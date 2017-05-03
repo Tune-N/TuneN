@@ -3,11 +3,17 @@
 <head>
   <!-- Our js bundle will be in 'bundle.js' -->
   <!-- The 'defer' attribute will ensure that it is run only after the DOM finishes loading -->
-  <script src="bundle.js" defer></script>
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous"/>
 </head>
 <body>
   <!-- We will render our React app into a div with an id of 'app' -->
   <!-- We can grab it off the DOM by saing `document.getElementById('app');` -->
   <div id="app"></div>
+  <h2>test</h2>
+  <script async defer src="/bundle/bundle.js" ></script>
 </body>
 </html>
