@@ -2,7 +2,7 @@ module.exports = {
   entry: './browser/main.jsx',
   output: {
     path: __dirname,
-    filename: './public/bundle/bundle.js' // assumes your bundle.js will also be in the root of your project folder
+    filename: './public/bundle.js' // assumes your bundle.js will also be in the root of your project folder
   },
   devtool: 'source-map',
   module: {
