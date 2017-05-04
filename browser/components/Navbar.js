@@ -5,9 +5,15 @@ import { Link, browserHistory } from 'react-router-dom'
 // import WhoAmI from './WhoAmI'
 import store from '../store'
 
+import { login, logout } from '../reducers/auth'
+ 
 /* -----------------    COMPONENT     ------------------ */
 
 class Navbar extends React.Component {
+  componentDidMount(){
+
+  }
+
   render() {
     return (
       <nav className="navbar navbar-inverse bg-inverse">
@@ -45,11 +51,22 @@ class Navbar extends React.Component {
               <button type="submit" className="btn btn-default">Submit</button>
             </form>
             <ul className="nav navbar-nav navbar-right">
-              <li><a href="#">Signup</a></li>
-              <li className="dropdown">
+              {this.props.loggedIn ?
+                <li>
+                  <button className="btn btn-default" onClick={(evt)=>{
+                    evt.preventDefault()
+                    this.props.logout()
+                  }}>Logout</button>
+                </li>
+                :
+                <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span className="caret"></span></a>
-                <form onSubmit={console.log("hello")}>
-                  <ul className="dropdown-menu">
+                <div className="dropdown-menu">
+                <form onSubmit={(evt)=>{
+                  evt.preventDefault()
+                  this.props.login(evt.target.email.value,evt.target.password.value)
+                }}>
+                  <ul style={{listStyle:'none'}} >
                     <li>
                       <input name="email" type="text" placeholder="Enter Email Address" />
                     </li>
@@ -63,7 +80,9 @@ class Navbar extends React.Component {
                     <li><a href="#">Signup</a></li>
                   </ul>
                 </form>
+                </div>
               </li>
+              }
             </ul>
           </div>
         </div>
@@ -74,18 +93,20 @@ class Navbar extends React.Component {
 
 /* -----------------    CONTAINER     ------------------ */
 
-
-// import {login} from 'APP/app/reducers/auth'
-
 const mapStateToProps = (state) => ({
-  // loggedIn: state.auth ? true : false
+  loggedIn: state.auth ? state.auth : false
 })
 const mapDispatchToProps = dispatch => ({
-  login
+  login:(email,password) => {
+      dispatch(login(email,password))
+  },
+  logout:() => {
+      dispatch(logout())
+  }
 })
 
-export default Navbar;
-// export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+// export default Navbar;
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
 
 //Way to choose what is rendered...
 // <li classNameName="active">
