@@ -1,8 +1,10 @@
 const app = require('express').Router();
 const passport = require('passport');
+const crypto = require('crypto');
 
 // we will need our sequelize instance from somewhere
 const db = require('../db/db');
+const User = require('../db/models').User
 // we should do this in the same place we've set up express-session
 const session = require('express-session');
 
@@ -40,5 +42,52 @@ passport.deserializeUser((id, done) => {
     .then(user => done(null, user))
     .catch(done);
 });
+
+app.post('/login', (req, res, next) => {
+  User.findOne({
+    where: {
+      email: req.body.email
+    }
+  })
+    .then(user => {
+      if (!user) res.status(401).send('User not found');
+      if (user.password !== encryptPassword(req.body.password, user.salt)) res.status(401).send('Incorrect password');
+      else {
+        req.login(user, err => {
+          if (err) next(err);
+          else res.json(user);
+        });
+      }
+    })
+    .catch(next);
+});
+
+app.post('/signup', (req, res, next) => {
+  User.create(req.body)
+    .then(user => {
+      req.login(user, err => {
+        if (err) next(err);
+        else res.json(user);
+      });
+    })
+    .catch(next);
+});
+
+app.post('/logout', (req, res, next) => {
+  req.logout();
+  res.sendStatus(200);
+});
+
+//this only works on the enter request
+app.get('/me', (req, res, next) => {
+  res.json(req.user);
+});
+
+function encryptPassword(plainText, salt) {
+  const hash = crypto.createHash('sha1');
+  hash.update(plainText);
+  hash.update(salt);
+  return hash.digest('hex');
+}
 
 module.exports = app;
