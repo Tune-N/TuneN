@@ -8,7 +8,7 @@ const chalk = require('chalk')
 require('./models');
 
 // Syncing all the models at once. This promise is used by main.js.
-let syncedDbPromise = db.sync({force: true});
+let syncedDbPromise = db.sync({force: false});
 
 syncedDbPromise
 .then(function () {
