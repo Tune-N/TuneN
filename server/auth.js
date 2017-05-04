@@ -1,141 +1,93 @@
-const app = require('APP'), {env} = app
-// const debug = require('debug')(`${app.name}:auth`)
-const passport = require('passport')
-const {User, OAuth} = require('APP/db')
-const auth = require('express').Router()
+const app = require('express').Router();
+const passport = require('passport');
+const crypto = require('crypto');
 
-/*************************
- * Auth strategies
- *
- * The OAuth model knows how to configure Passport middleware.
- * To enable an auth strategy, ensure that the appropriate
- * environment variables are set.
- *
- * You can do it on the command line:
- *
- *   FACEBOOK_CLIENT_ID=abcd FACEBOOK_CLIENT_SECRET=1234 npm run dev
- *
- * Or, better, you can create a ~/.$your_app_name.env.json file in
- * your home directory, and set them in there:
- *
- * {
- *   FACEBOOK_CLIENT_ID: 'abcd',
- *   FACEBOOK_CLIENT_SECRET: '1234',
- * }
- *
- * Concentrating your secrets this way will make it less likely that you
- * accidentally push them to Github, for example.
- *
- * When you deploy to production, you'll need to set up these environment
- * variables with your hosting provider.
- **/
+// we will need our sequelize instance from somewhere
+const db = require('../db/db');
+const User = require('../db/models').User
+// we should do this in the same place we've set up express-session
+const session = require('express-session');
 
-// Facebook needs the FACEBOOK_CLIENT_ID and FACEBOOK_CLIENT_SECRET
-// environment variables.
-OAuth.setupStrategy({
-  provider: 'facebook',
-  strategy: require('passport-facebook').Strategy,
-  config: {
-    clientID: '448749878803777', // env.FACEBOOK_CLIENT_ID,
-    clientSecret: '0fc3e8d8c37e765bd6e47aa5d14038e0', // env.FACEBOOK_CLIENT_SECRET,
-    callbackURL: `http://localhost:1337/api/auth/login/facebook` // `${app.baseUrl}/api/auth/login/facebook`,
-  },
-  passport
-})
+// configure and create our database store
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const dbStore = new SequelizeStore({ db: db });
 
-// Google needs the GOOGLE_CLIENT_SECRET AND GOOGLE_CLIENT_ID
-// environment variables.
-OAuth.setupStrategy({
-  provider: 'google',
-  strategy: require('passport-google-oauth').OAuth2Strategy,
-  config: {
-    clientID: '630118201570-e95b3r63894t6vom5osr58103jvg36jn.apps.googleusercontent.com', // env.GOOGLE_CLIENT_ID,
-    clientSecret: 'C5aBT2oSWnJKHuRvWw3FRqht', // env.GOOGLE_CLIENT_SECRET,
-    callbackURL: `http://localhost:1337/api/auth/login/google`, //`${app.baseUrl}/api/auth/login/google`,
-  },
-  passport
-})
+// sync so that our session table gets created
+dbStore.sync();
 
-// Github needs the GITHUB_CLIENT_ID AND GITHUB_CLIENT_SECRET
-// environment variables.
-OAuth.setupStrategy({
-  provider: 'github',
-  strategy: require('passport-github2').Strategy,
-  config: {
-    clientID: env.GITHUB_CLIENT_ID,
-    clientSecret: env.GITHUB_CLIENT_SECRET,
-    callbackURL: `${app.baseUrl}/api/auth/login/github`,
-  },
-  passport
-})
+// plug the store into our session middleware
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'a wildly insecure secret',
+  store: dbStore,
+  resave: false,
+  saveUninitialized: false
+}));
 
-// Other passport configuration:
-// Passport review in the Week 6 Concept Review:
-// https://docs.google.com/document/d/1MHS7DzzXKZvR6MkL8VWdCxohFJHGgdms71XNLIET52Q/edit?usp=sharing
+// Set secret on deployment server
+// Then, on our deployment server, we can set an environment variable called SESSION_SECRET with our real secret!
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 passport.serializeUser((user, done) => {
-  done(null, user.id)
-})
-
-passport.deserializeUser(
-  (id, done) => {
-    debug('will deserialize user.id=%d', id)
-    User.findById(id)
-      .then(user => {
-        if (!user) debug('deserialize retrieved null user for id=%d', id)
-        else debug('deserialize did ok user.id=%d', id)
-        done(null, user)
-      })
-      .catch(err => {
-        debug('deserialize did fail err=%s', err)
-        done(err)
-      })
+  try {
+    done(null, user.id);
+  } catch (err) {
+    done(err);
   }
-)
+});
 
-// require.('passport-local').Strategy => a function we can use as a constructor, that takes in a callback
-passport.use(new (require('passport-local').Strategy)(
-  (email, password, done) => {
-    debug('will authenticate user(email: "%s")', email)
-    User.findOne({where: {email}})
-      .then(user => {
-        if (!user) {
-          debug('authenticate user(email: "%s") did fail: no such user', email)
-          return done(null, false, { message: 'Login incorrect' })
-        }
-        return user.authenticate(password)
-          .then(ok => {
-            if (!ok) {
-              debug('authenticate user(email: "%s") did fail: bad password')
-              return done(null, false, { message: 'Login incorrect' })
-            }
-            debug('authenticate user(email: "%s") did ok: user.id=%d', email, user.id)
-            done(null, user)
-          })
-      })
-      .catch(done)
-  }
-))
+passport.deserializeUser((id, done) => {
+  User.findById(id)
+    .then(user => done(null, user))
+    .catch(done);
+});
 
-auth.get('/whoami', (req, res) => res.send(req.user))
+app.post('/login', (req, res, next) => {
+  User.findOne({
+    where: {
+      email: req.body.email
+    }
+  })
+    .then(user => {
+      if (!user) res.status(401).send('User not found');
+      if (user.password !== encryptPassword(req.body.password, user.salt)) res.status(401).send('Incorrect password');
+      else {
+        req.login(user, err => {
+          if (err) next(err);
+          else res.json(user);
+        });
+      }
+    })
+    .catch(next);
+});
 
-// POST requests for local login:
-auth.post('/login/local', passport.authenticate('local', {successRedirect: '/'}))
+app.post('/signup', (req, res, next) => {
+  User.create(req.body)
+    .then(user => {
+      req.login(user, err => {
+        if (err) next(err);
+        else res.json(user);
+      });
+    })
+    .catch(next);
+});
 
-// GET requests for OAuth login:
-// Register this route as a callback URL with OAuth provider
-auth.get('/login/:strategy', (req, res, next) =>
-  passport.authenticate(req.params.strategy, {
-    scope: 'email', // You may want to ask for additional OAuth scopes. These are
-                    // provider specific, and let you access additional data (like
-                    // their friends or email), or perform actions on their behalf.
-    successRedirect: '/',
-    // Specify other config here
-  })(req, res, next)
-)
+app.post('/logout', (req, res, next) => {
+  req.logout();
+  res.sendStatus(200);
+});
 
-auth.post('/logout', (req, res) => {
-  req.logout()
-  res.redirect('/api/auth/whoami')
-})
+//this only works on the enter request
+app.get('/me', (req, res, next) => {
+  res.json(req.user);
+});
 
-module.exports = auth
+function encryptPassword(plainText, salt) {
+  const hash = crypto.createHash('sha1');
+  hash.update(plainText);
+  hash.update(salt);
+  return hash.digest('hex');
+}
+
+module.exports = app;

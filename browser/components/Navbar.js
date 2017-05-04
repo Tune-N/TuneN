@@ -45,16 +45,24 @@ class Navbar extends React.Component {
               <button type="submit" className="btn btn-default">Submit</button>
             </form>
             <ul className="nav navbar-nav navbar-right">
-              <li><a href="#">Link</a></li>
+              <li><a href="#">Signup</a></li>
               <li className="dropdown">
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></a>
-                <ul className="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" className="divider"></li>
-                  <li><a href="#">Separated link</a></li>
-                </ul>
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span className="caret"></span></a>
+                <form onSubmit={console.log("hello")}>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <input name="email" type="text" placeholder="Enter Email Address" />
+                    </li>
+                    <li>
+                      <input name="password" type="password" placeholder="Enter Password" />
+                    </li>
+                    <li>
+                      <button className="login" label="login" type="submit" value="Login" >Login</button>
+                    </li>
+                    <li role="separator" className="divider"></li>
+                    <li><a href="#">Signup</a></li>
+                  </ul>
+                </form>
               </li>
             </ul>
           </div>
