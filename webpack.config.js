@@ -1,3 +1,5 @@
+var LiveReloadPlugin = require('webpack-livereload-plugin');
+
 module.exports = {
   entry: './browser/main.jsx',
   output: {
@@ -24,5 +26,8 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins: [
+    new LiveReloadPlugin({appendScriptTag: true})
+  ]
 };
