@@ -5,13 +5,13 @@ import { Link, browserHistory } from 'react-router-dom'
 // import WhoAmI from './WhoAmI'
 import store from '../store'
 
-import { login, logout } from '../reducers/auth'
+import { login, logout, whoami } from '../reducers/auth'
  
 /* -----------------    COMPONENT     ------------------ */
 
 class Navbar extends React.Component {
-  componentDidMount(){
-
+  componentWillMount(){
+    this.props.whoami();
   }
 
   render() {
@@ -101,6 +101,9 @@ const mapDispatchToProps = dispatch => ({
   },
   logout:() => {
       dispatch(logout())
+  },
+  whoami:() =>{
+      dispatch(whoami())
   }
 })
 
