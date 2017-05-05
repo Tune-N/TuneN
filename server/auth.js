@@ -51,7 +51,7 @@ app.post('/login', (req, res, next) => {
   })
     .then(user => {
       if (!user) res.status(401).send('User not found');
-      if (user.password !== encryptPassword(req.body.password, user.salt)) res.status(401).send('Incorrect password');
+      if (user.password !== user.Model.encryptPassword(req.body.password, user.salt)) res.status(401).send('Incorrect password');
       else {
         req.login(user, err => {
           if (err) next(err);
@@ -82,12 +82,5 @@ app.post('/logout', (req, res, next) => {
 app.get('/me', (req, res, next) => {
   res.json(req.user);
 });
-
-function encryptPassword(plainText, salt) {
-  const hash = crypto.createHash('sha1');
-  hash.update(plainText);
-  hash.update(salt);
-  return hash.digest('hex');
-}
 
 module.exports = app;

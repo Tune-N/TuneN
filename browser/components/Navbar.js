@@ -5,9 +5,15 @@ import { Link, browserHistory } from 'react-router-dom'
 // import WhoAmI from './WhoAmI'
 import store from '../store'
 
+import { login, logout, whoami } from '../reducers/auth'
+ 
 /* -----------------    COMPONENT     ------------------ */
 
 class Navbar extends React.Component {
+  componentWillMount(){
+    this.props.whoami();
+  }
+
   render() {
     return (
       <nav className="navbar navbar-inverse bg-inverse">
@@ -45,25 +51,37 @@ class Navbar extends React.Component {
               <button type="submit" className="btn btn-default">Submit</button>
             </form>
             <ul className="nav navbar-nav navbar-right">
-              <li><a href="#">Signup</a></li>
-              <li className="dropdown">
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span className="caret"></span></a>
-                <form onSubmit={console.log("hello")}>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <input name="email" type="text" placeholder="Enter Email Address" />
-                    </li>
-                    <li>
-                      <input name="password" type="password" placeholder="Enter Password" />
-                    </li>
-                    <li>
-                      <button className="login" label="login" type="submit" value="Login" >Login</button>
-                    </li>
-                    <li role="separator" className="divider"></li>
-                    <li><a href="#">Signup</a></li>
-                  </ul>
-                </form>
+              {this.props.loggedIn ?
+                <li>
+                  <button className="btn btn-default navbar-btn form-inline" onClick={(evt)=>{
+                    evt.preventDefault()
+                    this.props.logout()
+                  }}>Logout</button>
+                </li>
+                :
+                <li className="dropdown">
+                  <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span className="caret"></span></a>
+                  <div className="dropdown-menu">
+                  <form className="navbar-form" onSubmit={(evt)=>{
+                    evt.preventDefault()
+                    this.props.login(evt.target.email.value,evt.target.password.value)
+                  }}>
+                    <ul style={{listStyle:'none',padding:0}} >
+                      <li style={{paddingBottom:8}}>
+                        <input name="email" type="text" className="form-control" placeholder="Enter Email Address" />
+                      </li>
+                      <li>
+                        <input name="password" type="password"  className="form-control" placeholder="Enter Password" />
+                      </li>
+                      <li role="separator" className="divider"></li>
+                      <li>
+                        <button className="login btn btn-success pull-right" label="login" type="submit" value="Login" >Login</button>
+                      </li>
+                    </ul>
+                  </form>
+                  </div>
               </li>
+              }
             </ul>
           </div>
         </div>
@@ -74,18 +92,23 @@ class Navbar extends React.Component {
 
 /* -----------------    CONTAINER     ------------------ */
 
-
-// import {login} from 'APP/app/reducers/auth'
-
 const mapStateToProps = (state) => ({
-  // loggedIn: state.auth ? true : false
+  loggedIn: state.auth ? state.auth : false
 })
 const mapDispatchToProps = dispatch => ({
-  login
+  login:(email,password) => {
+      dispatch(login(email,password))
+  },
+  logout:() => {
+      dispatch(logout())
+  },
+  whoami:() =>{
+      dispatch(whoami())
+  }
 })
 
-export default Navbar;
-// export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+// export default Navbar;
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
 
 //Way to choose what is rendered...
 // <li classNameName="active">
