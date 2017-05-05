@@ -11,7 +11,7 @@ module.exports = db.define('user', {
   username: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false,
+    allowNull: true,
   },
   email: {
     type: Sequelize.STRING,
@@ -26,7 +26,7 @@ module.exports = db.define('user', {
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
-    allowNull: false,
+    allowNull: true,
     defaultValue: false
   },
   googleId: {

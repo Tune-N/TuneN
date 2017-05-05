@@ -77,8 +77,7 @@ class Navbar extends React.Component {
                       <button className="login" label="login" type="submit" value="Login" >Login</button>
                     </li>
                     <li role="separator" className="divider"></li>
-                    <li><a href='/api/auth/google'><img src="../../public/googlebtn.png" /></a></li>
-                    <li><a href='/api/auth/facebook'><button className="facebook" type="button">Facebook</button></a></li>
+                    <li><a href='/api/auth/google'><img src="googlebtn.png" /></a></li>
                     <li role="separator" className="divider"></li>
                     <li><a href="#">Signup</a></li>
                   </ul>

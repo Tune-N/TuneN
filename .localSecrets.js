@@ -1,2 +1,2 @@
-process.env.GOOGLE_CLIENT_ID = '630118201570-e95b3r63894t6vom5osr58103jvg36jn.apps.googleusercontent.com';
-process.env.GOOGLE_CLIENT_SECRET = 'C5aBT2oSWnJKHuRvWw3FRqht';
+process.env.GOOGLE_CLIENT_ID = '661746692-1uju0up57llnrneenklkk4sksholv2ia.apps.googleusercontent.com';
+process.env.GOOGLE_CLIENT_SECRET = 'SxmACN-1k0Y7bkc6ZcOot54E';
