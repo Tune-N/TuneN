@@ -15,7 +15,11 @@ app.listen(3000, function () {
     startDb
 });
 
+var env = process.env.NODE_ENV || 'development'
 
+if (env === 'development') {
+  require('../.localSecrets'); // this will mutate the process.env object with your secrets.
+}
 
 const morgan = require('morgan');
 app.use(morgan('dev'));

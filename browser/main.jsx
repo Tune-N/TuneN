@@ -6,6 +6,7 @@ import { BrowserRouter, Link, Route, browserHistory, IndexRedirect } from 'react
 
 import App from './app.js';
 import '../public/stylesheets/index.scss'
+import '../public/stylesheets/nav.scss'
 
 ReactDOM.render(
   <Provider store={ store }>

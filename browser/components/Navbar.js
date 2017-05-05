@@ -6,6 +6,7 @@ import { Link, browserHistory } from 'react-router-dom'
 import store from '../store'
 
 import { login, logout, whoami } from '../reducers/auth'
+// import '.../public/stylesheets/nav.scss'
  
 /* -----------------    COMPONENT     ------------------ */
 
@@ -16,7 +17,7 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <nav className="navbar navbar-inverse bg-inverse">
+    <nav className="navbar navbar-inverse bg-inverse">
         <div className="container-fluid">
           <div className="navbar-header">
             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -50,7 +51,7 @@ class Navbar extends React.Component {
               </div>
               <button type="submit" className="btn btn-default">Submit</button>
             </form>
-            <ul className="nav navbar-nav navbar-right">
+            <ul className="nav navbar-nav navbar-right login-container">
               {this.props.loggedIn ?
                 <li>
                   <button className="btn btn-default navbar-btn form-inline" onClick={(evt)=>{
@@ -68,14 +69,18 @@ class Navbar extends React.Component {
                   }}>
                     <ul style={{listStyle:'none',padding:0}} >
                       <li style={{paddingBottom:8}}>
-                        <input name="email" type="text" className="form-control" placeholder="Enter Email Address" />
+                        <input name="email" type="text" className="form-control login-input" placeholder="Enter Email Address" />
                       </li>
                       <li>
-                        <input name="password" type="password"  className="form-control" placeholder="Enter Password" />
+                        <input name="password" type="password"  className="form-control login-input" placeholder="Enter Password" />
                       </li>
-                      <li role="separator" className="divider"></li>
-                      <li>
-                        <button className="login btn btn-success pull-right" label="login" type="submit" value="Login" >Login</button>
+                      
+                      <li className="login-btn ">
+                        <button className="login btn btn-success" label="login" type="submit" value="Login" >Login</button>
+                      </li>
+                      
+                      <li className="login-btn">
+                        <a href='/api/auth/google'><img src="googlebtn.png" /></a>
                       </li>
                     </ul>
                   </form>
@@ -86,6 +91,7 @@ class Navbar extends React.Component {
           </div>
         </div>
       </nav>
+    
     )
   }
 }
