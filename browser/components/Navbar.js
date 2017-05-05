@@ -6,7 +6,7 @@ import { Link, browserHistory } from 'react-router-dom'
 import store from '../store'
 
 import { login, logout } from '../reducers/auth'
- 
+
 /* -----------------    COMPONENT     ------------------ */
 
 class Navbar extends React.Component {
@@ -28,7 +28,7 @@ class Navbar extends React.Component {
             <a className="navbar-brand" href="#">TuneN</a>
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul className="nav navbar-nav">
+            <ul className="nav navbnpar-nav">
               <li className="active"><a href="#">Link <span className="sr-only">(current)</span></a></li>
               <li><a href="#">Link</a></li>
               <li className="dropdown">
@@ -76,6 +76,9 @@ class Navbar extends React.Component {
                     <li>
                       <button className="login" label="login" type="submit" value="Login" >Login</button>
                     </li>
+                    <li role="separator" className="divider"></li>
+                    <li><a href='/api/auth/google'><img src="../../public/googlebtn.png" /></a></li>
+                    <li><a href='/api/auth/facebook'><button className="facebook" type="button">Facebook</button></a></li>
                     <li role="separator" className="divider"></li>
                     <li><a href="#">Signup</a></li>
                   </ul>

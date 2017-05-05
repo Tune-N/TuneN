@@ -8,6 +8,11 @@ const _ = require('lodash');
 const Sequelize = require('sequelize');
 
 module.exports = db.define('user', {
+  username: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false,
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
@@ -18,6 +23,14 @@ module.exports = db.define('user', {
   },
   salt: {
     type: Sequelize.STRING
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  googleId: {
+    type: Sequelize.STRING,
   }
 }, {
   instanceMethods: {
