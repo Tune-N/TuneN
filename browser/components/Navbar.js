@@ -53,34 +53,33 @@ class Navbar extends React.Component {
             <ul className="nav navbar-nav navbar-right">
               {this.props.loggedIn ?
                 <li>
-                  <button className="btn btn-default" onClick={(evt)=>{
+                  <button className="btn btn-default navbar-btn form-inline" onClick={(evt)=>{
                     evt.preventDefault()
                     this.props.logout()
                   }}>Logout</button>
                 </li>
                 :
                 <li className="dropdown">
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span className="caret"></span></a>
-                <div className="dropdown-menu">
-                <form onSubmit={(evt)=>{
-                  evt.preventDefault()
-                  this.props.login(evt.target.email.value,evt.target.password.value)
-                }}>
-                  <ul style={{listStyle:'none'}} >
-                    <li>
-                      <input name="email" type="text" placeholder="Enter Email Address" />
-                    </li>
-                    <li>
-                      <input name="password" type="password" placeholder="Enter Password" />
-                    </li>
-                    <li>
-                      <button className="login" label="login" type="submit" value="Login" >Login</button>
-                    </li>
-                    <li role="separator" className="divider"></li>
-                    <li><a href="#">Signup</a></li>
-                  </ul>
-                </form>
-                </div>
+                  <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span className="caret"></span></a>
+                  <div className="dropdown-menu">
+                  <form className="navbar-form" onSubmit={(evt)=>{
+                    evt.preventDefault()
+                    this.props.login(evt.target.email.value,evt.target.password.value)
+                  }}>
+                    <ul style={{listStyle:'none',padding:0}} >
+                      <li style={{paddingBottom:8}}>
+                        <input name="email" type="text" className="form-control" placeholder="Enter Email Address" />
+                      </li>
+                      <li>
+                        <input name="password" type="password"  className="form-control" placeholder="Enter Password" />
+                      </li>
+                      <li role="separator" className="divider"></li>
+                      <li>
+                        <button className="login btn btn-success pull-right" label="login" type="submit" value="Login" >Login</button>
+                      </li>
+                    </ul>
+                  </form>
+                  </div>
               </li>
               }
             </ul>
