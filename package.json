@@ -7,7 +7,7 @@
     "dev": "node dev",
     "test": "mocha --compilers js:babel-register --watch-extensions js,jsx app/**/*.test.js app/**/*.test.jsx server/**/*.test.js db/**/*.test.js",
     "start": "node server/index.js",
-    "start-dev":"webpack -w & nodemon server/index.js",
+    "start-dev":"webpack -w & nodemon server/index.js ",
     "build": "webpack"
   },
   "repository": {
