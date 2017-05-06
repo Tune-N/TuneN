@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node dev",
     "test": "mocha --compilers js:babel-register --watch-extensions js,jsx app/**/*.test.js app/**/*.test.jsx server/**/*.test.js db/**/*.test.js",
-    "start": "nodemon server/index.js",
+    "start": "node server/index.js",
     "build": "webpack",
     "build-watch": "npm run build -- -w"
   },
@@ -61,6 +61,7 @@
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.1",
     "node-sass": "^4.5.2",
+    "nodemon": "^1.11.0",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.17.0",
     "webpack": "^2.4.1"
