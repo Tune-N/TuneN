@@ -1,6 +1,7 @@
 const app = require('express').Router();
 const passport = require('passport');
 const crypto = require('crypto');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 // we will need our sequelize instance from somewhere
 const db = require('../db/db');
@@ -14,7 +15,6 @@ const dbStore = new SequelizeStore({ db: db });
 
 // sync so that our session table gets created
 dbStore.sync();
-
 // plug the store into our session middleware
 app.use(session({
   secret: process.env.SESSION_SECRET || 'a wildly insecure secret',
@@ -43,6 +43,38 @@ passport.deserializeUser((id, done) => {
     .catch(done);
 });
 
+passport.use(
+  new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: '/api/auth/google/callback'
+  },
+  function (token, refreshToken, profile, done) {
+    var info = {
+      name: profile.displayName,
+      email: profile.emails[0].value,
+      photo: profile.photos ? profile.photos[0].value : undefined
+    };
+    User.findOrCreate({
+      where: {googleId: profile.id},
+      defaults: info
+    })
+    .spread(function (user) {
+      done(null, user);
+    })
+    .catch(done);
+  })
+);
+
+app.get('/google', passport.authenticate('google', { scope: 'email' }));
+
+app.get('/google/callback',
+  passport.authenticate('google', {
+    successRedirect: '/me',
+    failureRedirect: '/login'
+  })
+);
+
 app.post('/login', (req, res, next) => {
   User.findOne({
     where: {
@@ -51,7 +83,7 @@ app.post('/login', (req, res, next) => {
   })
     .then(user => {
       if (!user) res.status(401).send('User not found');
-      if (user.password !== encryptPassword(req.body.password, user.salt)) res.status(401).send('Incorrect password');
+      if (user.password !== user.Model.encryptPassword(req.body.password, user.salt)) res.status(401).send('Incorrect password');
       else {
         req.login(user, err => {
           if (err) next(err);
@@ -82,12 +114,5 @@ app.post('/logout', (req, res, next) => {
 app.get('/me', (req, res, next) => {
   res.json(req.user);
 });
-
-function encryptPassword(plainText, salt) {
-  const hash = crypto.createHash('sha1');
-  hash.update(plainText);
-  hash.update(salt);
-  return hash.digest('hex');
-}
 
 module.exports = app;

@@ -8,14 +8,20 @@ const {resolve} = require('path')
 const passport = require('passport')
 const startDb = require('../db');
 
-app.listen(3000, function () {
-  console.log("Your server is listening on port 3000");
+app.set('port', (process.env.PORT || 3000));
+
+app.listen(app.get('port'), function () {
+  	console.log('Node app is running on port:', app.get('port'));
 
   //Promise
     startDb
 });
 
+var env = process.env.NODE_ENV || 'development'
 
+if (env === 'development') {
+  require('../.localSecrets'); // this will mutate the process.env object with your secrets.
+}
 
 const morgan = require('morgan');
 app.use(morgan('dev'));

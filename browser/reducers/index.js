@@ -11,8 +11,9 @@ import { combineReducers } from 'redux'
 
 // export default rootReducer
 
-function dummyReducer (state = {}, action) {
-  return state;
-}
 
-export default dummyReducer;
+const rootReducer = combineReducers({
+  auth: require('./auth').default,
+})
+
+export default rootReducer;

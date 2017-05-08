@@ -8,6 +8,7 @@ import App from './app.js';
 import Booth from './components/VR/Booth';
 
 import '../public/stylesheets/index.scss'
+import '../public/stylesheets/nav.scss'
 
 ReactDOM.render(
   <Provider store={ store }>
