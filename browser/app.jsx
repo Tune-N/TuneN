@@ -6,8 +6,8 @@ import Booth from './components/VR/Booth';
 
 const App = () => (
   <div id="main" className="container-fluid">
-    <Navbar />
-    <h1>Testing</h1>
+    {/*<Navbar />*/}
+    {/*<h1>Testing</h1>*/}
     <Route path="/vr" component={Booth} />
   </div>
 );

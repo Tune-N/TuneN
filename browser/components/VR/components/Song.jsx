@@ -8,44 +8,46 @@ function handleClick() {
   if (!this.is('intersected')) this.addState('focus');
 }
 
-function intersected(){
+function intersected() {
   console.log('mouseenter');
   if (!this.is('intersected')) this.addState('focus');
 }
 
-function leave(){
+function leave() {
   console.log('mouseleave');
-  this.removeState('focus')
+  this.removeState('focus');
 }
 
-function render(){
+function render() {
   const color = this.is('focus') ? 'purple' : 'white';
-  this.setAttribute('color', color)
-
+  this.setAttribute('color', color);
 }
 
 const Song = (props) => {
+  console.log(props);
   return (
-  <Entity
-    click-drag
-    primitive="a-plane"
-    className="selectable song"
-    width="1.50"
-    height="0.50"
-    color="white"
-    id={props.id}
-    position={props.position}
-    events={{
-      'click': handleClick,
-      'raycaster-intersected': intersected,
-      'mouseenter':intersected,
-      'stateadded':render,
-      'stateremoved':render,
-      'mouseleave':leave
-    }}
-  >
-    <Entity text={{value: props.text, color:"red"}} />
-  </Entity>
-)};
+    <Entity
+      click-drag
+      primitive="a-plane"
+      className="selectable song"
+      width="1.50"
+      height="0.50"
+      color="white"
+      id={props.id}
+      position={props.position}
+      events={{
+        'click': handleClick,
+        'raycaster-intersected': intersected,
+        'raycaster-intersected-cleared': leave,
+        'mouseenter':intersected,
+        'stateadded':render,
+        'stateremoved':render,
+        'mouseleave':leave
+      }}
+    >
+      <Entity text={{ value: props.text, color: 'red'}} />
+    </Entity>
+  );
+};
 
 export default Song;
