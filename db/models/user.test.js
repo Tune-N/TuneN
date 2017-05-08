@@ -37,7 +37,7 @@ describe('User', () => {
     xit('returns true for expected outcome', () => {
       expect(user.name).to.equal('Bob Builder');
       expect(user.email).to.equal('bb@gmail.com');
-      expect(user.isAdmin).to.be.true
+      expect(user.isAdmin).to.be.true;
     })
   })
 });
