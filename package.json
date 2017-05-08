@@ -14,8 +14,8 @@
     "type": "git",
     "url": "git+https://github.com/Tune-N/TuneN.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["Fullstack"],
+  "author": "Ben, Marcos, Isaac & Samir",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Tune-N/TuneN/issues"
