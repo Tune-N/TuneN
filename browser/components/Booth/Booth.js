@@ -13,30 +13,30 @@ export default class extends React.Component {
 
   render(){
     return (
-    <Scene>
-      <Entity position="0 0 0">
-        <Entity primitive="a-camera">
+    <div>
+      <Scene>
+        <Entity position="0 0 0">
+          <Entity primitive="a-camera">
 
-          {/*Cursor for browser controller*/}
-          <Entity primitive="a-cursor"
-            position="0 0 -1"
-            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-            material="color: red; shader: flat">
+            {/*Cursor for browser controller*/}
+            <Entity primitive="a-cursor"
+                    position="0 0 -1"
+                    geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                    material="color: red; shader: flat">
+            </Entity>
+
+            <Entity daydream-controller id="remote" raycaster="objects: .selectable">
+              <Entity primitive="a-cone" color="cyan" position="0 0 -2" rotation="-90 0 0" radius-bottom="0.005" radius-top="0.001" height="4"/>
+              <Entity primitive='a-box' id="position-guide" position="0 0 -1" visible="false"/>
+            </Entity>
+
           </Entity>
-
-          {/*Raaycaster for daydream controller*/}
-          {/*<Entity daydream-controller id="remote" raycaster="objects: .selectable">*/}
-            {/*<Entity primitive="a-cone" color="cyan" position="0 0 -2" rotation="-90 0 0" radius-bottom="0.005" radius-top="0.001" height="4"/>*/}
-            {/*<Entity primitive='a-box' id="position-guide" position="0 0 -2" visible="false"/>*/}
-          {/*</Entity>*/}
-
         </Entity>
-      </Entity>
-      <Entity primitive="a-sky" color='#2d2c2c'/>
-      <Song id="song1" text="Song 1" textColor="black" position="0 2 -2"/>
-      <Song id="song2" text="Song 2" textColor="black" position="0 1 -2"/>
-      <p>hello world</p>
-      <p>hello world</p>
-    </Scene>
+        <Entity primitive="a-sky" color='#2d2c2c'/>
+        <Song id="song1" text="Song 1" textColor="black" position="0 2 -2"/>
+        <Song id="song2" text="Song 2" textColor="black" position="0 1 -2"/>
+      </Scene>
+    </div>
+
 )}
 }
