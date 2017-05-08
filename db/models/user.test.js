@@ -1,8 +1,8 @@
-'use strict';
+const db = require('../db');
+const { expect } = require('chai');
 
-const db = require('../db')
-    , {User} = db
-    , {expect} = require('chai');
+const { User } = db;
+
 
 /* global describe it before afterEach beforeEach */
 
