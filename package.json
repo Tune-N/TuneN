@@ -1,12 +1,12 @@
 {
   "name": "TuneN",
   "version": "1.0.0",
-  "description": "",
+  "description": "Virtual Reality Live Streaming DJ Application",
   "main": "index.js",
   "scripts": {
     "dev": "node dev",
     "test": "mocha --compilers js:babel-register --watch-extensions js,jsx app/**/*.test.js app/**/*.test.jsx server/**/*.test.js db/**/*.test.js",
-    "start":"webpack -w & nodemon server/index.js ",
+    "start": "webpack -w & nodemon server/index.js ",
     "start-production": "node server/index.js",
     "build": "webpack"
   },
@@ -14,8 +14,8 @@
     "type": "git",
     "url": "git+https://github.com/Tune-N/TuneN.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["Fullstack"],
+  "author": "Ben, Marcos, Isaac & Samir",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Tune-N/TuneN/issues"
@@ -60,10 +60,18 @@
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-loader": "^7.0.0",
     "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.24.1",
     "css-loader": "^0.28.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
     "node-sass": "^4.5.2",
+    "react-addons-test-utils": "^15.5.1",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.17.0",
     "webpack": "^2.4.1"
