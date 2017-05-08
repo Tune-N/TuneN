@@ -6,8 +6,8 @@ bundle.js.map
 .DS_Store
 
 # Compiled JS
-public/bundle.js
-public/bundle.js.map
+/public/bundle.js
+/public/bundle.js.map
 
 # NPM errors
 npm-debug.log
