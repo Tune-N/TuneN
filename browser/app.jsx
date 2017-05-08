@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Link, Route, Redirect} from 'react-router-dom';
+import React from 'react';
+import { Route } from 'react-router-dom';
 
-//load components
 import Navbar from './components/Navbar';
+import Booth from './components/VR/Booth';
 
 const App = () => (
   <div id="main" className="container-fluid">
     <Navbar />
     <h1>Testing</h1>
+    <Route path="/vr" component={Booth} />
   </div>
 );
 
