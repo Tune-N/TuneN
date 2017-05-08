@@ -4,6 +4,7 @@ import { Scene, Entity } from 'aframe-react';
 import daydream from 'aframe-daydream-controller-component'
 import SongContainer from './containers/SongContainer';
 import Song from './components/Song'
+import Deck from './components/Deck'
 
 function handleClick() {
   console.log('Scene Clicked!')
@@ -33,6 +34,7 @@ export default class extends React.Component {
           </Entity>
         </Entity>
         <Entity primitive="a-sky" color='#2d2c2c'/>
+        <Deck position="-2 2 -2"/>
         <Song id="song1" text="Song 1" textColor="black" position="0 2 -2"/>
         <Song id="song2" text="Song 2" textColor="black" position="0 1 -2"/>
       </Scene>

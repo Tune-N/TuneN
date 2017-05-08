@@ -5,7 +5,7 @@ import store from './store.js';
 import { BrowserRouter, Link, Route, browserHistory, IndexRedirect } from 'react-router-dom';
 
 import App from './app.js';
-import Booth from './components/Booth/Booth';
+import Booth from './components/VR/Booth';
 
 import '../public/stylesheets/index.scss'
 
