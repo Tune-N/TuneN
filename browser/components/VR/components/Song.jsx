@@ -27,6 +27,7 @@ function render(){
 const Song = (props) => {
   return (
   <Entity
+    click-drag
     primitive="a-plane"
     className="selectable song"
     width="1.50"
