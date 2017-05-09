@@ -24,18 +24,15 @@ class djBooth extends React.Component {
     this.dragEndHandler = this.dragEndHandler.bind(this);
   }
 
+  componentDidMount(){
+    this.deck1 = document.getElementById('deck1');
+    this.deck2 = document.getElementById('deck2');
+  }
+
   dragEndHandler(event) {
-    console.log('dragend event', event);
-    const deck1 = document.getElementById('deck1');
-    const deck2 = document.getElementById('deck2');
-
-    const draggedItem = event.target;
-
-    console.log('draggedItemPosition', draggedItemPosition);
-
-    if (deck1.is('hovered')){
+    if (this.deck1.is('hovered')){
       console.log('Dropped inside Deck 1');
-      this.setState({deck1:'My Song'}});
+      this.setState({deck1:'My Song'});
     }
   }
 

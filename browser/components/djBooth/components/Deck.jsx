@@ -60,6 +60,7 @@ import { Scene, Entity } from 'aframe-react';
 
 
 const Deck = (props) => {
+  console.log('Rendering Deck', props);
   return (
     <Entity
       className="selectable"

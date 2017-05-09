@@ -2,7 +2,6 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
-import djBoothContainer from './components/djBooth/containers/djBoothContainer';
 import Booth from './components/djBooth/djBooth';
 
 const App = () => (
