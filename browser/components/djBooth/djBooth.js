@@ -14,45 +14,51 @@ import RequestedSongs from './components/RequestedSongs.jsx'
 
 registerClickDrag(aframe);
 
-console.log('executing file');
+class djBooth extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      deck1: null
+    };
 
-const dragEndHandler = (event) => {
-  console.log('dragend event', event);
-  const deck1 = document.getElementById('deck1');
-  const deck2 = document.getElementById('deck2');
-
-  const draggedItem = event.target;
-
-  console.log('draggedItemPosition', draggedItemPosition);
-
-  if (deck1.is('hovered')){
-    console.log('Dropped inside Deck 1');
-    draggedItem.setAttribute('position', deck1Position)
+    this.dragEndHandler = this.dragEndHandler.bind(this);
   }
-};
 
+  dragEndHandler(event) {
+    console.log('dragend event', event);
+    const deck1 = document.getElementById('deck1');
+    const deck2 = document.getElementById('deck2');
 
+    const draggedItem = event.target;
 
+    console.log('draggedItemPosition', draggedItemPosition);
 
+    if (deck1.is('hovered')){
+      console.log('Dropped inside Deck 1');
+      this.setState({deck1:'My Song'}});
+    }
+  }
 
-const djBooth = (props) => {
-  console.log('djBooth');
-  return (
-    <div className="DJBooth">
-      <Scene
-        events={{
-          'dragend': dragEndHandler
-        }}
-      >
-        <Camera />
-        <DaydreamController />
-        <Background />
-        <Deck id="deck1" position="0 2 -2" />
-        <Deck id="deck2" position="0 1 -2" />
-        <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" />
-      </Scene>
-    </div>
-  )
-};
+  render(){
+    console.log('rendering djBooth');
+    return (
+      <div className="DJBooth">
+        <Scene
+          events={{
+            'dragend': this.dragEndHandler
+          }}
+        >
+          <Camera />
+          <DaydreamController />
+          <Background />
+          <Deck id="deck1" position="0 2 -2" songName={this.state.deck1} />
+          <Deck id="deck2" position="0 1 -2" />
+          <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" />
+        </Scene>
+      </div>
+    )
+  }
+}
+
 
 export default djBooth;
