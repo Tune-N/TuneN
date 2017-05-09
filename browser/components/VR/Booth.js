@@ -2,11 +2,18 @@ import React from 'react';
 import aframe from 'aframe';
 import { Scene, Entity } from 'aframe-react';
 require('aframe-daydream-controller-component');
+import 'aframe-mouse-cursor-component'
 import registerClickDrag from 'aframe-click-drag-component';
 
 import Song from './components/Song.jsx';
 import Deck from './components/Deck';
 
+function onClick(){
+  const song1 = document.getElementById('song1');
+  song1.setAttribute('color', 'yellow')
+
+
+}
 
 registerClickDrag(aframe);
 
@@ -17,23 +24,22 @@ export default class extends React.Component {
       <div className="main">
         <Scene>
           <Entity position="0 0 0">
-            <Entity primitive="a-camera">
-              {/* Cursor for browser controller */}
-              <Entity
-                primitive="a-cursor"
-                position="0 0 -1"
-                geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-                material="color: red; shader: flat"
-              />
+            <Entity primitive="a-camera" mouse-cursor id="cursor">
             </Entity>
-            <Entity daydream-controller id="remote" raycaster="objects: .selectable">
+            <Entity
+              daydream-controller
+              id="remote"
+              raycaster="objects: .selectable"
+              events={{'buttondown':onClick}}
+            >
               <Entity
                 primitive="a-cone"
                 color="cyan"
                 position="0 0 -2"
                 rotation="-90 0 0"
                 radius-bottom="0.005"
-                radius-top="0.001" height="4"
+                radius-top="0.001"
+                height="4"
               />
               <Entity
                 primitive="a-box"
