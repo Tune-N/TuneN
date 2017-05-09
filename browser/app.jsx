@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
-import Booth from './components/VR/Booth';
+import Booth from './components/djBooth/djBooth';
 
 const App = () => (
   <div id="main" className="container-fluid">
