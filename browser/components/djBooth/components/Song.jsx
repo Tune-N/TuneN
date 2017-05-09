@@ -44,14 +44,6 @@ const Song = (props) => {
         'stateadded':render,
         'stateremoved':render,
         'mouseleave':leave,
-        'dragend': (event)=> {
-          const deck1 = document.getElementById('deck1');
-          const song1 = document.getElementById('song1');
-          console.log('dragend', event);
-          console.log('deck1', deck1);
-          console.log('deck1 position', deck1.getAttribute('position'));
-          console.log('song1 position', song1.getAttribute('position'));
-        }
       }}
     >
       {/*Song Name*/}

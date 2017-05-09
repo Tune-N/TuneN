@@ -1,6 +1,6 @@
 import React from 'react';
 import aframe from 'aframe';
-import { Scene, Entity } from 'aframe-react';
+import { Scene } from 'aframe-react';
 
 import 'aframe-mouse-cursor-component'
 import 'aframe-daydream-controller-component';
@@ -14,12 +14,29 @@ import RequestedSongs from './components/RequestedSongs.jsx'
 
 registerClickDrag(aframe);
 
+console.log('executing file');
+
 const dragEndHandler = (event) => {
   console.log('dragend event', event);
+  const deck1 = document.getElementById('deck1');
+  const deck2 = document.getElementById('deck2');
 
+  const draggedItem = event.target;
+
+  console.log('draggedItemPosition', draggedItemPosition);
+
+  if (deck1.is('hovered')){
+    console.log('Dropped inside Deck 1');
+    draggedItem.setAttribute('position', deck1Position)
+  }
 };
 
+
+
+
+
 const djBooth = (props) => {
+  console.log('djBooth');
   return (
     <div className="DJBooth">
       <Scene
