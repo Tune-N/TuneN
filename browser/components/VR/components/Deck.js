@@ -12,7 +12,10 @@ const Deck = (props) => {
       position={props.position}
       width="1.75"
       height="0.75"
+      events={{
+        mouseenter: () => console.log('mouseenter deck'),
 
+      }}
     >
     </Entity>
   )

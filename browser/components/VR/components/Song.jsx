@@ -5,6 +5,7 @@ import { Scene, Entity } from 'aframe-react';
 
 function handleClick() {
   console.log('Song Clicked!');
+  this.setAttribute('color', "yellow");
   if (!this.is('intersected')) this.addState('focus');
 }
 
@@ -21,6 +22,10 @@ function leave() {
 function render() {
   const color = this.is('focus') ? 'purple' : 'white';
   this.setAttribute('color', color);
+}
+
+function onClick() {
+
 }
 
 const Song = (props) => {
@@ -42,7 +47,8 @@ const Song = (props) => {
         'mouseenter':intersected,
         'stateadded':render,
         'stateremoved':render,
-        'mouseleave':leave
+        'mouseleave':leave,
+        'dragend': ()=> console.log('dragend')
       }}
     >
       <Entity text={{ value: props.text, color: 'red'}} />
