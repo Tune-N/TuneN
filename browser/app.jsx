@@ -8,7 +8,7 @@ const App = () => (
   <div id="main" className="container-fluid">
     {/*<Navbar />*/}
     {/*<h1>Testing</h1>*/}
-    <Route path="/vr" component={Booth} />
+    <Route path="/vr" component={djBoothContainer} />
   </div>
 );
 

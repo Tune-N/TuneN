@@ -17,10 +17,6 @@ registerClickDrag(aframe);
 class djBooth extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      deck1: null
-    };
-
     this.dragEndHandler = this.dragEndHandler.bind(this);
   }
 
@@ -37,7 +33,9 @@ class djBooth extends React.Component {
   }
 
   render(){
-    console.log('rendering djBooth, props', this.props);
+    console.log('djBooth render()', this.props);
+    const { requestedSongs, deck1, deck2 } = this.props;
+
     return (
       <div className="DJBooth">
         <Scene
@@ -48,9 +46,9 @@ class djBooth extends React.Component {
           <Camera />
           <DaydreamController />
           <Background />
-          <Deck id="deck1" position="0 2 -2" songName={this.state.deck1} />
-          <Deck id="deck2" position="0 1 -2" />
-          <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" />
+          <Deck id="deck1" position="0 2 -2" song={deck1.song} volume={deck1.volume}/>
+          <Deck id="deck2" position="0 1 -2" song={deck1.song} volume={deck1.volume}/>
+          <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} />
         </Scene>
       </div>
     )

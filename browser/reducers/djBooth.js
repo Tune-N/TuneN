@@ -33,7 +33,12 @@ const initialState = {
     volume: 0,
     progress: 0
   },
-  requestedSongs:[],
+  requestedSongs:[
+    {name: 'Song 1', album: 'Album 1', artist:'Artist 1'},
+    {name: 'Song 2', album: 'Album 2', artist:'Artist 2'},
+    {name: 'Song 3', album: 'Album 3', artist:'Artist 3'},
+    {name: 'Song 4', album: 'Album 4', artist:'Artist 4'},
+  ],
   crossfader:0,
 };
 

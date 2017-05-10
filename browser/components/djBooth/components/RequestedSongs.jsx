@@ -2,8 +2,7 @@ import React from 'react';
 import 'aframe';
 import { Entity } from 'aframe-react';
 
-import Song from './Song.jsx'
-
+import Song from './RequestedSong.jsx'
 
 const RequestedSongs = (props) => {
   console.log('RequestedSongs props', props);
@@ -27,15 +26,18 @@ const RequestedSongs = (props) => {
         position="0 0.85 0"
         align="center"
       />
-
-      <Song
-        id="song1"
-        position="0 0.7 0.02"
-        name="Song Name"
-        album="Album Name"
-        artist="Artist"
-        image="Image"
-        />
+      {
+        songs.map((song, index) => (
+          <Song
+            id={song.name}
+            position={`0 ${0.80-0.17 * index} 0.02`}
+            name={song.name}
+            album={song.album}
+            artist={song.artist}
+            image={song.image}
+          />
+        ))
+      }
     </Entity>
   )
 };

@@ -24,8 +24,8 @@ function render() {
 
 
 const Song = (props) => {
-  console.log('Song props', props);
-  const { id, name, albumName, artistName, position } = props;
+  console.log('Song()', props);
+  const { id, position, name, album, artist,  } = props;
   return (
     <Entity
       click-drag
@@ -34,7 +34,7 @@ const Song = (props) => {
       width="0.90"
       height="0.15"
       color="blue"
-      id={id}
+      key={name}
       position={position}
       events={{
         'click': handleClick,
