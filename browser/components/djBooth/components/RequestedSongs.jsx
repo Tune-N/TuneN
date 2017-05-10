@@ -2,7 +2,7 @@ import React from 'react';
 import 'aframe';
 import { Entity } from 'aframe-react';
 
-import RequestedSong from './RequestedSong.jsx'
+import RequestedSongContainer from '../containers/RequestedSongContainer'
 
 const RequestedSongs = (props) => {
   console.log('RequestedSongs props', props);
@@ -28,10 +28,10 @@ const RequestedSongs = (props) => {
       />
       {
         songs.map((song, index) => (
-          <RequestedSong
-            id={song.name}
+          <RequestedSongContainer
+            id={song.id}
             position={`0 ${0.80-0.17 * index} 0.02`}
-            key={song.name}
+            key={song.id}
             name={song.name}
             album={song.album}
             artist={song.artist}

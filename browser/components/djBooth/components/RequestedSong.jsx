@@ -3,69 +3,57 @@ import 'aframe';
 import { Entity } from 'aframe-react';
 
 
-function handleClick() {
-  console.log('Song Clicked!');
-  this.setAttribute('color', "yellow");
-  if (!this.is('intersected')) this.addState('focus');
-}
+class RequestedSong extends React.Component {
 
-function intersected() {
-  if (!this.is('intersected')) this.addState('focus');
-}
+  constructor(props){
+    super(props);
+    this.state = {
+      focus:false
+    };
 
-function leave() {
-  this.removeState('focus');
-}
+    this.onFocus = this.onFocus.bind(this);
+  }
 
-function render() {
-  const color = this.is('focus') ? 'purple' : 'white';
-  this.setAttribute('color', color);
-}
+  onFocus(){
+    this.setState({focus: !this.state.focus});
+  }
+
+  render(){
+    // console.log('RequestedSong render()', this.props);
+    const { id, position, name, album, artist, selectSong  } = this.props;
+
+    let color = this.state.focus ? "blue" : "white";
+    if (this.props.selectedSong === id) color = "yellow";
 
 
-const RequestedSong = (props) => {
-  console.log('Song()', props);
-  const { id, position, name, album, artist,  } = props;
-  return (
-    <Entity
-      click-drag
-      primitive="a-plane"
-      className="Song selectable "
-      width="0.90"
-      height="0.15"
-      color="blue"
-      position={position}
-      events={{
-        'click': handleClick,
-        'raycaster-intersected': intersected,
-        'raycaster-intersected-cleared': leave,
-        'mouseenter':intersected,
-        'stateadded':render,
-        'stateremoved':render,
-        'mouseleave':leave,
-      }}
-    >
-      {/*Song Name*/}
+    return (
       <Entity
-        primitive="a-text"
-        value={name}
-        color="black"
-        position="-0.42 0.04 0"
-        width="0.80"
-      />
-
-      {/*/!*Album Name*!/*/}
-      {/*<Entity*/}
-        {/*primitive="a-text"*/}
-        {/*value={albumName}*/}
-        {/*color="black"*/}
-        {/*position="-0.40 0 0"*/}
-        {/*width="0.60"*/}
-      {/*/>*/}
-    </Entity>
-
-
-  );
-};
+        click-drag
+        id={id}
+        primitive="a-plane"
+        className="Song selectable "
+        width="0.90"
+        height="0.15"
+        color={color}
+        position={position}
+        events={{
+          'click': (e) => selectSong(this.props.id),
+          'raycaster-intersected': this.onFocus,
+          'raycaster-intersected-cleared': this.onFocus,
+          'mouseenter':this.onFocus,
+          'mouseleave':this.onFocus,
+        }}
+      >
+        <Entity
+          primitive="a-text"
+          value={name}
+          color="black"
+          position="-0.42 0.04 0"
+          width="0.80"
+        />
+      </Entity>
+    )
+  }
+}
 
 export default RequestedSong;
