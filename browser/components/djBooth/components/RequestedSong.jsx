@@ -27,7 +27,6 @@ class RequestedSong extends React.Component {
   render(){
     // console.log('RequestedSong render()', this.props);
     const { id, position, name, album, artist, selectSong  } = this.props;
-    console.log('focus', this.state.focus);
     let color = this.state.focus ? "blue" : "white";
     if (this.props.selectedSong === id) color = "yellow";
 
