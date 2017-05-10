@@ -18,12 +18,12 @@ function leave() {
 }
 
 function render() {
-  const color = this.is('focus') ? 'purple' : 'grey';
+  const color = this.is('focus') ? 'purple' : 'white';
   this.setAttribute('color', color);
 }
 
 
-const Song = (props) => {
+const RequestedSong = (props) => {
   console.log('Song()', props);
   const { id, position, name, album, artist,  } = props;
   return (
@@ -34,7 +34,6 @@ const Song = (props) => {
       width="0.90"
       height="0.15"
       color="blue"
-      key={name}
       position={position}
       events={{
         'click': handleClick,
@@ -51,8 +50,8 @@ const Song = (props) => {
         primitive="a-text"
         value={name}
         color="black"
-        position="-0.40 0.05 0"
-        width="0.60"
+        position="-0.42 0.04 0"
+        width="0.80"
       />
 
       {/*/!*Album Name*!/*/}
@@ -69,4 +68,4 @@ const Song = (props) => {
   );
 };
 
-export default Song;
+export default RequestedSong;
