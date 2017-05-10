@@ -43,6 +43,11 @@ const RequestedSong = (props) => {
         'stateadded':render,
         'stateremoved':render,
         'mouseleave':leave,
+        'componentchanged':function () {props.songChange(
+          this.components.position.data,
+          this.components.rotation.data,
+          this.components.color.data,
+          this.components.value.data)}
       }}
     >
       {/*Song Name*/}

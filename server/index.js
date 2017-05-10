@@ -6,15 +6,27 @@ const bodyParser = require('body-parser');
 
 const startDb = require('../db');
 
+const socketio = require('socket.io')
+
 const app = express();
 app.set('port', (process.env.PORT || 3000));
 
-app.listen(app.get('port'), function () {
+const server = app.listen(app.get('port'), function () {
   console.log('Node app is running on port:', app.get('port'));
   //Promise
   startDb
 });
 
+const websocket = socketio(server);
+
+websocket.on('connection', function(socket) {
+  console.log('A new client has connected', socket.id)
+
+  socket.on('something', function(data){
+    console.log('broadcasting from server')
+    socket.broadcast.emit('something', data);
+  })
+})
 const env = process.env.NODE_ENV || 'development';
 
 if (env === 'development') {
