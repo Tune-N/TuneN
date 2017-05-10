@@ -11,17 +11,22 @@ class RequestedSong extends React.Component {
       focus:false
     };
 
-    this.onFocus = this.onFocus.bind(this);
+    this.setFocus = this.setFocus.bind(this);
+    this.removeFocus = this.removeFocus.bind(this);
   }
 
-  onFocus(){
-    this.setState({focus: !this.state.focus});
+  setFocus(){
+    this.setState({focus: true});
+
   }
+  removeFocus(){
+    this.setState({focus: false});
+  }
+
 
   render(){
     // console.log('RequestedSong render()', this.props);
     const { id, position, name, album, artist, selectSong  } = this.props;
-
     let color = this.state.focus ? "blue" : "white";
     if (this.props.selectedSong === id) color = "yellow";
 
@@ -44,10 +49,10 @@ class RequestedSong extends React.Component {
           'buttonup': () => {
             console.log('buttonup');
             selectSong(this.props.id)},
-          'raycaster-intersected': this.onFocus,
-          'raycaster-intersected-cleared': this.onFocus,
-          'mouseenter':this.onFocus,
-          'mouseleave':this.onFocus,
+          'mouseenter': this.setFocus,
+          'raycaster-intersected': this.setFocus,
+          'mouseleave':this.removeFocus,
+          'raycaster-intersected-cleared': this.removeFocus,
         }}
       >
         <Entity

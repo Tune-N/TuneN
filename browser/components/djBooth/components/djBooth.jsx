@@ -21,7 +21,19 @@ class djBooth extends React.Component {
 
     return (
       <div className="DJBooth">
-        <Scene>
+        <Scene events={{
+          click: (e) => console.log('Scene Clicked', e),
+          'buttonup': (e) => {
+            console.log('buttonup');
+            console.log('event', e);
+            const remote = e.target;
+            console.log('remote', remote);
+            const raycaster = remote.getAttribute('raycaster');
+            console.log('raycaster', raycaster);
+            console.log('remote.components.raycaster.raycaster', remote.components.raycaster.raycaster);
+
+          }
+        }}>
           <Camera />
           <DaydreamController />
           <Background />

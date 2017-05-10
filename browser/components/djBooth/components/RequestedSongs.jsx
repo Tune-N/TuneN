@@ -21,9 +21,9 @@ const RequestedSongs = (props) => {
         primitive="a-text"
         value="Top Requested Songs"
         color="black"
-        height="0.05"
+        height="0.90"
         width="0.75"
-        position="0 0.85 0.02"
+        position="0 0.90 0.02"
         align="center"
       />
       {
