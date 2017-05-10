@@ -37,7 +37,13 @@ class RequestedSong extends React.Component {
         color={color}
         position={position}
         events={{
-          'click': (e) => selectSong(this.props.id),
+          'click': () => selectSong(this.props.id),
+          'buttondown': () => {
+            console.log('buttondown');
+            selectSong(this.props.id)},
+          'buttonup': () => {
+            console.log('buttonup');
+            selectSong(this.props.id)},
           'raycaster-intersected': this.onFocus,
           'raycaster-intersected-cleared': this.onFocus,
           'mouseenter':this.onFocus,

@@ -15,7 +15,6 @@ import RequestedSongs from './RequestedSongs.jsx'
 registerClickDrag(aframe);
 
 class djBooth extends React.Component {
-
   render(){
     console.log('djBooth render()', this.props);
     const { requestedSongs, deck1, deck2 } = this.props;

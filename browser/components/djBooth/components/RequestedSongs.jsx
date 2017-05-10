@@ -23,7 +23,7 @@ const RequestedSongs = (props) => {
         color="black"
         height="0.05"
         width="0.75"
-        position="0 0.85 0"
+        position="0 0.85 0.02"
         align="center"
       />
       {
