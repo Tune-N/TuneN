@@ -1,20 +1,11 @@
-import React, { Component } from 'react';
-import aframe from 'aframe';
+import { connect } from 'react-redux'
 
-// import djBooth from '../djBooth'
-//
-// export default class djBoothContainer extends Component {
-//
-//   componentDidMount(){
-//     console.log('DJ Booth Mounted.')
-//   }
-//
-//   render(){
-//     console.log("rendering djBooth Container");
-//     return(
-//     <div>
-//       <djBooth name="Samir"/>
-//     </div>
-//     )
-//   }
-// }
+import djBooth from '../components/djBooth.jsx'
+
+const mapStateToProps = state => (state.djBooth);
+
+const mapDispatchToProps = {};
+
+const djBoothContainer = connect(mapStateToProps, mapDispatchToProps)(djBooth);
+
+export default djBoothContainer
