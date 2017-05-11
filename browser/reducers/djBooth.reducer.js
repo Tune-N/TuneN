@@ -1,6 +1,7 @@
 /* -----------------    ACTIONS     ------------------ */
 
 const SET_SELECTED_SONG = 'SET_SELECTED_SONG';
+const FILTER_SONGS = 'FILTER_SONGS';
 
 const SET_DECK1_SONG = 'SET_DECK1_SONG';
 const START_PLAYING_DECK1 = 'START_PLAYING_DECK1';
@@ -24,7 +25,15 @@ export const setDeck1Song = song => ({
   song
 });
 
+export const setDeck2Song = song => ({
+  type: SET_DECK2_SONG,
+  song
+});
 
+export const filterSongs = songId => ({
+  type: FILTER_SONGS,
+  songId,
+});
 
 /* ------------       REDUCER     ------------------ */
 
@@ -67,8 +76,18 @@ export default function reducer(state = initialState, action) {
       break;
 
     case SET_DECK1_SONG:
-      const newDeck1 = Object.assign({}, state.deck1);
-      newDeck1.song = action.song;
+      newState.deck1 = Object.assign({}, state.deck1);
+      newState.deck1.song = action.song;
+      break;
+
+    case SET_DECK2_SONG:
+      newState.deck2 = Object.assign({}, state.deck2);
+      newState.deck2.song = action.song;
+      break;
+
+    case FILTER_SONGS:
+      const filtSongs = newState.requestedSongs.filter(song => song.id !== action.songId);
+      newState.requestedSongs = filtSongs;
       break;
 
     default:
