@@ -1,56 +1,46 @@
 import React from 'react';
 import 'aframe';
-import { Scene, Entity } from 'aframe-react';
-import store from '../../../store';
-import { filterSongs, setDeck1Song, setDeck2Song } from '../../../reducers/djBooth.reducer';
+import { Entity } from 'aframe-react';
 
-
-function dragend(event) {
-  console.log('dragEnd', this);
-  if (this.is('hovered')) console.log('Dropped inside Deck 1');
-
-}
 
 class Deck extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick(){
+    const { id, selectedSong, setDeckSong, removeRequestedSong } = this.props;
+    setDeckSong(id, selectedSong);
+    removeRequestedSong(id, selectedSong.id);
   }
 
   render() {
-    console.log('Deck()', this.props);
+    console.log('render() Deck', this.props);
+    const { id, position, song } = this.props;
+
     return (
       <Entity
         className="selectable"
-        id={this.props.id}
+        id={id}
         primitive="a-plane"
         material={{
           color: 'white',
           opacity: 0.70,
           wireframe: true
         }}
-        position={this.props.position}
+        position={position}
         width="1.50"
         height="0.50"
         events={{
-          dragend: dragend,
-          click: (e) => {
-            console.log('Click!');
-            const id = e.srcElement.id;
-            const state = store.getState();
-            const songId = state.djBooth.selectedSong;
-            const song = state.djBooth.requestedSongs.filter(sng => sng.id === songId);
-            if (song[0]){
-              id === 'deck1' ? store.dispatch(setDeck1Song(song[0])) : store.dispatch(setDeck2Song(song[0]));
-            }
-            store.dispatch(filterSongs(songId));
-          }
+          click: this.onClick
         }}
       >
-        {this.props.song.name ?
+        {song ?
           <Entity
             primitive="a-text"
-            value={this.props.song.name}
+            value={song.name}
             width="1.00"
             align="center"
           /> : <div></div>
@@ -58,7 +48,7 @@ class Deck extends React.Component {
       </Entity>
     )
   }
-};
+}
 
 
 export default Deck;
