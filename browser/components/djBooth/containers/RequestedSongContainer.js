@@ -5,7 +5,7 @@ import RequestedSong from '../components/RequestedSong.jsx'
 
 
 const mapStateToProps = (state) => ({
-  selectedSong: state.djBooth.selectedSong
+  selectedSong: state.djBooth.selectedSong,
 });
 
 const mapDispatchToProps = {
@@ -14,4 +14,4 @@ const mapDispatchToProps = {
 
 const RequestedSongContainer = connect(mapStateToProps, mapDispatchToProps)(RequestedSong);
 
-export default RequestedSongContainer
+export default RequestedSongContainer;

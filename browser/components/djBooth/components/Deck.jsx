@@ -26,7 +26,10 @@ const Deck = (props) => {
         height="0.50"
         events={{
           dragend: dragend,
-          click: () => {console.log('Click!')}
+          click: (e) => {
+            console.log('Click!');
+            console.log('deck event', e);
+          }
         }}
       >
         { props.songName ?

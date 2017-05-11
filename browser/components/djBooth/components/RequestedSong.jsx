@@ -26,10 +26,9 @@ class RequestedSong extends React.Component {
 
   render(){
     // console.log('RequestedSong render()', this.props);
-    const { id, position, name, album, artist, selectSong  } = this.props;
+    const { id, position, name, album, artist, selectSong } = this.props;
     let color = this.state.focus ? "blue" : "white";
     if (this.props.selectedSong === id) color = "yellow";
-
 
     return (
       <Entity
@@ -43,12 +42,6 @@ class RequestedSong extends React.Component {
         position={position}
         events={{
           'click': () => selectSong(this.props.id),
-          'buttondown': () => {
-            console.log('buttondown');
-            selectSong(this.props.id)},
-          'buttonup': () => {
-            console.log('buttonup');
-            selectSong(this.props.id)},
           'mouseenter': this.setFocus,
           'raycaster-intersected': this.setFocus,
           'mouseleave':this.removeFocus,
