@@ -4,7 +4,16 @@ import djBooth from '../components/djBooth.jsx'
 
 const mapStateToProps = state => (state.djBooth);
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = dispatch => {
+  return {
+    songChange(position,rotation,color,){
+      return {
+        type:'SONG_CHANGE',
+        action: {}
+      }
+    }
+  }
+};
 
 const djBoothContainer = connect(mapStateToProps, mapDispatchToProps)(djBooth);
 

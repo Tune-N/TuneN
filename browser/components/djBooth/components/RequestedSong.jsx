@@ -46,7 +46,7 @@ const RequestedSong = (props) => {
         'componentchanged':function () {props.songChange(
           this.components.position.data,
           this.components.rotation.data,
-          this.components.color.data,
+          this.components.material.data.color,
           this.components.value.data)}
       }}
     >
