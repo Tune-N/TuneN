@@ -24,7 +24,7 @@ function render() {
 
 
 const RequestedSong = (props) => {
-  console.log('Song()', props);
+  console.log('requestedSongProps', props);
   const { id, position, name, album, artist,  } = props;
   return (
     <Entity
@@ -43,11 +43,15 @@ const RequestedSong = (props) => {
         'stateadded':render,
         'stateremoved':render,
         'mouseleave':leave,
-        'componentchanged':function () {props.songChange(
+        'componentchanged':function() {
+          console.log('thisReqSong',this.components)
+          {/*console.log('thisReqSong2',Object.keys(this))*/}
+
+          props.songChange(
           this.components.position.data,
           this.components.rotation.data,
           this.components.material.data.color,
-          this.components.value.data)}
+          name)}
       }}
     >
       {/*Song Name*/}

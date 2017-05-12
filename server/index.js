@@ -22,9 +22,9 @@ const websocket = socketio(server);
 websocket.on('connection', function(socket) {
   console.log('A new client has connected', socket.id)
 
-  socket.on('something', function(data){
+  socket.on('loadAllSongs', function(data){
     console.log('broadcasting from server')
-    socket.broadcast.emit('something', data);
+    socket.broadcast.emit('loadAllSongs', data);
   })
 })
 const env = process.env.NODE_ENV || 'development';

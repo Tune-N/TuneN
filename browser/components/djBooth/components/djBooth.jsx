@@ -1,6 +1,7 @@
 import React from 'react';
 import aframe from 'aframe';
 import { Scene } from 'aframe-react';
+import socketclient from 'socket.io-client'
 
 import 'aframe-mouse-cursor-component'
 import 'aframe-daydream-controller-component';
@@ -13,8 +14,13 @@ import Deck from './Deck.jsx';
 import RequestedSongs from './RequestedSongs.jsx'
 
 registerClickDrag(aframe);
+const socket = socketclient('192.168.1.12:3000')
 
 class djBooth extends React.Component {
+
+//   componentDidMount(){
+//     socket.emit('loadAllSongs',this.props)
+// }
 
   render(){
     console.log('djBooth render()', this.props);
@@ -28,7 +34,7 @@ class djBooth extends React.Component {
           <Background />
           <Deck id="deck1" position="0 2 -2" song={deck1.song} volume={deck1.volume}/>
           <Deck id="deck2" position="0 1 -2" song={deck1.song} volume={deck1.volume}/>
-          <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} />
+          <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} songChange={this.props.songChange}/>
         </Scene>
       </div>
     )

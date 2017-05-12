@@ -10,7 +10,7 @@ function dragend(event){
 }
 
 const Deck = (props) => {
-    console.log('Deck()', props);
+    // console.log('Deck()', props);
     return (
       <Entity
         className="selectable"
