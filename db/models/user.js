@@ -16,22 +16,27 @@ module.exports = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
   },
   password: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   salt: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
     allowNull: true,
-    defaultValue: false
+    defaultValue: false,
+  },
+  isLive: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true,
+    defaultValue: false,
   },
   googleId: {
     type: Sequelize.STRING,
-  }
+  },
 }, {
   instanceMethods: {
     sanitize: function () {

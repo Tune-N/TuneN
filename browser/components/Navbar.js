@@ -1,13 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link, browserHistory } from 'react-router-dom'
-// import Login from './Login'
-// import WhoAmI from './WhoAmI'
 import store from '../store'
 
 import { login, logout, whoami } from '../reducers/auth'
 // import '.../public/stylesheets/nav.scss'
- 
+
 /* -----------------    COMPONENT     ------------------ */
 
 class Navbar extends React.Component {
@@ -26,12 +24,12 @@ class Navbar extends React.Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="#">TuneN</a>
+            <Link className="navbar-brand" to="/">TuneN</Link>
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
-              <li className="active"><a href="#">Link <span className="sr-only">(current)</span></a></li>
-              <li><a href="#">Link</a></li>
+              <li className="active"><Link to="/vr">VR <span className="sr-only">(current)</span></Link></li>
+              <li><Link to="/room">Room</Link></li>
               <li className="dropdown">
                 <Link to="/" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></Link>
                 <ul className="dropdown-menu">
@@ -74,11 +72,11 @@ class Navbar extends React.Component {
                       <li>
                         <input name="password" type="password"  className="form-control login-input" placeholder="Enter Password" />
                       </li>
-                      
+
                       <li className="login-btn ">
                         <button className="login btn btn-success" label="login" type="submit" value="Login" >Login</button>
                       </li>
-                      
+
                       <li className="login-btn">
                         <a href='/api/auth/google'><img src="googlebtn.png" /></a>
                       </li>
@@ -91,7 +89,7 @@ class Navbar extends React.Component {
           </div>
         </div>
       </nav>
-    
+
     )
   }
 }

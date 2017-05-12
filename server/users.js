@@ -35,6 +35,19 @@ module.exports = require('express').Router()
         else res.json(user)
       })
       .catch(next))
+  .get('/live',
+    // mustBeLoggedIn,
+    (req, res, next) =>
+      User.findAll({
+        where: {
+          live: true,
+        },
+      })
+      .then(users => {
+        if (!users.length) res.status(404).send('no live DJs found');
+        else res.json(users);
+      })
+      .catch(next))
   .put('/:id',
     mustBeLoggedIn,
     (req, res, next) =>
