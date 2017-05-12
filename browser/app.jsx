@@ -6,8 +6,7 @@ import djBoothContainer from './components/djBooth/containers/djBoothContainer'
 
 const App = () => (
   <div id="main" className="container-fluid">
-    {/*<Navbar />*/}
-    {/*<h1>Testing</h1>*/}
+    <Route exact path="/" component={Navbar} />
     <Route path="/vr" component={djBoothContainer} />
   </div>
 );
