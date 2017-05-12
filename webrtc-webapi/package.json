@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.2",
-    "rtcmulticonnection-v3": "^3.4.4"
+    "rtcmulticonnection-v3": "^3.4.4",
+    "youtube-audio-stream": "0.0.48"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
