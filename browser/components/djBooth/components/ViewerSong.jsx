@@ -4,11 +4,9 @@ import { Entity } from 'aframe-react';
 
 
 const ViewerSong = (props) => {
-  console.log('Song()', props);
   const { position, name, rotation, color} = props;
   return (
     <Entity
-      click-drag
       primitive="a-plane"
       className="Song selectable "
       width="0.90"

@@ -4,9 +4,21 @@ import store from '../../../store'
 
 import djBoothViewer from '../components/djBoothViewer.jsx'
 
-const socket = socketclient('192.168.1.12:3000')
+const socket = socketclient('192.168.2.23:3000')
+
+setTimeout(function () {
+  socket.emit('newViewer','')
+},1000)
+
+socket.on('songChange',function(attributes){
+  console.log('attributes',attributes)
+  store.dispatch({
+    type: 'SONG_CHANGE',
+    attributes
+  })
+})
+
 socket.on('loadAllSongs', function (songList) {
-  console.log('receiving songs', songList)
   store.dispatch({
     type:'LOAD_SONGS',
     songList

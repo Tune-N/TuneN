@@ -7,7 +7,7 @@ import ViewerSong from './ViewerSong.jsx'
 const ViewerSongs = (props) => {
   console.log('RequestedSongs props', props);
 
-  const {position, rotation, songList } = props;
+  const {songList } = props;
   console.log('songList',songList)
   return (
     <Entity

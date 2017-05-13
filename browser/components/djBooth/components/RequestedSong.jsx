@@ -15,6 +15,7 @@ function intersected() {
 
 function leave() {
   this.removeState('focus');
+  this.setAttribute('color', "white");
 }
 
 function render() {
@@ -24,7 +25,7 @@ function render() {
 
 
 const RequestedSong = (props) => {
-  console.log('requestedSongProps', props);
+  // console.log('requestedSongProps', props);
   const { id, position, name, album, artist,  } = props;
   return (
     <Entity
@@ -33,7 +34,6 @@ const RequestedSong = (props) => {
       className="Song selectable "
       width="0.90"
       height="0.15"
-      color="blue"
       position={position}
       events={{
         'click': handleClick,
@@ -44,14 +44,12 @@ const RequestedSong = (props) => {
         'stateremoved':render,
         'mouseleave':leave,
         'componentchanged':function() {
-          console.log('thisReqSong',this.components)
-          {/*console.log('thisReqSong2',Object.keys(this))*/}
-
+          {/*console.log('hello',this.components)*/}
           props.songChange(
           this.components.position.data,
           this.components.rotation.data,
           this.components.material.data.color,
-          name)}
+          name)},
       }}
     >
       {/*Song Name*/}

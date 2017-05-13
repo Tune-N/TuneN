@@ -5,7 +5,7 @@ import { Entity } from 'aframe-react';
 import RequestedSong from './RequestedSong.jsx'
 
 const RequestedSongs = (props) => {
-  console.log('RequestedSongs props', props);
+  // console.log('RequestedSongs props', props);
 
   const {position, rotation, songs } = props;
   return (

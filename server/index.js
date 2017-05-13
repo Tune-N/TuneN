@@ -19,8 +19,17 @@ const server = app.listen(app.get('port'), function () {
 
 const websocket = socketio(server);
 
+
 websocket.on('connection', function(socket) {
   console.log('A new client has connected', socket.id)
+
+  socket.on('newViewer', function (data) {
+    socket.broadcast.emit('newViewer', data)
+  })
+
+  socket.on('songChange', function (attributes) {
+    socket.broadcast.emit('songChange', attributes)
+  })
 
   socket.on('loadAllSongs', function(data){
     console.log('broadcasting from server')
