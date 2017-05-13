@@ -21,7 +21,7 @@
         connection.join('fullstack-academy')
         // open new session
         document.getElementById('openNewSessionButton').onclick = function() {
-            connection.join('fullstack-academy')
+            // connection.join('fullstack-academy')
             console.log(connection)
         };
 
