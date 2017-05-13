@@ -1,18 +1,22 @@
 import React from 'react';
 import axios from 'axios';
+import loadLiveDJs from '../../../reducers/djBooth.reducer.js';
+import store from '../../../store';
+
 
 class HomePage  extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
 
   }
 
-  compmonentDidMount() {
+  componentDidMount() {
     //axios requests to get all live DJs
     axios.get('/api/users/live')
     .then(liveDjs => {
-      console.log("we are here");s
+      console.log("we are here");
       console.log(liveDjs);
+      store.dispatch(loadLiveDJs(liveDjs));
     });
   }
 

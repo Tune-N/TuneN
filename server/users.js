@@ -26,21 +26,11 @@ module.exports = require('express').Router()
       .then(user => res.status(201).send(user))
       .catch(next)
     })
-  .get('/:id',
-    // mustBeLoggedIn,
-    (req, res, next) =>
-      User.findById(req.params.id)
-      .then(user => {
-        if (!user) res.status(404).send('no user found')
-        else res.json(user)
-      })
-      .catch(next))
   .get('/live',
-    // mustBeLoggedIn,
     (req, res, next) =>
       User.findAll({
         where: {
-          live: true,
+          isLive: true,
         },
       })
       .then(users => {
@@ -48,8 +38,17 @@ module.exports = require('express').Router()
         else res.json(users);
       })
       .catch(next))
+  .get('/:id',
+    // mustBeLoggedIn,
+    (req, res, next) =>
+      User.findById(req.params.id)
+      .then(user => {
+        if (!user) res.status(404).send('no user found');
+        else res.json(user);
+      })
+      .catch(next))
   .put('/:id',
-    mustBeLoggedIn,
+    // mustBeLoggedIn,
     (req, res, next) =>
       User.update(req.body, {
         where: {
