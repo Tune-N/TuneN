@@ -8,7 +8,8 @@ const START_PLAYING = 'START_PLAYING';
 const STOP_PLAYING = 'STOP_PLAYING';
 const SET_DECK_PROGRESS = 'SET_DECK_PROGRESS';
 
-
+const SONGS_LOADED = 'SONGS_LOADED'
+const SONG_CHANGE = 'SONG_CHANGE'
 
 
 /* ------------   ACTION CREATORS     ------------------ */
@@ -48,20 +49,19 @@ const initialState = {
     progress: 0
   },
   requestedSongs:[
-    {id:0, name: 'Song 1', album: 'Album 1', artist:'Artist 1'},
-    {id:1, name: 'Song 2', album: 'Album 2', artist:'Artist 2'},
-    {id:2, name: 'Song 3', album: 'Album 3', artist:'Artist 3'},
-    {id:3, name: 'Song 4', album: 'Album 4', artist:'Artist 4'},
+    {id:0, name: 'Song 1', album: 'Album 1', artist:'Artist 1',position:'-3 1 2',rotation:'0 3 0',color:'white'},
+    {id:1, name: 'Song 2', album: 'Album 2', artist:'Artist 2',position:'-3 0.5 2',rotation:'0 3 0',color:'white'},
+    {id:2, name: 'Song 3', album: 'Album 3', artist:'Artist 3',position:'-3 0',rotation:'0 3 0',color:'white'},
+    {id:3, name: 'Song 4', album: 'Album 4', artist:'Artist 4',position:'-3 -0.5 2',rotation:'0 3 0',color:'white'},
   ],
-
   selectedSong: null,
-
   crossfader:0,
 };
 
 // Reducer
 
 export default function reducer(state = initialState, action) {
+  console.log('boothState',state.requestedSongs)
 
   const newState = Object.assign({}, state);
 
@@ -81,6 +81,18 @@ export default function reducer(state = initialState, action) {
       newState.requestedSongs =  state.requestedSongs.filter(
         song => song.id !== action.songId);
       break;
+
+    case SONGS_LOADED:
+      newState.requestedSongs = action.allSongs
+      break
+
+    case SONG_CHANGE:
+      // console.log('action',action.attributes.color)
+      newState.requestedSongs = newState.requestedSongs.map(song =>{
+        // console.log('CHANGING',song,action.attributes)
+        if (song.name == action.attributes.name) song = Object.assign(song,action.attributes)
+        return song})
+      break
 
     default:
       return state;
