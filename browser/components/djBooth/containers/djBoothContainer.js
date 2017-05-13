@@ -27,21 +27,7 @@ const mapDispatchToProps = dispatch => {
         type:'SONG_CHANGE',
         attributes:{position,rotation,color,name}
       })
-
     }
-  ,
-    loadSongs(songs){
-    songs.map(song =>{
-      name = song.children[0].components.text.attrValue.value
-      var position = Object.values(song.components.position.attrValue).join(' ')
-      console.log(position)
-      console.log(Object.keys(song.components))
-      console.log(song.components.geometry)
-
-
-      return {name, }
-    })
-  }
 }}
 
 const djBoothContainer = connect(mapStateToProps, mapDispatchToProps)(djBooth);

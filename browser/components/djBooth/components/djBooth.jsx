@@ -16,10 +16,6 @@ registerClickDrag(aframe);
 
 class djBooth extends React.Component {
 
-componentDidMount(){
-  this.props.loadSongs(Array.prototype.slice.call(document.querySelector('#requestedSongs').children).slice(1))
-  }
-
   render(){
     // console.log('djBooth render()', this.props);
     const { requestedSongs, deck1, deck2 } = this.props;
