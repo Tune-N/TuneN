@@ -1,22 +1,17 @@
 import React from 'react';
-import axios from 'axios';
-import loadLiveDJs from '../../../reducers/djBooth.reducer.js';
+import { connect } from 'react-redux';
 import store from '../../../store';
+import axios from 'axios';
+import { Link, withRouter } from 'react-router-dom';
+import { loadLiveDJs } from '../../../reducers/djBooth.reducer.js';
 
-
-class HomePage  extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
+class HomePage extends React.Component {
 
   componentDidMount() {
-    //axios requests to get all live DJs
+    //axios request to get all live DJs
     axios.get('/api/users/live')
     .then(liveDjs => {
-      console.log("we are here");
-      console.log(liveDjs);
-      store.dispatch(loadLiveDJs(liveDjs));
+      store.dispatch(loadLiveDJs(liveDjs.data));
     });
   }
 
@@ -24,14 +19,27 @@ class HomePage  extends React.Component {
     return (
       <div className="row">
         <div className="col-md-8 jumbotron" style={{ padding: 5 }}>
-          <h2>Map Will Go Here</h2>
+          <h3>DJs in your area...</h3>
+          <img style={{ width: '100%' }} src="http://laurabelinfante.com/wp-content/uploads/2014/01/Google-Maps-USA-862x582.png" />
         </div>
         <div className="col-md-4 jumbotron" style={{ padding: 5 }}>
-          <h2>DJ Rooms that Are Live</h2>
+          <ul style={{ listStyle: 'none' }}>
+          {
+            this.props.djs.length && this.props.djs.map(dj => {
+              return <li key={dj.id}><Link to={`/room/${dj.username}`}>{dj.username}</Link></li>;
+            })
+          }
+          </ul>
         </div>
       </div>
     );
   }
 }
 
-export default HomePage;
+
+
+const mapStateToProps = (state) => ({
+  djs: state.djBooth.djs,
+});
+
+export default withRouter(connect(mapStateToProps, null)(HomePage));

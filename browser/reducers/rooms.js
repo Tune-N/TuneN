@@ -21,7 +21,7 @@ const joinRoom = room => ({
 
 const initialState = {
   selected: {},
-  list: []
+  list: [],
 };
 
 

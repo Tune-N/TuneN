@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
 
 export const Login = ({ login }) => (
   <div className='container-fluid'>
@@ -19,7 +20,7 @@ export const Login = ({ login }) => (
 // import { login } from 'APP/app/reducers/auth'
 // import { connect } from 'react-redux'
 
-export default connect(
-  state => ({}),
-  { login },
-)(Login)
+// export default connect(
+//   state => ({}),
+//   { login },
+// )(Login)

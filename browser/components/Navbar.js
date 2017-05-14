@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link, browserHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import store from '../store'
 
 import { login, logout, whoami } from '../reducers/auth'
@@ -28,8 +28,7 @@ class Navbar extends React.Component {
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
-              <li className="active"><Link to="/vr">VR <span className="sr-only">(current)</span></Link></li>
-              <li><Link to="/room">Room</Link></li>
+              { this.props.loggedIn ? <li className="active"><Link to="/vr">DJ Now <span className="sr-only">(current)</span></Link></li> : <li></li> }
               <li className="dropdown">
                 <Link to="/" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></Link>
                 <ul className="dropdown-menu">
@@ -43,13 +42,8 @@ class Navbar extends React.Component {
                 </ul>
               </li>
             </ul>
-            <form className="navbar-form navbar-left">
-              <div className="form-group">
-                <input type="text" className="form-control" placeholder="Search" />
-              </div>
-              <button type="submit" className="btn btn-default">Submit</button>
-            </form>
             <ul className="nav navbar-nav navbar-right login-container">
+              { this.props.loggedIn ? <li></li> : <li><Link to="/signup">Signup</Link></li> }
               {this.props.loggedIn ?
                 <li>
                   <button className="btn btn-default navbar-btn form-inline" onClick={(evt)=>{
@@ -112,9 +106,4 @@ const mapDispatchToProps = dispatch => ({
 })
 
 // export default Navbar;
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
-
-//Way to choose what is rendered...
-// <li classNameName="active">
-//                 {this.props.user ? <WhoAmI /> : <Login user={this.props.user} />}
-//               </li>
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
