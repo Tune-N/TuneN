@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 
-import djBooth from '../components/djBooth.jsx'
+import djBooth from '../components/djBooth.jsx';
 
-const mapStateToProps = state => (state.djBooth);
+const mapStateToProps = state => (state);
 
 const mapDispatchToProps = {};
 
 const djBoothContainer = connect(mapStateToProps, mapDispatchToProps)(djBooth);
 
-export default djBoothContainer
+export default djBoothContainer;

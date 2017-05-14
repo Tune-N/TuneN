@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import store from '../store'
 
 import { login, logout, whoami } from '../reducers/auth'
 // import '.../public/stylesheets/nav.scss'
@@ -9,9 +8,6 @@ import { login, logout, whoami } from '../reducers/auth'
 /* -----------------    COMPONENT     ------------------ */
 
 class Navbar extends React.Component {
-  componentWillMount(){
-    this.props.whoami();
-  }
 
   render() {
     return (
@@ -28,7 +24,7 @@ class Navbar extends React.Component {
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
-              { this.props.loggedIn ? <li className="active"><Link to="/vr">DJ Now <span className="sr-only">(current)</span></Link></li> : <li></li> }
+              <li className="active"><Link to="/vr">DJ Now <span className="sr-only">(current)</span></Link></li>
               <li className="dropdown">
                 <Link to="/" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></Link>
                 <ul className="dropdown-menu">
@@ -60,7 +56,7 @@ class Navbar extends React.Component {
                     this.props.login(evt.target.email.value,evt.target.password.value)
                   }}>
                     <ul style={{listStyle:'none',padding:0}} >
-                      <li style={{paddingBottom:8}}>
+                      <li style={{paddingBottom: 8 }}>
                         <input name="email" type="text" className="form-control login-input" placeholder="Enter Email Address" />
                       </li>
                       <li>
@@ -92,18 +88,16 @@ class Navbar extends React.Component {
 
 const mapStateToProps = (state) => ({
   loggedIn: state.auth ? state.auth : false
-})
+});
+
 const mapDispatchToProps = dispatch => ({
-  login:(email,password) => {
-      dispatch(login(email,password))
+  login:(email, password) => {
+    dispatch(login(email, password));
   },
   logout:() => {
-      dispatch(logout())
+    dispatch(logout());
   },
-  whoami:() =>{
-      dispatch(whoami())
-  }
-})
+});
 
 // export default Navbar;
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
