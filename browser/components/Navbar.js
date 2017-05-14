@@ -24,7 +24,7 @@ class Navbar extends React.Component {
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
-              <li className="active"><Link to="/vr">DJ Now <span className="sr-only">(current)</span></Link></li>
+              { this.props.loggedIn ? <li className="active"><Link to="/vr">DJ Now <span className="sr-only">(current)</span></Link></li> : <li></li> }
               <li className="dropdown">
                 <Link to="/" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></Link>
                 <ul className="dropdown-menu">
