@@ -6,7 +6,7 @@ import { Link, browserHistory } from 'react-router-dom'
 import store from '../store'
 
 import { login, logout, whoami } from '../reducers/auth'
-// import '.../public/stylesheets/nav.scss'
+import '../../public/stylesheets/nav.scss'
  
 /* -----------------    COMPONENT     ------------------ */
 

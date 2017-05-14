@@ -19,11 +19,7 @@ app.use('/client', function(req, res) {
 });
 
 app.get('/mp3/:videoId', function(req, res) {
-	console.log(req.params.videoId)
     stream(`https://www.youtube.com/watch?v=${req.params.videoId}`).pipe(res)
-    
-    // res.send(req.body)
-    // stream(`https://www.youtube.com/watch?v=ShOQQOy5pf8`).pipe(res)
 });
 
 app.get('/', function(req, res) {
