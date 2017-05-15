@@ -51,7 +51,7 @@ class YoutubeSearch extends React.Component {
     return (
         <div className="youtube-section col-xs-4 no-pad">
            <h2 className="header youtube-header">
-                YouTube
+                YouTube Music
           </h2>
           <form action="#" id='youtube-form' onSubmit={this.triggerSearch}>
                 <input type="input" id="youtube-search" name="youtubeSearch" placeholder="Search Song" autoComplete="off"/>
