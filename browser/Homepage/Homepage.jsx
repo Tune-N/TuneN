@@ -6,7 +6,7 @@ import Navbar from '../components/NavbarMaterial.jsx'
 import RoomsList from './components/RoomsList/RoomsList.jsx'
 import RoomsMap from './components/RoomsMap.jsx'
 
-import { getLiveDjs } from '../reducers/liveDjs';
+import { getLiveDjs } from '../reducers/rooms.reducer';
 
 class Homepage extends React.Component {
 
@@ -29,7 +29,7 @@ class Homepage extends React.Component {
             containerElement={<div id="rooms_map"/>}
             mapElement={<div style={{ height: `100%` }} />}
           />
-          <RoomsList djs={djs} />
+          <RoomsList />
         </div>
       </div>
 

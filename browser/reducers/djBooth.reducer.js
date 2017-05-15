@@ -30,10 +30,6 @@ export const removeRequestedSong = (deck, songId) => ({
   songId,
 });
 
-export const loadLiveDJs = djs => ({
-  type: SET_LIVE_DJS,
-  djs,
-});
 
 
 /* ------------       REDUCER     ------------------ */
@@ -62,8 +58,6 @@ const initialState = {
   selectedSong: null,
 
   crossfader: 0,
-
-  djs: [],
 };
 
 // Reducer
@@ -89,9 +83,6 @@ export default function reducer(state = initialState, action) {
         song => song.id !== action.songId);
       break;
 
-    case SET_LIVE_DJS:
-      newState.djs = action.djs;
-      break;
 
     default:
       return state;

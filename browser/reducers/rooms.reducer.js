@@ -1,13 +1,15 @@
+import axios from 'axios';
+
 
 /* -----------------    ACTIONS     ------------------ */
 
-const RECEIVE_ROOMS = 'RECEIVE_ROOMS';
+const SET_ROOMS = 'SET_ROOMS';
 const JOIN_ROOM = 'JOIN_ROOM';
 
 
 /* ------------   ACTION CREATORS     ------------------ */
-const receiveRooms = rooms => ({
-  type: RECEIVE_ROOMS,
+const setRooms = rooms => ({
+  type: SET_ROOMS,
   rooms
 });
 
@@ -32,7 +34,7 @@ export default function reducer(state = initialState, action) {
 
   switch (action.type) {
 
-    case RECEIVE_ROOMS:
+    case SET_ROOMS:
       newState.list = action.rooms;
       break;
 
@@ -51,3 +53,9 @@ export default function reducer(state = initialState, action) {
 
 /* ------------       DISPATCHERS     ------------------ */
 
+export const getLiveDjs = () => dispatch => {
+  axios.get('/api/users/live')
+    .then(response => {
+      dispatch(setRooms(response.data));
+    });
+};
