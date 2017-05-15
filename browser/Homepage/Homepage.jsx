@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Navbar from './components/Navbar.jsx'
+import Navbar from '../components/NavbarMaterial.jsx'
 import RoomsList from './components/RoomsList/RoomsList.jsx'
 import RoomsMap from './components/RoomsMap.jsx'
 

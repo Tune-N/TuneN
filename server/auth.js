@@ -70,8 +70,8 @@ app.get('/google', passport.authenticate('google', { scope: 'email' }));
 
 app.get('/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/me',
-    failureRedirect: '/login'
+    successRedirect: '/',
+    failureRedirect: '/login',
   })
 );
 

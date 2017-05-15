@@ -1,11 +1,13 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import Homepage from './Homepage/Homepage.jsx'
-import Navbar from './components/Navbar';
-import djBoothContainer from './components/djBooth/containers/djBoothContainer'
+import Homepage from './Homepage/Homepage.jsx';
+import djBoothContainer from './DJ/containers/djBoothContainer';
+
+
 
 const App = () => (
   <MuiThemeProvider>
@@ -18,5 +20,6 @@ const App = () => (
       </div>
   </MuiThemeProvider>
 );
+
 
 export default App;
