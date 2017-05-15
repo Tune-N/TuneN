@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { getLiveDjs } from '../../../reducers/liveDjs';
+import { getLiveDjs } from '../reducers/liveDjs';
 
 class HomePage extends React.Component {
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 import { whoami } from '../reducers/auth.reducer';
-import store from '../../../store';
+import store from '../store';
 
 class GoLive extends React.Component {
 
