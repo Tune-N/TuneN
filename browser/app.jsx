@@ -13,7 +13,7 @@ const App = () => (
         <Route exact path="/" component={Homepage} />
         <Route path="/signup" component={Homepage} />
         <Route path="/login" component={Homepage} />
-        <Route path="/room" component={djBoothContainer} />
+        <Route path="/room" component={<div>Hello World</div>} />
         <Route path="/dj" component={djBoothContainer} />
       </div>
   </MuiThemeProvider>
