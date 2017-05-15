@@ -18,7 +18,7 @@ registerClickDrag(aframe);
 class djBooth extends React.Component {
   constructor(props) {
     super(props)
-    this.strartStream = this.strartStream.bind(this);
+    this.startStream = this.startStream.bind(this);
     this.getSong = this.getSong.bind(this);
      
   }
@@ -66,10 +66,11 @@ class djBooth extends React.Component {
 
   }
 
-  strartStream(e){
+  startStream(e){
       e.preventDefault();
       // console.log(window.location.pathname.split('/')[1])
       this.connection.open('fullstack-academy')
+      console.log(this.connection);
   }
 
   getSong(e){
@@ -118,22 +119,20 @@ class djBooth extends React.Component {
             <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} />
           </Scene>
         </div>
-        <div className="col-xs-12" >
 
-
-          
+        {/*testing connection*/}
+        <div className="col-xs-12" >  
           <div className="experiment">
               <h2 className="header">
                   Select Song
               </h2>
-   
-              
+  
               <form action="#" id='select-form' onSubmit={this.getSong}  >
                   <input type="input" id="video-id" name="videoId" placeholder="Paste in video id" autoComplete="off"/>
                   <input type="submit" value="Play"/>
               </form>
 
-              <button id="openNewSessionButton" >Stream</button>
+              <button id="openNewSessionButton" onClick={this.startStream}>Stream Music</button>
               
               
               <div id="streams-container">
