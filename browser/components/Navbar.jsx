@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { login, logout, whoami } from '../reducers/auth.reducer'
+import { login, logout, whoami } from '../reducers/auth/reducer'
 // import '.../public/stylesheets/nav.scss'
 
 /* -----------------    COMPONENT     ------------------ */
