@@ -7,17 +7,11 @@ class Deck extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onClick = this.onClick.bind(this);
   }
 
-  onClick(){
-    const { id, selectedSong, setDeckSong, removeRequestedSong } = this.props;
-    setDeckSong(id, selectedSong);
-    removeRequestedSong(id, selectedSong.id, selectedSong.name);
-  }
 
   render() {
-    console.log('render() Deck', this.props);
+    console.log('render() DeckViewer', this.props);
     const { id, position, song } = this.props;
 
     return (

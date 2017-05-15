@@ -21,7 +21,7 @@ class djBooth extends React.Component {
   }
 
   render() {
-    console.log('djBooth');
+    // console.log('djBoothProps', this.props);
 
     const { requestedSongs, deck1, deck2 } = this.props;
 
@@ -33,7 +33,7 @@ class djBooth extends React.Component {
           <Background />
           <DeckContainer id="deck1" position="0 2 -2" song={this.props.deck1.song} volume={deck1.volume} />
           <DeckContainer id="deck2" position="0 1 -2" song={this.props.deck2.song} volume={deck2.volume} />
-          <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} />
+          <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} songChange={this.props.songChange}/>
         </Scene>
       </div>
     )

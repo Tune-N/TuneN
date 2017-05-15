@@ -35,6 +35,7 @@ const RequestedSongs = (props) => {
             album={song.album}
             artist={song.artist}
             image={song.image}
+            songChange={props.songChange}
           />
         ))
       }
