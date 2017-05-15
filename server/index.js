@@ -29,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', require('./api'));
 
+app.use('/music', require('./music'));
 
 app.use(express.static(path.join(__dirname, '../public')));
 
