@@ -17,6 +17,7 @@ import { whoami } from '../../../reducers/auth';
 import axios from 'axios';
 import store from '../../../store';
 import { connect } from 'react-redux';
+import { getLiveDjs } from '../../../reducers/liveDjs';
 
 registerClickDrag(aframe);
 
@@ -31,6 +32,9 @@ class djBooth extends React.Component {
     axios.put(`/api/users/${this.props.id}`, { isLive: false })
     .then(res => {
       store.dispatch(whoami());
+    })
+    .then(res => {
+      getLiveDjs();
     });
   }
 
@@ -65,7 +69,7 @@ class djBooth extends React.Component {
 }
 
 const mapState = (state) => ({
-  id: state.auth.id,
+  id: state.auth ? state.auth.id : '',
 });
 
 export default connect(mapState, null)(djBooth);

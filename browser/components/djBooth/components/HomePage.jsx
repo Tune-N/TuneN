@@ -1,18 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import store from '../../../store';
-import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
-import { loadLiveDJs } from '../../../reducers/djBooth.reducer.js';
+import { getLiveDjs } from '../../../reducers/liveDjs';
 
 class HomePage extends React.Component {
 
   componentDidMount() {
-    //axios request to get all live DJs
-    axios.get('/api/users/live')
-    .then(liveDjs => {
-      store.dispatch(loadLiveDJs(liveDjs.data));
-    });
+    getLiveDjs();
   }
 
   render() {
@@ -26,7 +20,7 @@ class HomePage extends React.Component {
           <ul style={{ listStyle: 'none' }}>
           {
             this.props.djs.length && this.props.djs.map(dj => {
-              return <li key={dj.id}><Link to={`/room/${dj.username}`}>{dj.username}</Link></li>;
+              return <li key={dj.id}><Link to={`room/${dj.username}/client`}>{dj.username}</Link></li>;
             })
           }
           </ul>

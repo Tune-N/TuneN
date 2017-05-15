@@ -32,7 +32,7 @@ class GoLive extends React.Component {
 }
 
 const mapState = (state) => ({
-  id: state.auth.id,
+  id: state.auth ? state.auth.id : '',
 });
 
 export default connect(mapState, null)(GoLive);
