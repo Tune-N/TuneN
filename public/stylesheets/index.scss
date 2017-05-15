@@ -2,6 +2,18 @@
 	padding:0 !important
 }
 
+#homepage{
+	display:flex;
+	flex-direction: row;
+}
+
+#rooms_map {
+	flex-grow: 3;
+}
+
+#rooms_list{
+	flex-grow: 2;
+}
 
 .DJBooth {
 	position: absolute;
