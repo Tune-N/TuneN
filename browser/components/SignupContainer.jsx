@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Signup from './Signup.jsx';
 import SignedUp from './SignedUp.jsx';
-import { signUp } from '../../../reducers/signup.jsx';
+import { signUp } from '../reducers/auth.reducer';
 
 /* -----------------    COMPONENT     ------------------ */
 

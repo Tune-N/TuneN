@@ -2,8 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { login, logout, whoami } from '../reducers/auth'
-// import '.../public/stylesheets/nav.scss'
+import { login, logout, whoami } from '../reducers/auth.reducer'
+
+import '../../public/stylesheets/nav.scss'
+ 
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -25,6 +27,11 @@ class Navbar extends React.Component {
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
               { this.props.loggedIn ? <li className="active"><Link to="/vr">DJ Now <span className="sr-only">(current)</span></Link></li> : <li></li> }
+              <li className="active"><a href="#">Link <span className="sr-only">(current)</span></a></li>
+              <Link to="/vr">VR</Link>
+              <Link to="/room">Room</Link>
+              <Link to="/dj">DJ</Link>
+              <li><a href="#">Link</a></li>
               <li className="dropdown">
                 <Link to="/" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></Link>
                 <ul className="dropdown-menu">

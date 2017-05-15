@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Share mp3 Live using RTCMultiConnection</title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  
+    </style>
+</head>
+
+<body>
+    <article>
+        <header style="text-align: center;">
+            <h1>
+               DJ Virtual Player
+            </h1>
+        </header>
+
+        
+        <section class="experiment">
+            <h2 class="header">
+                Select Song
+            </h2>
+
+            <input type="file">
+            <button id="openNewSessionButton" >Stream</button>
+
+            <br>
+            <div id="streams-container"></div>
+        </section>
+        <script src="https://cdn.webrtc-experiment.com/RTCMultiConnection.js"></script>
+        <script src="https://cdn.webrtc-experiment.com/firebase.js"></script>
+        <script>
+        var connection = new RTCMultiConnection();
+        
+        connection.session = {
+            audio: true,
+            oneway: true
+        };
+        var streamsContainer = document.getElementById('streams-container');
+        connection.onstream = function(e) {
+            console.log(e.type)
+            streamsContainer.appendChild(e.mediaElement);
+        };
+        // connect to signaling gateway
+        connection.connect();
+        // open new session
+        document.getElementById('openNewSessionButton').onclick = function() {
+            // this.disabled = true;
+            connection.open();
+            // console.log(connection,'kjsadhfjksahfklashfasj');
+        };
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        var context = new AudioContext();
+        var gainNode = context.createGain();
+        gainNode.connect(context.destination);
+        // don't play for self
+        // gainNode.gain.value = 0;
+        var destination = context.createMediaStreamDestination();
+        connection.attachStreams.push(destination.stream);
+        connection.dontCaptureUserMedia = true;
+        let soundSource = null;
+        document.querySelector('input[type=file]').onchange = function() {
+            console.log('hello')
+            // this.disabled = true;
+            //This can be done from an ajax request spotify
+            var reader = new FileReader();
+
+            reader.onload = (function(e) {
+                // Import callback function that provides PCM audio data decoded as an audio buffer
+                    context.decodeAudioData(e.target.result, function(buffer) {
+                    // Create the sound source
+                    if(soundSource){
+                        soundSource.disconnect();
+                    }
+                    soundSource = context.createBufferSource();
+                    soundSource.buffer = buffer;
+                    soundSource.start(0, 0 / 1000);
+                    soundSource.connect(gainNode);
+                    
+                    soundSource.connect(destination);
+                    console.log(destination.stream)
+                    
+                    // document.getElementById('openNewSessionButton').disabled = false;
+                });
+            });
+            reader.readAsArrayBuffer(this.files[0]);
+            console.log(this.files)
+
+        };
+        </script> 
+    </article>
+</body>
+</html>

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import djBooth from '../components/djBooth.jsx';
+import djBooth from '../djBooth.jsx';
 
 const mapStateToProps = state => (state);
 

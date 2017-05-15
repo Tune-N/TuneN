@@ -2,7 +2,6 @@ import React from 'react';
 import 'aframe';
 import { Entity } from 'aframe-react';
 
-
 class RequestedSong extends React.Component {
 
   constructor(props){
@@ -22,7 +21,6 @@ class RequestedSong extends React.Component {
   removeFocus(){
     this.setState({focus: false});
   }
-
 
   render(){
     const { id, position, name, album, artist, selectSong, selectedSong } = this.props;
