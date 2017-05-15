@@ -1,21 +1,21 @@
 import React from 'react';
 
-import AppBar from 'material-ui/AppBar';
+import Navbar from './components/Navbar.jsx'
+import RoomsList from './components/RoomsList/RoomsList.jsx'
+import RoomsMap from './components/RoomsMap.jsx'
 
 const Homepage = (props) => {
   return (
     <div>
-      <AppBar
-        title="TuneN"
-      />
+      <Navbar />
       <h1>Live DJs</h1>
       <div id="homepage">
-        <div id="rooms_map">
-          Map
-        </div>
-        <div id="rooms_list">
-          Top DJ Rooms
-        </div>
+        <RoomsMap
+          id="rooms_map"
+          containerElement={<div id="rooms_map"/>}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
+        <RoomsList />
       </div>
     </div>
 

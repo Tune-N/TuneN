@@ -21,7 +21,12 @@ const joinRoom = room => ({
 
 const initialState = {
   selected: {},
-  list: []
+  list: [
+    {name: 'David Guetta', listeners: 200},
+    {name: 'Calvin Harris', listeners: 168},
+    {name: "Omri's Crazy Music", listeners: 27},
+    {name: 'DJ Marcos', listeners: 3}
+    ]
 };
 
 
