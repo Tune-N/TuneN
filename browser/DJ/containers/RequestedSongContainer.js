@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { selectSong } from '../../reducers/djBooth/djBooth.reducer'
+import { selectSong } from '../../reducers/djBooth/reducer'
 
 import RequestedSong from '../components/RequestedSong.jsx'
 

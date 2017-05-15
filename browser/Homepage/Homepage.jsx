@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar.jsx'
 import RoomsList from './components/RoomsList/RoomsList.jsx'
 import RoomsMap from './components/RoomsMap.jsx'
 
-import { getLiveDjs } from '../reducers/rooms/rooms.reducer';
+import { getLiveDjs } from '../reducers/rooms/reducer';
 
 class Homepage extends React.Component {
   // Look into if there is an equivalent to onEnter otherwise consider Componentupdated
