@@ -14,8 +14,8 @@ const App = () => (
         <Route exact path="/" component={Homepage} />
         <Route path="/signup" component={SignUpContainer} />
         <Route path="/login" component={Homepage} />
-        <Route path="/djMarcos/room" component={Room} />
         <Route path="/dj" component={djBoothContainer} />
+        <Route path="/:djName/live" component={Room} />
       </div>
   </MuiThemeProvider>
 

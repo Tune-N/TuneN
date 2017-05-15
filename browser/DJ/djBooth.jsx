@@ -76,7 +76,7 @@ class djBooth extends React.Component {
 
     // request.open('GET', `/mp3/${videoId}`, true);
 
-    request.open('GET', `/music/youtube/mp3/SZDmuHSqwtg`, true);
+    request.open('GET', `https://p.scdn.co/mp3-preview/4177d725cd93fa1753babdd73a69d285df100417?cid=null`, true);
     request.responseType = 'arraybuffer';
     request.onload = () => {
       this.context.decodeAudioData(request.response,(buffer)=>{
@@ -85,13 +85,13 @@ class djBooth extends React.Component {
           this.soundSource.disconnect();
         }
         this.soundSource = this.context.createBufferSource();
-        this.soundSource.buffer = buffer
-        this.soundSource.connect(this.gainNode)
-        this.soundSource.connect(this.destination)
+        this.soundSource.buffer = buffer;
+        this.soundSource.connect(this.gainNode);
+        this.soundSource.connect(this.destination);
         this.soundSource.start(0)
 
       },null)
-    }
+    };
     request.send();
   }
 
