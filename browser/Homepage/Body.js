@@ -2,10 +2,10 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 import Navbar from '../components/Navbar';
-import HomePage from '../DJ/components/HomePage.jsx';
+import HomePage from './HomePageBen.jsx';
 import Room from '../DJ/components/Room.jsx';
 import djBoothContainer from '../DJ/containers/djBoothContainer';
-import SignUpContainer from '../DJ/components/SignupContainer.jsx';
+import SignUpContainer from '../components/SignupContainer.jsx';
 
 const Body = () => (
   <div>
