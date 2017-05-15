@@ -19,7 +19,7 @@ const RoomsList = (props) => {
     <h4>Top DJ Rooms</h4>
     {
       rooms.map( room => (
-          <RoomCard name={room.username} listeners={room.listeners}/>
+          <RoomCard key={room.username} name={room.username} listeners={room.listeners}/>
         )
       )
     }

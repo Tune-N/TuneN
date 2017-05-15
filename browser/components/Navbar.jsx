@@ -3,9 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { login, logout, whoami } from '../reducers/auth.reducer'
-
-import '../../public/stylesheets/nav.scss'
- 
+// import '.../public/stylesheets/nav.scss'
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -13,7 +11,7 @@ class Navbar extends React.Component {
 
   render() {
     return (
-    <nav className="navbar navbar-inverse bg-inverse">
+      <nav className="navbar navbar-inverse bg-inverse">
         <div className="container-fluid">
           <div className="navbar-header">
             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -26,23 +24,10 @@ class Navbar extends React.Component {
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
-              { this.props.loggedIn ? <li className="active"><Link to="/vr">DJ Now <span className="sr-only">(current)</span></Link></li> : <li></li> }
-              <li className="active"><a href="#">Link <span className="sr-only">(current)</span></a></li>
-              <Link to="/vr">VR</Link>
-              <Link to="/room">Room</Link>
-              <Link to="/dj">DJ</Link>
-              <li><a href="#">Link</a></li>
+              { this.props.loggedIn ? <li className="active"><Link to="/dj">DJ Now <span className="sr-only">(current)</span></Link></li> : <li></li> }
               <li className="dropdown">
                 <Link to="/" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></Link>
-                <ul className="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" className="divider"></li>
-                  <li><a href="#">Separated link</a></li>
-                  <li role="separator" className="divider"></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
+
               </li>
             </ul>
             <ul className="nav navbar-nav navbar-right login-container">
@@ -58,29 +43,29 @@ class Navbar extends React.Component {
                 <li className="dropdown">
                   <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span className="caret"></span></a>
                   <div className="dropdown-menu">
-                  <form className="navbar-form" onSubmit={(evt)=>{
-                    evt.preventDefault()
-                    this.props.login(evt.target.email.value,evt.target.password.value)
-                  }}>
-                    <ul style={{listStyle:'none',padding:0}} >
-                      <li style={{paddingBottom: 8 }}>
-                        <input name="email" type="text" className="form-control login-input" placeholder="Enter Email Address" />
-                      </li>
-                      <li>
-                        <input name="password" type="password"  className="form-control login-input" placeholder="Enter Password" />
-                      </li>
+                    <form className="navbar-form" onSubmit={(evt)=>{
+                      evt.preventDefault()
+                      this.props.login(evt.target.email.value,evt.target.password.value)
+                    }}>
+                      <ul style={{listStyle:'none',padding:0}} >
+                        <li style={{paddingBottom: 8 }}>
+                          <input name="email" type="text" className="form-control login-input" placeholder="Enter Email Address" />
+                        </li>
+                        <li>
+                          <input name="password" type="password"  className="form-control login-input" placeholder="Enter Password" />
+                        </li>
 
-                      <li className="login-btn ">
-                        <button className="login btn btn-success" label="login" type="submit" value="Login" >Login</button>
-                      </li>
+                        <li className="login-btn ">
+                          <button className="login btn btn-success" label="login" type="submit" value="Login" >Login</button>
+                        </li>
 
-                      <li className="login-btn">
-                        <a href='/api/auth/google'><img src="googlebtn.png" /></a>
-                      </li>
-                    </ul>
-                  </form>
+                        <li className="login-btn">
+                          <a href='/api/auth/google'><img src="googlebtn.png" /></a>
+                        </li>
+                      </ul>
+                    </form>
                   </div>
-              </li>
+                </li>
               }
             </ul>
           </div>

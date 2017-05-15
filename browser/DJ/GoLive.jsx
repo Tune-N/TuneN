@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import { whoami } from '../reducers/auth.reducer';
+
 import store from '../store';
 
 class GoLive extends React.Component {
@@ -13,12 +13,6 @@ class GoLive extends React.Component {
     this.djGoesLive = this.djGoesLive.bind(this);
   }
 
-  djGoesLive() {
-    axios.put(`/api/users/${this.props.id}`, { isLive: true })
-    .then(res => {
-      store.dispatch(whoami());
-    });
-  }
 
   render() {
     return (

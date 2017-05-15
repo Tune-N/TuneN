@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import Navbar from '../components/NavbarMaterial.jsx'
+import Navbar from '../components/Navbar.jsx'
 import RoomsList from './components/RoomsList/RoomsList.jsx'
 import RoomsMap from './components/RoomsMap.jsx'
 
@@ -11,7 +11,6 @@ import { getLiveDjs } from '../reducers/rooms.reducer';
 class Homepage extends React.Component {
 
   componentDidMount(){
-    console.log('ComponentDidMount');
     this.props.getLiveDjs()
   }
 

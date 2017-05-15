@@ -9,8 +9,7 @@ const STOP_PLAYING = 'STOP_PLAYING';
 const SET_DECK_PROGRESS = 'SET_DECK_PROGRESS';
 const SET_LIVE_DJS = 'SET_LIVE_DJS';
 
-
-
+import { whoami } from '../reducers/auth.reducer';
 
 /* ------------   ACTION CREATORS     ------------------ */
 export const selectSong = song => ({
@@ -94,3 +93,9 @@ export default function reducer(state = initialState, action) {
 
 /* ------------       DISPATCHERS     ------------------ */
 
+export const djGoesLive = () => dispatch => {
+  axios.put(`/api/users/${this.props.id}`, { isLive: true })
+    .then(res => {
+      dispatch(whoami());
+    });
+};

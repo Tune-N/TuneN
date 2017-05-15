@@ -54,8 +54,10 @@ export default function reducer(state = initialState, action) {
 /* ------------       DISPATCHERS     ------------------ */
 
 export const getLiveDjs = () => dispatch => {
-  axios.get('/api/users/live')
+  console.log('getLiveDjs');
+  return axios.get('/api/users/live')
     .then(response => {
+      console.log(response.data);
       dispatch(setRooms(response.data));
     });
 };
