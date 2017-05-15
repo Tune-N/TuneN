@@ -37,6 +37,7 @@ class Deck extends React.Component {
           click: this.onClick
         }}
       >
+        {/*TODO: replace ternary with &&*/}
         {song ?
           <Entity
             primitive="a-text"

@@ -20,6 +20,7 @@ class djBooth extends React.Component {
   constructor(props) {
     super(props);
 
+    //#TODO: Chance to arrow binding
     this.startStream = this.startStream.bind(this);
     this.getSong = this.getSong.bind(this);
     this.endSession = this.endSession.bind(this);
@@ -30,7 +31,7 @@ class djBooth extends React.Component {
     this.connection.channel = 'full-stack-academy';
 
     this.connection.session = {
-      'video':false,
+      video:false,
       audio: true,
       oneway: true
     };
@@ -38,12 +39,13 @@ class djBooth extends React.Component {
     let  streamsContainer = document.getElementById('streams-container');
 
     this.connection.onstream = function(e) {
+      //dispatch
       streamsContainer.appendChild(e.mediaElement);
     };
 
     // connect to signaling gateway
     this.connection.connect();
-
+    //clean up into function
     //Audio Section
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
@@ -95,6 +97,7 @@ class djBooth extends React.Component {
     request.send();
   }
 
+  //#TODO: move into action creator
   endSession() {
     axios.put(`/api/users/${this.props.id}`, { isLive: false })
     .then(res => {

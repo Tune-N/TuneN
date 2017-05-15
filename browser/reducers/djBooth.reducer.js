@@ -23,6 +23,7 @@ export const setDeckSong = (deck, song) => ({
   song,
 });
 
+// TODO: remove deck id
 export const removeRequestedSong = (deck, songId) => ({
   type: REMOVE_REQUESTED_SONG,
   deck,

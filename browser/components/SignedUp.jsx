@@ -1,5 +1,6 @@
 import React from 'react';
 
+//TODO: Delte this component and do a redirect instead. @Ben
 const SignedUp = props => {
   return (
     <div className="col-lg-12">

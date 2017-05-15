@@ -72,6 +72,7 @@
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.0.0",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.24.1",
     "css-loader": "^0.28.1",
     "eslint": "^3.19.0",

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import Paper from 'material-ui/Paper';
 import RoomCard from './RoomCard.jsx'
 
 const style = {

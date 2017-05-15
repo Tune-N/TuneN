@@ -8,6 +8,7 @@ import Homepage from './Homepage/Homepage.jsx';
 import Room from './Room/Room.jsx'
 import djBoothContainer from './DJ/containers/djBoothContainer';
 
+// TODO: Read about Switch, we might need to put them inside one @Ben
 const App = () => (
   <MuiThemeProvider>
       <div id="main" className="container-fluid">

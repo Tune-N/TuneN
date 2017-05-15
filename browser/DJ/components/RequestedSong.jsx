@@ -10,6 +10,7 @@ class RequestedSong extends React.Component {
       focus:false
     };
 
+    //#TODO: Arro binding
     this.setFocus = this.setFocus.bind(this);
     this.removeFocus = this.removeFocus.bind(this);
   }

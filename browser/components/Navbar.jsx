@@ -7,6 +7,7 @@ import { login, logout, whoami } from '../reducers/auth.reducer'
 
 /* -----------------    COMPONENT     ------------------ */
 
+//#TODO: Move to MaterialUI Clenaup all the junk @Ben
 class Navbar extends React.Component {
 
   render() {
@@ -24,13 +25,15 @@ class Navbar extends React.Component {
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav">
-              { this.props.loggedIn ? <li className="active"><Link to="/dj">DJ Now <span className="sr-only">(current)</span></Link></li> : <li></li> }
+              {/*@Ben update ternaries to && */}
+              { this.props.loggedIn && <li className="active"><Link to="/dj">DJ Now <span className="sr-only">(current)</span></Link></li>}
               <li className="dropdown">
                 <Link to="/" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></Link>
 
               </li>
             </ul>
             <ul className="nav navbar-nav navbar-right login-container">
+              {/*@Ben update ternaries to && */}
               { this.props.loggedIn ? <li></li> : <li><Link to="/signup">Signup</Link></li> }
               {this.props.loggedIn ?
                 <li>
@@ -81,6 +84,12 @@ class Navbar extends React.Component {
 const mapStateToProps = (state) => ({
   loggedIn: state.auth ? state.auth : false
 });
+
+// TODO: @Ben change to abbreviated format
+// const mapDispatchToProps = {
+//   login,
+//   logout,
+// }
 
 const mapDispatchToProps = dispatch => ({
   login:(email, password) => {

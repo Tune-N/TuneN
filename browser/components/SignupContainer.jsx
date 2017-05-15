@@ -4,13 +4,24 @@ import Signup from './Signup.jsx';
 import SignedUp from './SignedUp.jsx';
 import { signUp } from '../reducers/auth.reducer';
 
+//TODO: @Ben consider renaming all the Signup, SingedUp, signup
+
 /* -----------------    COMPONENT     ------------------ */
 
 class SignupContainer extends React.Component {
 
   constructor(props) {
     super(props);
-    this.onSignupSubmit = this.onSignupSubmit.bind(this);
+    // this.onSignupSubmit = this.onSignupSubmit.bind(this); //
+  }
+
+  onSignupSubmit=(event)=>{
+    event.preventDefault();
+    const username = event.target.username.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    this.props.signUp(username, email, password);
+    this.props.history.push('/');
   }
 
   render() {
@@ -21,20 +32,20 @@ class SignupContainer extends React.Component {
     );
   }
 
-  onSignupSubmit(event) {
-    event.preventDefault();
-    const username = event.target.username.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    this.props.signUp(username, email, password);
-    this.props.history.push('/');
-  }
+  // onSignupSubmit(event) {
+  //   event.preventDefault();
+  //   const username = event.target.username.value;
+  //   const email = event.target.email.value;
+  //   const password = event.target.password.value;
+  //   this.props.signUp(username, email, password);
+  //   this.props.history.push('/');
+  // }
 }
 
 /* -----------------    CONTAINER     ------------------ */
 
 const mapState = (state) => ({
-  message: 'Sign up',
+  message: 'Sign up', //TODO: @ben put a constant on line 21 instead of passing it as props
   loggedIn: state.auth ? true : false,
 });
 
