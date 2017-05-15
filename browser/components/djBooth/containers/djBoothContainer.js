@@ -2,8 +2,8 @@ import { connect } from 'react-redux'
 import socketclient from 'socket.io-client'
 import djBooth from '../components/djBooth.jsx'
 
-const socket = socketclient('192.168.1.11:3000')
-
+const socket = socketclient(window.location.origin)
+//TODO put socketon on componentDidMount, unsubscribe on unmount
 const mapStateToProps = state => {
 
   socket.on('newViewer',function () {

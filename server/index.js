@@ -18,7 +18,7 @@ const server = app.listen(app.get('port'), function () {
 
 const websocket = socketio(server);
 
-
+//TODO after everything else redux-socket io middleware
 websocket.on('connection', function(socket) {
   console.log('A new client has connected', socket.id)
 

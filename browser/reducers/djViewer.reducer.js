@@ -20,13 +20,9 @@ const initialState = {
     progress: 0
   },
   songList:[
-    // {name: '', album: 'Album 1', artist:'Artist 1',position:'-10 1 2',rotation:'',color:'#2d2c2c'},
-    // {name: '', album: 'Album 2', artist:'Artist 2',position:'-10 0.5 2',rotation:'',color:'#2d2c2c'},
-    // {name: '', album: 'Album 3', artist:'Artist 3',position:'-10 0 2',rotation:'',color:'#2d2c2c'},
-    // {name: '', album: 'Album 4', artist:'Artist 4',position:'-10 -0.5 2',rotation:'',color:'#2d2c2c'},
   ],
 }
-let counter = 0
+
 /* ------------   REDUCER    ------------------ */
 export default function (state = initialState, action) {
 
@@ -49,17 +45,10 @@ export default function (state = initialState, action) {
       return newState
 
     case 'SET_DECKS_SONG':
-      counter +=1
-      console.log('SET_DECK-running',counter)
 
       newState[action.songDeck.deck] = action.songDeck.song
       return newState
 
-      // const newDeck = Object.assign({}, state[action.deck]);
-      // console.log('action',action)
-      // newDeck.song = action.songDeck.song;
-      // newState.song = newDeck;
-      // return newState
 
     default:
       return state;

@@ -22,11 +22,9 @@ export const selectSong = song => ({
   song
 });
 
-let counter = 0
 
 export const setDeckSong = (deck, song) => {
-  counter +=1
-  console.log('emit', counter)
+
   socket.emit('setDeckSong',{deck,song})
 
   return {

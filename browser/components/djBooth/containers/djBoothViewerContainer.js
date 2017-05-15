@@ -5,7 +5,7 @@ import store from '../../../store'
 import djBoothViewer from '../components/djBoothViewer.jsx'
 
 const socket = socketclient('192.168.1.11:3000')
-
+// TODO all listeners unsubscribe on unmount, and put on componentDidMount
 setTimeout(function () {
   socket.emit('newViewer','')
 },1000)
