@@ -21,7 +21,7 @@ class djBooth extends React.Component {
   }
 
   render() {
-    console.log('djBoothProps', this.props);
+    // console.log('djBoothProps', this.props);
 
     const { requestedSongs, deck1, deck2 } = this.props;
 

@@ -7,39 +7,32 @@
 //   allSongs
 // });
 
-export const addNewSong = newSong => ({
-  type: 'ADD_SONG',
-  newSong
-});
-
-// const initialState = {
-// songList:{  'Billie Jean':{
-//   name:'Billie Jean',
-//   position: '0 0 0',
-//   rotation: '0 0 0',
-//   color: 'white',
-// }}
-// }
-
 const initialState = {
+  djName: '',
+  deck1: {
+    song: null,
+    name: '',
+    progress: 0
+  },
+  deck2: {
+    song: null,
+    name: '',
+    progress: 0
+  },
   songList:[
-    {name: 'Song 5', album: 'Album 1', artist:'Artist 1',position:'-3 1 2',rotation:'',color:'white'},
-    {name: 'Song 6', album: 'Album 2', artist:'Artist 2',position:'-3 0.5 2',rotation:'',color:'white'},
-    {name: 'Song 7', album: 'Album 3', artist:'Artist 3',position:'-3 0 2',rotation:'',color:'white'},
-    {name: 'Song 8', album: 'Album 4', artist:'Artist 4',position:'-3 -0.5 2',rotation:'',color:'white'},
+    // {name: '', album: 'Album 1', artist:'Artist 1',position:'-10 1 2',rotation:'',color:'#2d2c2c'},
+    // {name: '', album: 'Album 2', artist:'Artist 2',position:'-10 0.5 2',rotation:'',color:'#2d2c2c'},
+    // {name: '', album: 'Album 3', artist:'Artist 3',position:'-10 0 2',rotation:'',color:'#2d2c2c'},
+    // {name: '', album: 'Album 4', artist:'Artist 4',position:'-10 -0.5 2',rotation:'',color:'#2d2c2c'},
   ],
 }
-
-
+let counter = 0
 /* ------------   REDUCER    ------------------ */
 export default function (state = initialState, action) {
 
   const newState = Object.assign({}, state);
 
   switch (action.type) {
-
-    // case 'ADD_SONG':
-    //   return Object.assign({},newState,action.newSong)
 
     case 'LOAD_SONGS':
       return Object.assign(newState, {songList:action.songList})
@@ -49,6 +42,24 @@ export default function (state = initialState, action) {
         if (song.name == action.attributes.name) song = Object.assign(song,action.attributes)
         return song
       })})
+
+    case 'REMOVE_SONG':
+      newState.songList =  newState.songList.filter(
+        song => song.name !== action.songName);
+      return newState
+
+    case 'SET_DECKS_SONG':
+      counter +=1
+      console.log('SET_DECK-running',counter)
+
+      newState[action.songDeck.deck] = action.songDeck.song
+      return newState
+
+      // const newDeck = Object.assign({}, state[action.deck]);
+      // console.log('action',action)
+      // newDeck.song = action.songDeck.song;
+      // newState.song = newDeck;
+      // return newState
 
     default:
       return state;

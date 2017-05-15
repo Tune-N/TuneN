@@ -4,7 +4,8 @@ import { Scene } from 'aframe-react';
 
 import Camera from './Camera.jsx';
 import Background from './Background.jsx'
-import Deck from './Deck.jsx';
+import DeckContainer from '../containers/DeckContainer';
+import DeckViewer from './DeckViewer'
 import ViewerSongs from './ViewerSongs.jsx'
 
 
@@ -18,8 +19,8 @@ class djBooth extends React.Component {
         <Scene>
           <Camera />
           <Background />
-          <Deck id="deck1" position="0 2 -2" />
-          <Deck id="deck2" position="0 1 -2" />
+          <DeckViewer id="deck1" position="0 2 -2" song={this.props.deck1} />
+          <DeckViewer id="deck2" position="0 1 -2" song={this.props.deck2} />
           <ViewerSongs {...this.props} />
         </Scene>
       </div>

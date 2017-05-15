@@ -1,3 +1,7 @@
+import socketclient from 'socket.io-client'
+
+const socket = socketclient('192.168.1.11:3000')
+
 /* -----------------    ACTIONS     ------------------ */
 
 const SET_SELECTED_SONG = 'SET_SELECTED_SONG';
@@ -18,17 +22,27 @@ export const selectSong = song => ({
   song
 });
 
-export const setDeckSong = (deck, song) => ({
+let counter = 0
+
+export const setDeckSong = (deck, song) => {
+  counter +=1
+  console.log('emit', counter)
+  socket.emit('setDeckSong',{deck,song})
+
+  return {
     type: SET_DECK_SONG,
     deck,
     song,
-});
+}};
 
-export const removeRequestedSong = (deck, songId) => ({
+export const removeRequestedSong = (deck, songId, songName) => {
+  socket.emit('removeSong',songName)
+
+  return {
   type: REMOVE_REQUESTED_SONG,
   deck,
   songId,
-});
+}};
 
 
 
@@ -61,7 +75,6 @@ const initialState = {
 // Reducer
 
 export default function reducer(state = initialState, action) {
-  console.log('boothState',state.requestedSongs)
 
   const newState = Object.assign({}, state);
 
@@ -87,9 +100,7 @@ export default function reducer(state = initialState, action) {
       break
 
     case SONG_CHANGE:
-      // console.log('action',action.attributes.color)
       newState.requestedSongs = newState.requestedSongs.map(song =>{
-        // console.log('CHANGING',song,action.attributes)
         if (song.name == action.attributes.name) song = Object.assign(song,action.attributes)
         return song})
       break

@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import socketclient from 'socket.io-client'
 import djBooth from '../components/djBooth.jsx'
 
-const socket = socketclient('192.168.2.23:3000')
+const socket = socketclient('192.168.1.11:3000')
 
 const mapStateToProps = state => {
 

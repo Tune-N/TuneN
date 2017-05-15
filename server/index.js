@@ -30,6 +30,14 @@ websocket.on('connection', function(socket) {
     socket.broadcast.emit('songChange', attributes)
   })
 
+  socket.on('setDeckSong', function (deckSong) {
+    socket.broadcast.emit('setDeckSong', deckSong)
+  })
+
+  socket.on('removeSong', function (songName) {
+    socket.broadcast.emit('removeSong', songName)
+  })
+
   socket.on('loadAllSongs', function(data){
     console.log('broadcasting from server')
     socket.broadcast.emit('loadAllSongs', data);
