@@ -8,16 +8,13 @@ class YoutubeSearch extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state ={
+    this.state = {
       result:'',
     }
     this.triggerSearch = this.triggerSearch.bind(this);
     this.sendRequest = this.sendRequest.bind(this);
   }
 
-  componentDidMount() {
-    
-  }
 
   triggerSearch(e){
       e.preventDefault();
@@ -51,8 +48,7 @@ class YoutubeSearch extends React.Component {
   render() {    
     return (
         <div className="youtube-section col-xs-3 no-pad" style={{textAlign:'center',color:'#fff',backgroundColor:'#303030'}}>
-           
-           <h2 className="header">
+           <h2 className="header youtube-header">
                 YouTube Music
           </h2>
           <form action="#" id='youtube-form' onSubmit={this.triggerSearch}>

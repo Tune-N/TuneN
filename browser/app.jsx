@@ -16,9 +16,9 @@ import Room from './Room/Room.jsx';
 import DJBooth from './DJ/containers/djBoothContainer';
 
 
-class App extends React.Component{
+class App extends React.Component {
 
-  componentWillMount(){
+  componentWillMount() {
     this.props.getUserInfo();
   }
 
