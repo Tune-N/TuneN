@@ -7,7 +7,6 @@ const RequestedSong = db.model('requestedSong');
 
 module.exports = require('express').Router()
   .post('/:id', (req, res, next) => {
-    console.log('req.body here', req.body);
     req.body.userId = req.params.id;
     RequestedSong.create(req.body)
       .then(songs => res.status(201).json(songs))

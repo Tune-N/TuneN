@@ -18,29 +18,26 @@ export const removeLoggedInUser = () => ({
 
 
 // Dispatchers
-export const signUp = (username, email, password) => dispatch => {
-  return axios.post('/api/users', { username, email, password })
+export const login = (email, password) => (dispatch) => {
+  return axios.post('/api/auth/login', { email, password })
+    .then(response => dispatch(setLoggedInUser(response.data)));
+};
+
+export const signUp = (username, email, password) => (dispatch) => {
+  return axios.post('/api/auth/signup', { username, email, password })
     .then(response => {
       dispatch(setLoggedInUser(response.data));
     });
 };
 
-
-export const login = (email, password) => dispatch => {
-  console.log('Im in the reducer', email, password);
-  return axios.post('/api/auth/login', {email, password})
-    .then((response) => dispatch(setLoggedInUser(response.data)));
-};
-
-
-export const getUserInfo = () => dispatch =>{
+export const getUserInfo = () => (dispatch) =>{
   return axios.get('/api/auth/me')
-    .then(response => {
-      dispatch(setLoggedInUser(response.data))
-    })
+    .then((response) => {
+      dispatch(setLoggedInUser(response.data));
+    });
 };
 
-export const logout = () => dispatch =>{
+export const logout = () => (dispatch) => {
   return axios.post('/api/auth/logout')
-    .then(() => dispatch(removeLoggedInUser()))
+    .then(() => dispatch(removeLoggedInUser()));
 };
