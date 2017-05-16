@@ -124,10 +124,6 @@ class djBooth extends React.Component {
             <DeckContainer id="deck2" position="0 1 -2" song={this.props.djBooth.deck2.song} volume={deck2.volume} />
             <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} />
 
-            <script src="https://rawgit.com/aframevr/aframe/917c06889ee1f3f79b7b1bbd9eab9815f9512503/dist/aframe.min.js"></script>
-            <script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>
-            <script src="../djComponents/audioanalyser-levels-scale.js"></script>
-
             <Entity
               primitive="a-image"
               id="floor" src="https://cdn.aframe.io/a-painter/images/floor.jpg"

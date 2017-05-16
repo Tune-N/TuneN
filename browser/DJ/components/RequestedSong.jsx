@@ -52,7 +52,7 @@ class RequestedSong extends React.Component {
           value={name}
           color="black"
           position="-0.42 0.04 0"
-          width="0.80"
+          width="1.2"
         />
       </Entity>
     )

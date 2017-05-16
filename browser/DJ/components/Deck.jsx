@@ -40,7 +40,7 @@ class Deck extends React.Component {
           <Entity
             primitive="a-text"
             value={song.name}
-            width="1.00"
+            width="2.00"
             align="center"
             position=" 0 .3 0"
           />
