@@ -20,7 +20,7 @@ const RoomsMap = withGoogleMap((props) => {
       {props.djs.filter(dj => dj.isLive).map(dj =>{
 console.log('djHere',dj)
         return (<Marker position={{lat: Number(dj.location.split(' ')[0]), lng: Number(dj.location.split(' ')[1])}}
-                                                           key={location}/>)})
+                                                           key={dj.location}/>)})
 }
     </GoogleMap>
   )
