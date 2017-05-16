@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom';
 import Navbar from '../components/Navbar.jsx'
 import RoomsList from './components/RoomsList/RoomsList.jsx'
 import RoomsMap from './components/RoomsMap.jsx'
+import muiThemeable from 'material-ui/styles/muiThemeable'
+
 
 import { getLiveDJs } from '../reducers/djs/action-creators';
 
@@ -20,7 +22,9 @@ class Homepage extends React.Component {
     return (
       <div>
         <Navbar />
-        <h1>Live DJs</h1>
+        <span style={{color: this.props.muiTheme.palette.textColor, fontSize:30}}>
+          Live DJs
+        </span>
         <div id="homepage">
           <RoomsMap
             djs={djs}
@@ -30,7 +34,6 @@ class Homepage extends React.Component {
           <RoomsList djs={djs}/>
         </div>
       </div>
-
     )
   }
 }
@@ -44,4 +47,6 @@ const mapDispatchToProps = {
   getLiveDJs,
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Homepage));
+const StyledHome = muiThemeable()(Homepage);
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StyledHome));
