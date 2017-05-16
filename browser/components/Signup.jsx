@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 
 import { signUp } from '../reducers/auth/actions-creators';
 
+import '../../public/stylesheets/login.scss';
 
 class Signup extends React.Component {
 
-  onSignup=(event)=>{
+  onSignup = (event) => {
     event.preventDefault();
     const username = event.target.username.value;
     const email = event.target.email.value;
@@ -17,37 +18,43 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div className="signin-container">
+      <div className="signin-container container-fluid center login">
         <div className="buffer local">
-          <form onSubmit={this.onSignup}>
+          <form className='row' onSubmit={this.onSignup}>
+            <fieldset style={{ paddingTop: 15 }}>
+              <div className="google-btn-container">
+                <img style={{ height: '25%', width: '25%' }} src="images/logo_transparent.png" />
+              </div>
+            </fieldset>
+            <hr />
             <div className="form-group">
-              <label>username</label>
               <input
                 name="username"
                 type="username"
+                placeholder= "username"
                 className="form-control"
                 required
               />
             </div>
             <div className="form-group">
-              <label>email</label>
               <input
                 name="email"
                 type="email"
+                placeholder= "email"
                 className="form-control"
                 required
               />
             </div>
             <div className="form-group">
-              <label>password</label>
               <input
                 name="password"
                 type="password"
+                placeholder= "password"
                 className="form-control"
                 required
               />
             </div>
-            <button style={{ backgroundColor: '#3D69A2' }} type="submit" className="btn btn-block btn-primary">Sign Up</button>
+            <button style={{ backgroundColor: '#3D69A2', marginBottom: 10 }} type="submit" className="btn btn-block btn-primary">Signup</button>
           </form>
         </div>
       </div>

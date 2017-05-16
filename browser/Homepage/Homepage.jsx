@@ -12,7 +12,7 @@ import { getLiveDJs } from '../reducers/djs/action-creators';
 class Homepage extends React.Component {
 
   componentDidMount() {
-    this.props.getLiveDJs()
+    this.props.getLiveDJs();
   }
 
   render() {

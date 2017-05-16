@@ -8,7 +8,7 @@ import mapStyles from '../../../public/stylesheets/mapStyles.json';
 const RoomsMap = withGoogleMap(() => (
   <GoogleMap
     id="rooms_map"
-    defaultZoom={8}
+    defaultZoom={6}
     defaultCenter={{ lat: 40.690218, lng: -74.0962687 }}
     defaultOptions={{ styles: mapStyles }}
   />

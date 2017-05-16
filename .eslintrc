@@ -4,6 +4,7 @@
     "func-names": ["error", "never"],
     "no-console": "off",
     "react/prop-types": "off",
-    "import/extensions":"off"
+    "import/extensions":"off",
+    "arrow-body-style": "off"
   }
 }
