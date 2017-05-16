@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { login, logout, whoami } from '../reducers/auth/reducer'
-// import '.../public/stylesheets/nav.scss'
+import { logout } from '../reducers/auth/actions-creators'
+
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -38,7 +38,7 @@ class Navbar extends React.Component {
               {this.props.loggedIn ?
                 <li>
                   <button className="btn btn-default navbar-btn form-inline" onClick={(evt)=>{
-                    evt.preventDefault()
+                    evt.preventDefault();
                     this.props.logout()
                   }}>Logout</button>
                 </li>
@@ -82,23 +82,11 @@ class Navbar extends React.Component {
 /* -----------------    CONTAINER     ------------------ */
 
 const mapStateToProps = (state) => ({
-  loggedIn: state.auth ? state.auth : false
+  user: state.auth
 });
 
-// TODO: @Ben change to abbreviated format
-// const mapDispatchToProps = {
-//   login,
-//   logout,
-// }
+const mapDispatchToProps = {
+  logout,
+};
 
-const mapDispatchToProps = dispatch => ({
-  login:(email, password) => {
-    dispatch(login(email, password));
-  },
-  logout:() => {
-    dispatch(logout());
-  },
-});
-
-// export default Navbar;
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

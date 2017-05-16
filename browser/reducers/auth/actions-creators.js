@@ -32,12 +32,11 @@ export const login = (email, password) => dispatch => {
 };
 
 
-export const userInfo = () => dispatch =>{
+export const getUserInfo = () => dispatch =>{
   return axios.get('/api/auth/me')
     .then(response => {
-      const user = response.data;
-      console.log(user);
-      dispatch(setLoggedInUser(user))
+      console.log('getUserInfo', response.data);
+      dispatch(setLoggedInUser(response.data))
     })
 };
 
