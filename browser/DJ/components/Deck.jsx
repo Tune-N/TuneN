@@ -17,7 +17,6 @@ class Deck extends React.Component {
   }
 
   render() {
-    console.log('render() Deck', this.props);
     const { id, position, song } = this.props;
 
     return (
@@ -37,6 +36,7 @@ class Deck extends React.Component {
           click: this.onClick
         }}
       >
+        {/*TODO: replace ternary with &&*/}
         {song ?
           <Entity
             primitive="a-text"

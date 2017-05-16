@@ -1,14 +1,49 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import Navbar from './components/Navbar';
-import djBoothContainer from './components/djBooth/containers/djBoothContainer'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-const App = () => (
-  <div id="main" className="container-fluid">
-    <Route exact path="/" component={Navbar} />
-    <Route path="/vr" component={djBoothContainer} />
-  </div>
-);
+import { getUserInfo } from './reducers/auth/actions-creators';
 
-export default App;
+import Homepage from './Homepage/Homepage.jsx';
+import SignUp from './components/Signup.jsx';
+import Login from './components/Login';
+import Room from './Room/Room.jsx';
+import DJBooth from './DJ/containers/djBoothContainer';
+
+
+class App extends React.Component {
+
+  componentWillMount() {
+    this.props.getUserInfo();
+  }
+
+  render(){
+    return (
+      <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+        <div id="main" className="container-fluid">
+          <Route exact path="/" component={Homepage} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/login" component={Login} />
+          <Route path="/dj" component={DJBooth} />
+          <Route path="/:djName/live" component={Room} />
+        </div>
+      </MuiThemeProvider>
+
+    );
+  }
+}
+
+
+const mapStateToProps = (state) => ({
+  user: state.auth,
+});
+
+const mapDispatchToProps = {
+  getUserInfo,
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

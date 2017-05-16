@@ -3,6 +3,7 @@
   "rules": {
     "func-names": ["error", "never"],
     "no-console": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "import/extensions":"off"
   }
 }

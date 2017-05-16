@@ -2,7 +2,6 @@ import React from 'react';
 import 'aframe';
 import { Entity } from 'aframe-react';
 
-
 class RequestedSong extends React.Component {
 
   constructor(props){
@@ -11,6 +10,7 @@ class RequestedSong extends React.Component {
       focus:false
     };
 
+    //#TODO: Arro binding
     this.setFocus = this.setFocus.bind(this);
     this.removeFocus = this.removeFocus.bind(this);
   }
@@ -22,7 +22,6 @@ class RequestedSong extends React.Component {
   removeFocus(){
     this.setState({focus: false});
   }
-
 
   render(){
     const { id, position, name, album, artist, selectSong, selectedSong } = this.props;
@@ -45,7 +44,6 @@ class RequestedSong extends React.Component {
           'raycaster-intersected': this.setFocus,
           'mouseleave':this.removeFocus,
           'raycaster-intersected-cleared': this.removeFocus,
-          'buttonup':  () => {console.log('Song buttonup2')},
         }}
       >
         <Entity

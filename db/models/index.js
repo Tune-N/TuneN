@@ -5,23 +5,17 @@
 // to get access to the Song model.
 
 const User = require('./user');
+const RequestedSong = require('./requestedSong');
 
 
 // Form the associations
 
-// Examples
-// Song.belongsTo(Album);
-// Album.hasMany(Song);
-// Album.belongsTo(Artist);
+RequestedSong.belongsTo(User);
 
-// Artist.belongsToMany(Song, { through: 'artistSong' });
-// Song.belongsToMany(Artist, { through: 'artistSong' });
-
-// Song.belongsToMany(Playlist, { through: 'playlistSong' });
-// Playlist.belongsToMany(Song, { through: 'playlistSong' });
-
-// exported just in case, but can also be fetched via db.model('Album') etc.
+// Don't really hav a reason to relate to all instances. We will see
+User.hasMany(RequestedSong);
 
 module.exports = {
-  User: User
+  User,
+  RequestedSong,
 };

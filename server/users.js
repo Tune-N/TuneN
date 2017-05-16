@@ -22,21 +22,38 @@ module.exports = require('express').Router()
         .catch(next))
   .post('/',
     (req, res, next) => {
+      console.log('do we make it to the route to create a user???');
       User.create(req.body)
       .then(user => res.status(201).send(user))
       .catch(next)
     })
+  .get('/live',
+    (req, res, next) =>
+      User.findAll({
+        where: {
+          isLive: true,
+        },
+      })
+      .then(users => {
+        if (!users.length) res.status(404).send('no live DJs found');
+        else {
+          console.log('testing in route');
+          console.log(users.data);
+          res.json(users);
+        }
+      })
+      .catch(next))
   .get('/:id',
     // mustBeLoggedIn,
     (req, res, next) =>
       User.findById(req.params.id)
       .then(user => {
-        if (!user) res.status(404).send('no user found')
-        else res.json(user)
+        if (!user) res.status(404).send('no user found');
+        else res.json(user);
       })
       .catch(next))
   .put('/:id',
-    mustBeLoggedIn,
+    // mustBeLoggedIn,
     (req, res, next) =>
       User.update(req.body, {
         where: {

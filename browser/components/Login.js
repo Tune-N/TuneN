@@ -1,10 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 export const Login = ({ login }) => (
   <div className='container-fluid'>
     <form className='row' onSubmit={evt => {
       evt.preventDefault()
-      console.log('testing', evt.target)
       login(evt.target.email.value, evt.target.password.value)
     }}>
       <div style={{ paddingTop: 12 }}>
@@ -14,12 +13,4 @@ export const Login = ({ login }) => (
       </div>
     </form>
   </div>
-)
-
-// import { login } from 'APP/app/reducers/auth'
-// import { connect } from 'react-redux'
-
-export default connect(
-  state => ({}),
-  { login },
-)(Login)
+);
