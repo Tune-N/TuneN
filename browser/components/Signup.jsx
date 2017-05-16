@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 
 import { signUp } from '../reducers/auth/actions-creators';
 
+import '../../public/stylesheets/login.scss';
 
 class Signup extends React.Component {
 
-  onSignup=(event)=>{
+  onSignup = (event) => {
     event.preventDefault();
     const username = event.target.username.value;
     const email = event.target.email.value;
@@ -17,14 +18,21 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div className="signin-container">
+      <div className="signin-container container-fluid center login">
         <div className="buffer local">
-          <form onSubmit={this.onSignup}>
+          <form className='row' onSubmit={this.onSignup}>
+            <fieldset style={{ paddingTop: 15 }}>
+              <div className="google-btn-container">
+                <img style={{ height: '50%', width: '50%' }} src="images/logo_transparent.png" />
+              </div>
+            </fieldset>
+            <hr />
             <div className="form-group">
               <label>username</label>
               <input
                 name="username"
                 type="username"
+                placeholder= "username"
                 className="form-control"
                 required
               />
@@ -34,6 +42,7 @@ class Signup extends React.Component {
               <input
                 name="email"
                 type="email"
+                placeholder= "email"
                 className="form-control"
                 required
               />
@@ -43,6 +52,7 @@ class Signup extends React.Component {
               <input
                 name="password"
                 type="password"
+                placeholder= "password"
                 className="form-control"
                 required
               />
