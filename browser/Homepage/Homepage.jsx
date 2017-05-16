@@ -21,25 +21,25 @@ class Homepage extends React.Component {
     return (
       <div>
         <Navbar />
-        <span style={{color: this.props.muiTheme.palette.textColor, fontSize:30}}>
+        <span style={{ color: this.props.muiTheme.palette.textColor, fontSize: 30 }}>
           Live DJs
         </span>
         <div id="homepage">
           <RoomsMap
             djs={djs}
-            containerElement={<div id="rooms_map"/>}
+            containerElement={<div id="rooms_map" />}
             mapElement={<div style={{ height: `100%` }} />}
           />
-          <RoomsList djs={djs}/>
+          <RoomsList djs={djs} />
         </div>
       </div>
-    )
+    );
   }
 }
 
 
-const mapStateToProps = (state) => ({
-  djs: state.djs.list
+const mapStateToProps = state => ({
+  djs: state.djs.list,
 });
 
 const mapDispatchToProps = {

@@ -1,6 +1,5 @@
-import { List, Map } from 'immutable'
 
-import { SET_DJS, ADD_DJ, REMOVE_DJ, SET_CURRENT_DJ} from './action-creators'
+import { SET_DJS, ADD_DJ, REMOVE_DJ, SET_CURRENT_DJ } from './action-creators';
 
 
 const initialState = {

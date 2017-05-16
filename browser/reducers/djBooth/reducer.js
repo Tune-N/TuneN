@@ -23,10 +23,8 @@ export const setDeckSong = (deck, song) => ({
   song,
 });
 
-// TODO: remove deck id
-export const removeRequestedSong = (deck, songId) => ({
+export const removeRequestedSong = (songId) => ({
   type: REMOVE_REQUESTED_SONG,
-  deck,
   songId,
 });
 
@@ -41,12 +39,12 @@ const initialState = {
   deck1: {
     song: null,
     volume: 0,
-    progress: 0
+    progress: 0,
   },
   deck2: {
     song: null,
     volume: 0,
-    progress: 0
+    progress: 0,
   },
   requestedSongs: [
     { id: 0, name: 'Song 1', album: 'Album 1', artist: 'Artist 1' },
@@ -94,7 +92,7 @@ export default function reducer(state = initialState, action) {
 
 /* ------------       DISPATCHERS     ------------------ */
 
-export const djGoesLive = () => dispatch => {
+export const djGoesLive = () => (dispatch) => {
   axios.put(`/api/users/${this.props.id}`, { isLive: true })
     .then(res => {
       dispatch(whoami());

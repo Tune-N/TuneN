@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 
 // Actions
@@ -12,28 +12,28 @@ export const SET_CURRENT_DJ = 'SET_CURRENT_DJ'; // This refers to the DJ you are
 // Action Creators
 export const setDJs = djs => ({
   type: SET_DJS,
-  djs
+  djs,
 });
 
 export const addDJ = dj => ({
   type: ADD_DJ,
-  dj
+  dj,
 });
 
 export const removeDJ = dj => ({
   type: REMOVE_DJ,
-  dj
+  dj,
 });
 
 export const setCurentDJ = dj => ({
   type: SET_CURRENT_DJ,
-  dj
+  dj,
 });
 
 // Dispatchers
-export const getLiveDJs = () => dispatch => {
+export const getLiveDJs = () => (dispatch) => {
   return axios.get('/api/users/live')
-    .then(response => {
+    .then((response) => {
       dispatch(setDJs(response.data));
     });
 };

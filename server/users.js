@@ -1,9 +1,7 @@
-'use strict'
+const db = require('../db/db');
+const User = db.model('user');
 
-const db = require('../db/db')
-const User = db.model('user')
-
-const {mustBeLoggedIn, forbidden} = require('./auth.filters')
+const {mustBeLoggedIn, forbidden} = require('./auth.filters');
 
 module.exports = require('express').Router()
   .get('/',
