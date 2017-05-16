@@ -1,11 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 export const Login = ({ login }) => (
   <div className='container-fluid'>
     <form className='row' onSubmit={evt => {
       evt.preventDefault()
-      console.log('testing', evt.target)
       login(evt.target.email.value, evt.target.password.value)
     }}>
       <div style={{ paddingTop: 12 }}>

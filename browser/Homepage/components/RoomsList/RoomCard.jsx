@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import Avatar from 'material-ui/Avatar'
 import PlayCircle from 'material-ui/svg-icons/av/play-circle-outline'
 
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 
 const RoomCard = (props) => {

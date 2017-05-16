@@ -44,7 +44,6 @@ class RequestedSong extends React.Component {
           'raycaster-intersected': this.setFocus,
           'mouseleave':this.removeFocus,
           'raycaster-intersected-cleared': this.removeFocus,
-          'buttonup':  () => {console.log('Song buttonup2')},
         }}
       >
         <Entity

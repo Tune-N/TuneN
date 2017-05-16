@@ -68,16 +68,13 @@ class djBooth extends React.Component {
 
   startStream(e){
       e.preventDefault();
-      // console.log(window.location.pathname.split('/')[1])
-      this.connection.open('fullstack-academy')
+      this.connection.open('fullstack-academy');
       console.log(this.connection);
   }
 
   getSong(e){
         e.preventDefault();
-
         let request = new XMLHttpRequest();
-
         // request.open('GET', `/mp3/${videoId}`, true);
         
         request.open('GET', `/music/youtube/mp3/SZDmuHSqwtg`, true);
@@ -101,8 +98,6 @@ class djBooth extends React.Component {
 
 
   render() {
-    console.log('djBooth');
-
     const { requestedSongs, deck1, deck2 } = this.props;
 
     return (

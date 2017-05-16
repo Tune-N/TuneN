@@ -34,7 +34,6 @@ export const setCurentDJ = dj => ({
 export const getLiveDJs = () => dispatch => {
   return axios.get('/api/users/live')
     .then(response => {
-      console.log(response.data);
       dispatch(setDJs(response.data));
     });
 };

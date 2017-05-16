@@ -35,7 +35,6 @@ export const login = (email, password) => dispatch => {
 export const getUserInfo = () => dispatch =>{
   return axios.get('/api/auth/me')
     .then(response => {
-      console.log('getUserInfo', response.data);
       dispatch(setLoggedInUser(response.data))
     })
 };

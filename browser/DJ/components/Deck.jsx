@@ -17,7 +17,6 @@ class Deck extends React.Component {
   }
 
   render() {
-    console.log('render() Deck', this.props);
     const { id, position, song } = this.props;
 
     return (

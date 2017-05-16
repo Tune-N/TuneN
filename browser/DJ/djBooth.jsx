@@ -67,7 +67,6 @@ class djBooth extends React.Component {
 
   startStream(e){
     e.preventDefault();
-    // console.log(window.location.pathname.split('/')[1])
     this.connection.open('fullstack-academy');
     console.log(this.connection);
     this.props.djGoesLive()
@@ -109,8 +108,6 @@ class djBooth extends React.Component {
   }
 
   render() {
-    console.log('props in dj booth', this.props);
-
     const requestedSongs = this.props.djBooth.requestedSongs;
     const deck1 = this.props.djBooth.deck1;
     const deck2 = this.props.djBooth.deck2;

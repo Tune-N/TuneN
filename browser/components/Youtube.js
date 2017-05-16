@@ -41,8 +41,7 @@ class YoutubeSearch extends React.Component {
 
   sendRequest(e){
      e.preventDefault();
-     let videoId = e.target.getAttribute('data-videoid')
-     console.log(videoId)
+     let videoId = e.target.getAttribute('data-videoid');
      //set Requested song here
   }
 
