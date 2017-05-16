@@ -19,16 +19,19 @@ registerClickDrag(aframe);
 class djBooth extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state={
+      volume:'1'
+    }
     //#TODO: Chance to arrow binding
     this.startStream = this.startStream.bind(this);
     this.getSong = this.getSong.bind(this);
     this.endSession = this.endSession.bind(this);
+    this.volume = this.volume.bind(this);
   }
 
   createConnetion(){
     const connection = new RTCMultiConnection();
-    connection.channel = 'full-stack-academy';
+    connection.channel = 'marcos';
     connection.dontCaptureUserMedia = true;
     connection.session = {
       video:false,
@@ -47,7 +50,6 @@ class djBooth extends React.Component {
 
     this.connection = this.createConnetion()
     this.connection.connect()
-    console.log('connection', this.connection);
 
     
     // Create AudioContext and MediaStream
@@ -55,8 +57,10 @@ class djBooth extends React.Component {
     this.broadcastingStream = this.audioContext.createMediaStreamDestination();
     this.connection.attachStreams.push(this.broadcastingStream.stream);
 
+    this.gainNode = this.audioContext.createGain();
+
   
-    this.connection.open('fullstack-academy');
+    this.connection.open('marcos');
     this.getSong()
   }
 
@@ -72,12 +76,11 @@ class djBooth extends React.Component {
 
     // request.open('GET', `/mp3/${videoId}`, true);
 
-    request.open('GET', `/music/youtube/mp3/5qm8PH4xAss`, true);
+    request.open('GET', `/music/youtube/mp3/HkVS79y4p4Y`, true);
     request.responseType = 'arraybuffer';
     console.log('this inside getSong', this)
     
     request.onload = () => {
-      console.log('this inside onload',this)
       this.audioContext.decodeAudioData(request.response,(buffer)=>{
         let soundSource = this.audioContext.createBufferSource();
         soundSource.buffer = buffer;
@@ -86,9 +89,9 @@ class djBooth extends React.Component {
         soundSource.connect(this.broadcastingStream);
         
         // Play SoundSource on DJ's Computer
-        let gainNode = this.audioContext.createGain();
-        soundSource.connect(gainNode);
-        gainNode.connect(this.audioContext.destination);
+        this.gainNode = this.audioContext.createGain();
+        soundSource.connect(this.gainNode);
+        this.gainNode.connect(this.audioContext.destination);
 
         soundSource.start(0)
 
@@ -108,6 +111,12 @@ class djBooth extends React.Component {
     });
   }
 
+  volume(e){
+    // console.log(elem, this.gainNode)
+    this.setState({volume: e.target.value});
+    this.gainNode.gain.value = parseFloat(e.target.value);
+  }
+
   render() {
     const requestedSongs = this.props.djBooth.requestedSongs;
     const deck1 = this.props.djBooth.deck1;
@@ -117,14 +126,15 @@ class djBooth extends React.Component {
     return (
       <div>
         <div className="DJBooth">
-          <Scene>
+        <input id="volume" className="col-xs-2"  onChange={this.volume} type="range" min="0" max="1" step="0.01" value={this.state.value} />
+          {/*<Scene>
             <Camera />
             <DaydreamController />
             <Background />
             <DeckContainer id="deck1" position="0 2 -2" song={this.props.djBooth.deck1.song} volume={deck1.volume} />
             <DeckContainer id="deck2" position="0 1 -2" song={this.props.djBooth.deck2.song} volume={deck2.volume} />
             <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} />
-          </Scene>
+          </Scene>*/}
       </div>
     </div>
     );
