@@ -11,3 +11,4 @@ bundle.js.map
 
 # NPM errors
 npm-debug.log
+/.localSecrets
