@@ -22,10 +22,9 @@ module.exports = require('express').Router()
         .catch(next))
   .post('/',
     (req, res, next) => {
-      console.log('do we make it to the route to create a user???');
       User.create(req.body)
       .then(user => res.status(201).send(user))
-      .catch(next)
+      .catch(next);
     })
   .get('/live',
     (req, res, next) =>
@@ -34,14 +33,7 @@ module.exports = require('express').Router()
           isLive: true,
         },
       })
-      .then(users => {
-        if (!users.length) res.status(404).send('no live DJs found');
-        else {
-          console.log('testing in route');
-          console.log(users.data);
-          res.json(users);
-        }
-      })
+      .then(users => res.json(users))
       .catch(next))
   .get('/:id',
     // mustBeLoggedIn,

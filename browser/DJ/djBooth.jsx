@@ -28,42 +28,37 @@ class djBooth extends React.Component {
     this.endSession = this.endSession.bind(this);
   }
 
-  componentDidMount(){
-    this.connection = new RTCMultiConnection();
-    this.connection.channel = 'full-stack-academy';
-
-    this.connection.session = {
+  createConnetion(){
+    const connection = new RTCMultiConnection();
+    connection.channel = 'full-stack-academy';
+    connection.dontCaptureUserMedia = true;
+    connection.session = {
       video:false,
       audio: true,
       oneway: true
     };
 
-    let  streamsContainer = document.getElementById('streams-container');
+    return connection;
+  }
 
-    this.connection.onstream = function(e) {
-      //dispatch
-      streamsContainer.appendChild(e.mediaElement);
-    };
+  createAudioContext
 
-    // connect to signaling gateway
-    this.connection.connect();
-    //clean up into function
-    //Audio Section
+  componentDidMount(){
+    
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
-    this.context = new AudioContext();
+    this.connection = this.createConnetion()
+    this.connection.connect()
+    console.log('connection', this.connection);
 
-    this.gainNode = this.context.createGain();
+    
+    // Create AudioContext and MediaStream
+    this.audioContext = new AudioContext();
+    this.broadcastingStream = this.audioContext.createMediaStreamDestination();
+    this.connection.attachStreams.push(this.broadcastingStream.stream);
 
-    this.gainNode.connect(this.context.destination);
-
-
-    this.destination = this.context.createMediaStreamDestination();
-
-    this.connection.attachStreams.push(this.destination.stream);
-    this.connection.dontCaptureUserMedia = true;
-
-    this.soundSource = null;
+  
+    this.connection.open('fullstack-academy');
     this.getSong()
 
     const geolocation = (
@@ -89,7 +84,7 @@ class djBooth extends React.Component {
 
   startStream(e){
     e.preventDefault();
-    this.connection.open('fullstack-academy');
+    // this.connection.open('fullstack-academy');
     console.log(this.connection);
     this.props.djGoesLive()
   }
@@ -99,19 +94,25 @@ class djBooth extends React.Component {
 
     // request.open('GET', `/mp3/${videoId}`, true);
 
-    request.open('GET', `https://p.scdn.co/mp3-preview/4177d725cd93fa1753babdd73a69d285df100417?cid=null`, true);
+    request.open('GET', `/music/youtube/mp3/5qm8PH4xAss`, true);
     request.responseType = 'arraybuffer';
+    console.log('this inside getSong', this)
+    
     request.onload = () => {
-      this.context.decodeAudioData(request.response,(buffer)=>{
+      console.log('this inside onload',this)
+      this.audioContext.decodeAudioData(request.response,(buffer)=>{
+        let soundSource = this.audioContext.createBufferSource();
+        soundSource.buffer = buffer;
+        
+        // Broadcast SoundSource to Listeners
+        soundSource.connect(this.broadcastingStream);
+        
+        // Play SoundSource on DJ's Computer
+        let gainNode = this.audioContext.createGain();
+        soundSource.connect(gainNode);
+        gainNode.connect(this.audioContext.destination);
 
-        if(this.soundSource){
-          this.soundSource.disconnect();
-        }
-        this.soundSource = this.context.createBufferSource();
-        this.soundSource.buffer = buffer;
-        this.soundSource.connect(this.gainNode);
-        this.soundSource.connect(this.destination);
-        this.soundSource.start(0)
+        soundSource.start(0)
 
       },null)
     };

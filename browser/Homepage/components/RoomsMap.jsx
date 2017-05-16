@@ -5,11 +5,9 @@ import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import mapStyles from '../../../public/stylesheets/mapStyles.json';
 
 // #TODO: remove duplicate rooms_map ids
+
 const RoomsMap = withGoogleMap((props) => {
-
-  console.log('props.djs',props.djs)
-console.log('dj',props.djs.filter(dj => dj.isLive))
-
+  
   return (
     <GoogleMap
       id="rooms_map"
@@ -24,5 +22,3 @@ console.log('dj',props.djs.filter(dj => dj.isLive))
 });
 
 export default RoomsMap;
-
-
