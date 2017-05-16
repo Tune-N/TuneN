@@ -5,9 +5,6 @@ import { connect } from 'react-redux'
 import { getUserInfo } from './reducers/auth/actions-creators';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-
 
 import Homepage from './Homepage/Homepage.jsx';
 import SignUp from './components/Signup.jsx'
@@ -24,7 +21,7 @@ class App extends React.Component{
 
   render(){
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+      <MuiThemeProvider>
         <div id="main" className="container-fluid">
           <Route exact path="/" component={Homepage} />
           <Route path="/signup" component={SignUp} />
