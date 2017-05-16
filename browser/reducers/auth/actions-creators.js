@@ -18,7 +18,6 @@ export const removeLoggedInUser = () => ({
 
 
 // Dispatchers
-
 export const login = (email, password) => (dispatch) => {
   return axios.post('/api/auth/login', { email, password })
     .then(response => dispatch(setLoggedInUser(response.data)));
@@ -33,14 +32,13 @@ export const signUp = (username, email, password) => (dispatch) => {
 
 
 export const getUserInfo = () => (dispatch) => {
-  console.log('getUserInfor');
   return axios.get('/api/auth/me')
     .then((response) => {
       dispatch(setLoggedInUser(response.data));
     });
 };
 
-export const logout = () => dispatch =>{
+export const logout = () => (dispatch) => {
   return axios.post('/api/auth/logout')
     .then(() => dispatch(removeLoggedInUser()));
 };

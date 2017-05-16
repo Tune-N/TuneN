@@ -82,7 +82,6 @@ app.post('/login', (req, res, next) => {
     }
   })
     .then(user => {
-      console.log('/login', user);
       if (!user) res.status(401).send('User not found');
       if (user.password !== user.Model.encryptPassword(req.body.password, user.salt)) res.status(401).send('Incorrect password');
       else {
@@ -97,10 +96,8 @@ app.post('/login', (req, res, next) => {
 });
 
 app.post('/signup', (req, res, next) => {
-  console.log('auth/signup');
   User.create(req.body)
     .then(user => {
-      console.log('create response', user);
       req.login(user, err => {
         if (err) next(err);
         else res.json(user);
@@ -109,14 +106,13 @@ app.post('/signup', (req, res, next) => {
     .catch(next);
 });
 
-app.post('/logout', (req, res, next) => {
+app.post('/logout', (req, res) => {
   req.logout();
   res.sendStatus(200);
 });
 
-//this only works on the enter request
-app.get('/me', (req, res, next) => {
-  console.log('/me', req.user);
+
+app.get('/me', (req, res) => {
   res.json(req.user);
 });
 
