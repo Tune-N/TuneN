@@ -1,18 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 
-import Navbar from '../components/Navbar.jsx'
-import RoomsList from './components/RoomsList/RoomsList.jsx'
-import RoomsMap from './components/RoomsMap.jsx'
-import muiThemeable from 'material-ui/styles/muiThemeable'
-
+import Navbar from '../components/Navbar.jsx';
+import RoomsList from './components/RoomsList/RoomsList.jsx';
+import RoomsMap from './components/RoomsMap.jsx';
 
 import { getLiveDJs } from '../reducers/djs/action-creators';
 
 class Homepage extends React.Component {
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.getLiveDJs()
   }
 
