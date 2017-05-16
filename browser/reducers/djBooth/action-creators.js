@@ -37,6 +37,7 @@ export const goLive = name => () => {
 };
 
 export const endSession = name => () => {
+  console.log('endSession Firebase', name);
   return firebase.database().ref(`liveDjs/${name}`).remove()
     .catch(err => console.log(err));
 };
