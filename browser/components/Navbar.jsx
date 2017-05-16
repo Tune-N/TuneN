@@ -59,21 +59,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
-
-{/*<AppBar*/}
-  {/*title={<span style={styles.title}>TuneN</span>}*/}
-  {/*style={{ backgroundColor: '#021019', color: '#FFFFFF' }}*/}
-  {/*iconElementLeft={<IconButton />}*/}
-  {/*iconElementRight={<IconMenu*/}
-    {/*{...props}*/}
-    {/*iconButtonElement={*/}
-      {/*<IconButton ><MoreVertIcon style={iconStyles} color={blue500}/></IconButton>*/}
-    {/*}*/}
-    {/*targetOrigin={{horizontal: 'right', vertical: 'top'}}*/}
-    {/*anchorOrigin={{horizontal: 'right', vertical: 'top'}}*/}
-  {/*>*/}
-    {/*<Link to="/dj"><MenuItem primaryText="DJ Live" /></Link>*/}
-    {/*<MenuItem primaryText="Sign out" onClick={()=> logout()}/>*/}
-
-  {/*</IconMenu>}*/}
-{/*/>*/}
