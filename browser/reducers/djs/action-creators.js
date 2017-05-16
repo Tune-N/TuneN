@@ -5,6 +5,7 @@ import axios from 'axios'
 export const SET_DJS = 'SET_DJS';
 export const ADD_DJ = 'ADD_DJ';
 export const REMOVE_DJ = 'REMOVE_DJ';
+export const SET_LOCATION = 'SET_LOCATION'
 
 export const SET_CURRENT_DJ = 'SET_CURRENT_DJ'; // This refers to the DJ you are listening to.
 
@@ -29,6 +30,12 @@ export const setCurentDJ = dj => ({
   type: SET_CURRENT_DJ,
   dj
 });
+
+export const setLocation = location =>({
+  type: SET_LOCATION,
+  location: {lat: location.split(' ')[0], lng:location.split(' ')[1]}
+})
+
 
 // Dispatchers
 export const getLiveDJs = () => dispatch => {

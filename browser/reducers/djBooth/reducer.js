@@ -1,3 +1,9 @@
+import { whoami } from '../auth/reducer';
+
+import axios from 'axios'
+
+import {setLocation} from '../djs/action-creators'
+
 /* -----------------    ACTIONS     ------------------ */
 
 const SET_SELECTED_SONG = 'SET_SELECTED_SONG';
@@ -9,7 +15,7 @@ const STOP_PLAYING = 'STOP_PLAYING';
 const SET_DECK_PROGRESS = 'SET_DECK_PROGRESS';
 const SET_LIVE_DJS = 'SET_LIVE_DJS';
 
-import { whoami } from '../auth/reducer';
+
 
 /* ------------   ACTION CREATORS     ------------------ */
 export const selectSong = song => ({
@@ -99,4 +105,13 @@ export const djGoesLive = () => dispatch => {
     .then(res => {
       dispatch(whoami());
     });
+};
+
+export const djLocation = (location,id) => dispatch => {
+  console.log('putting location',location)
+  const {lat, lng} = location
+  axios.put(`/api/users/${id}`, `${lat} ${lng}`)
+    .then(res => {
+      dispatch(setLocation(res.data.location));
+    })
 };
