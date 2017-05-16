@@ -17,6 +17,7 @@ class Login extends React.Component {
               <img style={{ height: '15%', width: '15%' }} src="tuneNLogo.png" />
             </div>
           </fieldset>
+          <hr/>
           <fieldset style={{ paddingBottom: 8 }}>
             <input name="email" type="text" className="form-control login-input" placeholder="Enter Email Address" />
           </fieldset>
