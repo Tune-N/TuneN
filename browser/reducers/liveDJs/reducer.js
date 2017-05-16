@@ -14,7 +14,7 @@ export default function reducer(state = initialState, action) {
   switch (action.type) {
 
     case SET_DJS:
-      newState.list = action.djs;
+      newState.list = action.liveDJs;
       break;
 
     case ADD_DJ:

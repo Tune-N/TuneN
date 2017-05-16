@@ -1,9 +1,8 @@
-import axios from 'axios'
+import axios from 'axios';
 
 // Actions
 export const SET_LOGGED_IN_USER = 'SET_LOGGED_IN_USER';
 export const REMOVE_LOGGED_IN_USER = 'REMOVE_LOGGED_IN_USER';
-
 
 
 // Action Creators
@@ -25,7 +24,7 @@ export const login = (email, password) => (dispatch) => {
 
 export const signUp = (username, email, password) => (dispatch) => {
   return axios.post('/api/auth/signup', { username, email, password })
-    .then(response => {
+    .then((response) => {
       dispatch(setLoggedInUser(response.data));
     });
 };

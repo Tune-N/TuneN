@@ -12,7 +12,7 @@ export const SET_CURRENT_DJ = 'SET_CURRENT_DJ'; // This refers to the DJ you are
 // Action Creators
 export const setDJs = djs => ({
   type: SET_DJS,
-  djs,
+  liveDJs,
 });
 
 export const addDJ = dj => ({

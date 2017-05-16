@@ -7,7 +7,7 @@ import Navbar from '../components/Navbar.jsx';
 import RoomsList from './components/RoomsList/RoomsList.jsx';
 import RoomsMap from './components/RoomsMap.jsx';
 
-import { getLiveDJs } from '../reducers/djs/action-creators';
+import { getLiveDJs } from '../reducers/liveDJs/action-creators';
 
 class Homepage extends React.Component {
 
@@ -39,7 +39,7 @@ class Homepage extends React.Component {
 
 
 const mapStateToProps = state => ({
-  djs: state.djs.list,
+  liveDJs: state.liveDJs.list,
 });
 
 const mapDispatchToProps = {

@@ -32,10 +32,11 @@ export const removeRequestedSong = (songId) => ({
 /* ------------       DISPATCHERS     ------------------ */
 
 export const goLive = name => () => {
-  console.log('Adding LiveDJ to Firebase', name);
-  return firebase.database().ref(`liveDjs/${name}`).set({
-    name,
-  })
-    .then(data => console.log('firebase response',data))
-    .catch(err => console.log('firebase errro', err));
+  return firebase.database().ref(`liveDjs/${name}`).set({ name })
+    .catch(err => console.log(err));
+};
+
+export const endSession = name => () => {
+  return firebase.database().ref(`liveDjs/${name}`).remove()
+    .catch(err => console.log(err));
 };

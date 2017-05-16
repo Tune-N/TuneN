@@ -15,7 +15,7 @@ import Homepage from './Homepage/Homepage.jsx';
 import Signup from './components/Signup.jsx';
 import Login from './components/Login';
 import Room from './Room/Room.jsx';
-import DJBooth from './DJ/containers/djBoothContainer';
+import DJBooth from './DJ/containers/DJBoothContainer';
 
 injectTapEventPlugin();
 

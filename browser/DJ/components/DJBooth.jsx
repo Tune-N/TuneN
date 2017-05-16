@@ -6,13 +6,12 @@ import 'aframe-mouse-cursor-component';
 import 'aframe-daydream-controller-component';
 import registerClickDrag from 'aframe-click-drag-component';
 
-import DeckContainer from './containers/DeckContainer'
+import DeckContainer from '../containers/DeckContainer';
 
-import Camera from './components/Camera.jsx';
-import DaydreamController from './components/DaydreamController.jsx';
-import Background from './components/Background.jsx';
-import RequestedSongs from './components/RequestedSongs.jsx';
-
+import Camera from './Camera.jsx';
+import DaydreamController from './DaydreamController.jsx';
+import Background from './Background.jsx';
+import RequestedSongs from './RequestedSongs.jsx';
 
 
 registerClickDrag(aframe);
@@ -26,7 +25,6 @@ class djBooth extends React.Component {
     // #TODO: Chance to arrow binding
     this.startStream = this.startStream.bind(this);
     this.getSong = this.getSong.bind(this);
-    this.endSession = this.endSession.bind(this);
   }
 
   createConnection() {
@@ -43,9 +41,10 @@ class djBooth extends React.Component {
   }
 
   componentDidMount() {
-    console.log('djBooth didMount', typeof this.props.goLive);
+    console.log('djBooth', this.props)
+    const { user, goLive } = this.props;
+    goLive('test2'); // Change to user.username but ComponentDidMount fires before thunk
 
-    this.props.goLive('samir');
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
     this.connection = this.createConnection();
@@ -59,14 +58,18 @@ class djBooth extends React.Component {
 
   
     this.connection.open('fullstack-academy');
-    // this.getSong()
+
+  }
+
+  componentWillUnmount() {
+    this.props.endSession();
   }
 
   startStream(e) {
     e.preventDefault();
     // this.connection.open('fullstack-academy');
     console.log(this.connection);
-    this.props.djGoesLive()
+
   }
 
   getSong(e){
@@ -76,10 +79,8 @@ class djBooth extends React.Component {
 
     request.open('GET', `/music/youtube/mp3/5qm8PH4xAss`, true);
     request.responseType = 'arraybuffer';
-    console.log('this inside getSong', this)
     
     request.onload = () => {
-      console.log('this inside onload',this)
       this.audioContext.decodeAudioData(request.response,(buffer)=>{
         let soundSource = this.audioContext.createBufferSource();
         soundSource.buffer = buffer;
@@ -99,22 +100,8 @@ class djBooth extends React.Component {
     request.send();
   }
 
-  //#TODO: move into action creator
-  endSession() {
-    axios.put(`/api/users/${this.props.id}`, { isLive: false })
-    .then(res => {
-      store.dispatch(whoami());
-    })
-    .then(res => {
-      getLiveDjs();
-    });
-  }
-
   render() {
-    const requestedSongs = this.props.djBooth.requestedSongs;
-    const deck1 = this.props.djBooth.deck1;
-    const deck2 = this.props.djBooth.deck2;
-    const auth = this.props.auth;
+    const { deck1, deck2, requestedSongs } = this.props.djBooth;
 
     return (
       <div>
@@ -123,7 +110,8 @@ class djBooth extends React.Component {
             <Camera />
             <DaydreamController />
             <Background />
-            <DeckContainer id="deck1" position="0 2 -2" song={this.props.djBooth.deck1.song} volume={deck1.volume} />
+            <DeckContainer
+              id="deck1" position="0 2 -2" song={this.props.djBooth.deck1.song} volume={deck1.volume} />
             <DeckContainer id="deck2" position="0 1 -2" song={this.props.djBooth.deck2.song} volume={deck2.volume} />
             <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} />
           </Scene>
