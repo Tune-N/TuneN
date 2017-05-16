@@ -6,6 +6,8 @@
     "react/prop-types": "off",
     "import/extensions":"off",
     "arrow-body-style": "off",
-    "quotes": "off"
+    "quotes": "off",
+    "no-trailing-spaces": "off",
+    "react/sort-comp":"off"
   }
 }

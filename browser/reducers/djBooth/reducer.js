@@ -1,38 +1,5 @@
-import * as firebase from 'firebase';
 
-/* -----------------    ACTIONS     ------------------ */
-
-const SET_SELECTED_SONG = 'SET_SELECTED_SONG';
-const REMOVE_REQUESTED_SONG = 'REMOVE_REQUESTED_SONG';
-
-const SET_DECK_SONG = 'SET_DECK_SONG';
-const START_PLAYING = 'START_PLAYING';
-const STOP_PLAYING = 'STOP_PLAYING';
-const SET_DECK_PROGRESS = 'SET_DECK_PROGRESS';
-const SET_LIVE_DJS = 'SET_LIVE_DJS';
-
-
-/* ------------   ACTION CREATORS     ------------------ */
-export const selectSong = song => ({
-  type: SET_SELECTED_SONG,
-  song
-});
-
-export const setDeckSong = (deck, song) => ({
-  type: SET_DECK_SONG,
-  deck,
-  song,
-});
-
-export const removeRequestedSong = (songId) => ({
-  type: REMOVE_REQUESTED_SONG,
-  songId,
-});
-
-
-
-/* ------------       REDUCER     ------------------ */
-
+import { SET_SELECTED_SONG, SET_DECK_SONG, REMOVE_REQUESTED_SONG } from './action-creators';
 
 // Initial State
 const initialState = {
@@ -89,16 +56,3 @@ export default function reducer(state = initialState, action) {
 
   return newState;
 }
-
-
-/* ------------       DISPATCHERS     ------------------ */
-
-export const goLive = (name, lat, lng) => (dispatch) => {
-  firebase.database().ref(`liveDjs/${name}`).set({
-    name: name,
-    location: {
-      lat: lat,
-      lng: lng,
-    }
-  })
-};

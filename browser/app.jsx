@@ -34,15 +34,6 @@ class App extends React.Component {
 
   componentWillMount() {
     this.props.getUserInfo();
-
-    console.log('Writing to Firebase');
-    function writeUserData(userId, name, email) {
-      firebase.database().ref('users/' + userId).set({
-        username: name,
-        email: email,
-      });
-    }
-    writeUserData(1, 'samir', 'samir8787@gmail.com')
   }
 
   render() {
@@ -62,7 +53,7 @@ class App extends React.Component {
 }
 
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   user: state.auth,
 });
 

@@ -14,41 +14,43 @@ import Background from './components/Background.jsx';
 import RequestedSongs from './components/RequestedSongs.jsx';
 
 
+
 registerClickDrag(aframe);
+
+/* globals window, AudioContext, RTCMultiConnection, XMLHttpRequest */
 
 class djBooth extends React.Component {
   constructor(props) {
     super(props);
 
-    //#TODO: Chance to arrow binding
+    // #TODO: Chance to arrow binding
     this.startStream = this.startStream.bind(this);
     this.getSong = this.getSong.bind(this);
     this.endSession = this.endSession.bind(this);
   }
 
-  createConnetion(){
+  createConnection() {
     const connection = new RTCMultiConnection();
     connection.channel = 'full-stack-academy';
     connection.dontCaptureUserMedia = true;
     connection.session = {
-      video:false,
+      video: false,
       audio: true,
-      oneway: true
+      oneway: true,
     };
 
     return connection;
   }
 
-  createAudioContext
+  componentDidMount() {
+    console.log('djBooth didMount', typeof this.props.goLive);
 
-  componentDidMount(){
-    
+    this.props.goLive('samir');
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
-    this.connection = this.createConnetion()
-    this.connection.connect()
+    this.connection = this.createConnection();
+    this.connection.connect();
     console.log('connection', this.connection);
-
     
     // Create AudioContext and MediaStream
     this.audioContext = new AudioContext();
@@ -57,10 +59,10 @@ class djBooth extends React.Component {
 
   
     this.connection.open('fullstack-academy');
-    this.getSong()
+    // this.getSong()
   }
 
-  startStream(e){
+  startStream(e) {
     e.preventDefault();
     // this.connection.open('fullstack-academy');
     console.log(this.connection);
@@ -68,7 +70,7 @@ class djBooth extends React.Component {
   }
 
   getSong(e){
-    let request = new XMLHttpRequest();
+    const request = new XMLHttpRequest();
 
     // request.open('GET', `/mp3/${videoId}`, true);
 
