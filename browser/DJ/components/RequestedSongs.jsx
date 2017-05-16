@@ -28,13 +28,11 @@ const RequestedSongs = (props) => {
       {
         songs.map((song, index) => (
           <RequestedSongContainer
-            id={song.id}
+            id={song.id.videoId}
             position={`0 ${0.80-0.17 * index} 0.02`}
-            key={song.id}
-            name={song.name}
-            album={song.album}
-            artist={song.artist}
-            image={song.image}
+            key={song.id.videoId}
+            name={song.snippet.title}
+            image={song.snippet.thumbnails.default.url}
           />
         ))
       }

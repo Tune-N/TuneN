@@ -19,7 +19,7 @@ const DJsList = (props) => {
     <Paper zDepth={2} >
       <Subheader style={{ color: '#FFFFFF', fontSize: 20 }}>Top DJ Rooms</Subheader>
         {djs.map(dj => (
-          <RoomCard key={dj.username} name={dj.username} listeners={dj.listeners} />
+          <RoomCard key={dj.username} name={dj.username} image={dj.image} listeners={dj.listeners} />
           ))
         }
     </Paper>
