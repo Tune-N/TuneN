@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { AppBar } from 'material-ui';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
+import {red500} from 'material-ui/styles/colors';
 
 
 import { logout } from '../reducers/auth/actions-creators';
@@ -42,9 +43,11 @@ const Navbar = props => {
     <div>
       <AppBar
         title={<span style={styles.title}>TuneN</span>}
-        style={{ backgroundColor: '#021019', color: '#FFFFFF', paddingTop:8}}
+        style={{ backgroundColor: '#CC181E', color: '#FFFFFF', paddingTop:8}}
         iconElementLeft={<IconButton />}
+
       iconElementRight={ user ? <Loggedin/>: <NotLoggedIn/>}
+
       />
     </div>
   );
