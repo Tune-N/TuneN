@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import '../../public/stylesheets/youtube.scss'
+import {FlatButton, TextField, Divider} from 'material-ui';
+
 
 class YoutubeSearch extends React.Component {
 
@@ -49,23 +51,28 @@ class YoutubeSearch extends React.Component {
 
   render() {    
     return (
-        <div className="youtube-section col-xs-4 no-pad">
+        <div className="youtube-section col-xs-3 no-pad" style={{textAlign:'center',color:'#fff',backgroundColor:'#303030'}}>
+           
            <h2 className="header youtube-header">
                 YouTube Music
           </h2>
           <form action="#" id='youtube-form' onSubmit={this.triggerSearch}>
-                <input type="input" id="youtube-search" name="youtubeSearch" placeholder="Search Song" autoComplete="off"/>
-                <input type="submit" value="Search"/>
+               <TextField  type="input" hintText="Search Song" id="youtube-search" name="youtubeSearch" autoComplete="off" style={{color:'#000',width:'50%'}} /> 
+               <FlatButton type="submit" label="Search" style={{color:'#fff',backgroundColor:'#e52d27',with:'50%'}} primary={true} />
           </form>
+          
 
           <div id='youtube-results'>
              {(this.state.result) ?
                 this.state.result.map((item) =>{
                   return(
                     <div key={item.id.videoId}>
-                      <h4>{item.snippet.title}</h4>
-                      <img src={item.snippet.thumbnails.default.url}/>
-                      <button data-videoid={item.id.videoId} onClick={this.sendRequest}> Request song </button>
+                      <h4 >{item.snippet.title}</h4>
+                      <div style={{width:'100%:',marginBottom:'10'}}>
+                        <img style={{textAlign:'center'}}src={item.snippet.thumbnails.default.url}/>
+                      </div>
+                      <FlatButton type="submit" label=" Request song" data-videoid={item.id.videoId} onClick={this.sendRequest} style={{color:'#fff',backgroundColor:'#e52d27',with:'50%',marginBottom:'10'}} primary={true} />
+                      <Divider />
                     </div>
                   )
                 })
