@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 import RoomCard from './RoomCard.jsx'
+import Paper from 'material-ui/Paper';
+import Subheader from 'material-ui/Subheader';
 
 const style = {
   margin: 20,
@@ -15,13 +17,15 @@ const RoomsList = (props) => {
   const { rooms } = props;
   return (
   <div id="rooms_list" style={style}>
-    <h4>Top DJ Rooms</h4>
+    <Paper zDepth={2} >
+      <Subheader style={{color:'#FFFFFF', fontSize:20}}>Top DJ Rooms</Subheader>
     {
       rooms.map( room => (
           <RoomCard key={room.username} name={room.username} listeners={room.listeners}/>
         )
       )
     }
+    </Paper>
   </div>
   )
 
