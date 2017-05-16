@@ -33,7 +33,7 @@ const Navbar = props => {
             onClick={() => logout()}
           /> :
           <Link to="/login"><FlatButton label="Login" /></Link>}
-        style={{ backgroundColor:red500, color: '#FFFFFF' }}
+        style={{ backgroundColor:'#CC181E', color: '#FFFFFF' }}
       />
     </div>
   );
