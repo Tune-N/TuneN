@@ -27,8 +27,9 @@ export const signUp = (username, email, password) => dispatch => {
 
 
 export const login = (email, password) => dispatch => {
+  console.log('Im in the reducer', email, password);
   return axios.post('/api/auth/login', {email, password})
-    .then((response) => dispatch(setLoggedInUser(response.data)))
+    .then((response) => dispatch(setLoggedInUser(response.data)));
 };
 
 
