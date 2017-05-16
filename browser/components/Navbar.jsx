@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { AppBar } from 'material-ui';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
+import {red500} from 'material-ui/styles/colors';
 
 import { logout } from '../reducers/auth/actions-creators';
 
@@ -32,7 +33,7 @@ const Navbar = props => {
             onClick={() => logout()}
           /> :
           <Link to="/login"><FlatButton label="Login" /></Link>}
-        style={{ backgroundColor: '#021019', color: '#FFFFFF' }}
+        style={{ backgroundColor:'#CC181E', color: '#FFFFFF' }}
       />
     </div>
   );
