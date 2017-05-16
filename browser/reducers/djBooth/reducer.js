@@ -110,8 +110,9 @@ export const djGoesLive = () => dispatch => {
 export const djLocation = (location,id) => dispatch => {
   console.log('putting location',location)
   const {lat, lng} = location
-  axios.put(`/api/users/${id}`, `${lat} ${lng}`)
+  axios.put(`/api/users/${id}`, {location:`${lat} ${lng}`})
     .then(res => {
-      dispatch(setLocation(res.data.location));
+      console.log('HERE',res.data[0].location)
+      dispatch(setLocation(res.data[0].location,res.data[0].id));
     })
 };

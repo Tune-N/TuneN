@@ -31,10 +31,12 @@ export const setCurentDJ = dj => ({
   dj
 });
 
-export const setLocation = location =>({
+export const setLocation = (location,id) =>{
+
+  return{
   type: SET_LOCATION,
-  location: {lat: location.split(' ')[0], lng:location.split(' ')[1]}
-})
+  location: {location,id}
+}}
 
 
 // Dispatchers
