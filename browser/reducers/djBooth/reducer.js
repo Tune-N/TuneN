@@ -2,7 +2,7 @@ import { whoami } from '../auth/reducer';
 
 import axios from 'axios'
 
-import setLocation from '../djs/action-creators'
+import {setLocation} from '../djs/action-creators'
 
 /* -----------------    ACTIONS     ------------------ */
 
@@ -112,6 +112,6 @@ export const djLocation = (location,id) => dispatch => {
   const {lat, lng} = location
   axios.put(`/api/users/${id}`, `${lat} ${lng}`)
     .then(res => {
-      dispatch(setLocation(res.data));
+      dispatch(setLocation(res.data.location));
     })
 };
