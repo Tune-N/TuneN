@@ -1,8 +1,9 @@
 import React from 'react';
 
-import RoomCard from './RoomCard.jsx'
 import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
+
+import RoomCard from './RoomCard.jsx';
 
 const style = {
   margin: 20,
@@ -16,9 +17,9 @@ const DJsList = (props) => {
   return (
   <div id="rooms_list" style={style}>
     <Paper zDepth={2} >
-      <Subheader style={{color:'#FFFFFF', fontSize:20}}>Top DJ Rooms</Subheader>
+      <Subheader style={{ color: '#FFFFFF', fontSize: 20 }}>Top DJ Rooms</Subheader>
         {djs.map(dj => (
-          <RoomCard key={dj.username} name={dj.username} listeners={dj.listeners}/>
+          <RoomCard key={dj.username} name={dj.username} listeners={dj.listeners} />
           ))
         }
     </Paper>

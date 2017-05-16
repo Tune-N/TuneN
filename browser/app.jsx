@@ -2,12 +2,11 @@ import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { getUserInfo } from './reducers/auth/actions-creators';
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+import { getUserInfo } from './reducers/auth/actions-creators';
 
 import Homepage from './Homepage/Homepage.jsx';
 import SignUp from './components/Signup.jsx';
