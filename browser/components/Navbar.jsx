@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { login, logout, whoami } from '../reducers/auth.reducer'
-// import '.../public/stylesheets/nav.scss'
+import { login, logout } from '../reducers/auth/actions-creators'
+
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -33,12 +33,12 @@ class Navbar extends React.Component {
               </li>
             </ul>
             <ul className="nav navbar-nav navbar-right login-container">
-              {/*@Ben update ternaries to && */}
-              { this.props.loggedIn ? <li></li> : <li><Link to="/signup">Signup</Link></li> }
-              {this.props.loggedIn ?
+
+              { !this.props.user && <li><Link to="/signup">Signup</Link></li> }
+              { this.props.user ?
                 <li>
                   <button className="btn btn-default navbar-btn form-inline" onClick={(evt)=>{
-                    evt.preventDefault()
+                    evt.preventDefault();
                     this.props.logout()
                   }}>Logout</button>
                 </li>
@@ -47,7 +47,7 @@ class Navbar extends React.Component {
                   <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span className="caret"></span></a>
                   <div className="dropdown-menu">
                     <form className="navbar-form" onSubmit={(evt)=>{
-                      evt.preventDefault()
+                      evt.preventDefault();
                       this.props.login(evt.target.email.value,evt.target.password.value)
                     }}>
                       <ul style={{listStyle:'none',padding:0}} >
@@ -82,23 +82,12 @@ class Navbar extends React.Component {
 /* -----------------    CONTAINER     ------------------ */
 
 const mapStateToProps = (state) => ({
-  loggedIn: state.auth ? state.auth : false
+  user: state.auth
 });
 
-// TODO: @Ben change to abbreviated format
-// const mapDispatchToProps = {
-//   login,
-//   logout,
-// }
+const mapDispatchToProps = {
+  login,
+  logout,
+};
 
-const mapDispatchToProps = dispatch => ({
-  login:(email, password) => {
-    dispatch(login(email, password));
-  },
-  logout:() => {
-    dispatch(logout());
-  },
-});
-
-// export default Navbar;
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

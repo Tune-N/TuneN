@@ -9,7 +9,7 @@ const STOP_PLAYING = 'STOP_PLAYING';
 const SET_DECK_PROGRESS = 'SET_DECK_PROGRESS';
 const SET_LIVE_DJS = 'SET_LIVE_DJS';
 
-import { whoami } from '../reducers/auth.reducer';
+import { whoami } from '../auth/reducer';
 
 /* ------------   ACTION CREATORS     ------------------ */
 export const selectSong = song => ({

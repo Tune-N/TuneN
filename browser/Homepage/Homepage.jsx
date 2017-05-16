@@ -5,46 +5,48 @@ import { withRouter } from 'react-router-dom';
 import Navbar from '../components/Navbar.jsx'
 import RoomsList from './components/RoomsList/RoomsList.jsx'
 import RoomsMap from './components/RoomsMap.jsx'
+import muiThemeable from 'material-ui/styles/muiThemeable'
 
-import { getLiveDjs } from '../reducers/rooms.reducer';
+
+import { getLiveDJs } from '../reducers/djs/action-creators';
 
 class Homepage extends React.Component {
-  // Look into if there is an equivalent to onEnter otherwise consider Componentupdated
+
   componentDidMount(){
-    this.props.getLiveDjs()
+    this.props.getLiveDJs()
   }
 
   render() {
-    console.log('Homepage', this.props);
     const { djs } = this.props;
 
     return (
       <div>
         <Navbar />
-        <h1>Live DJs</h1>
-        {/* Consider styling inline*/}
+        <span style={{color: this.props.muiTheme.palette.textColor, fontSize:30}}>
+          Live DJs
+        </span>
         <div id="homepage">
           <RoomsMap
-
-            id="rooms_map"
+            djs={djs}
             containerElement={<div id="rooms_map"/>}
             mapElement={<div style={{ height: `100%` }} />}
           />
-          <RoomsList />
+          <RoomsList djs={djs}/>
         </div>
       </div>
-
     )
   }
 }
 
 
 const mapStateToProps = (state) => ({
-  djs: state.djBooth.djs,
+  djs: state.djs.list
 });
 
 const mapDispatchToProps = {
-  getLiveDjs,
+  getLiveDJs,
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Homepage));
+const StyledHome = muiThemeable()(Homepage);
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StyledHome));
