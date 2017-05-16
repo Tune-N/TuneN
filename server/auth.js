@@ -45,25 +45,25 @@ passport.deserializeUser((id, done) => {
 
 passport.use(
   new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/api/auth/google/callback'
-  },
-  function (token, refreshToken, profile, done) {
-    var info = {
-      name: profile.displayName,
-      email: profile.emails[0].value,
-      photo: profile.photos ? profile.photos[0].value : undefined
-    };
-    User.findOrCreate({
-      where: {googleId: profile.id},
-      defaults: info
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: '/api/auth/google/callback'
+    },
+    function (token, refreshToken, profile, done) {
+      var info = {
+        name: profile.displayName,
+        email: profile.emails[0].value,
+        photo: profile.photos ? profile.photos[0].value : undefined
+      };
+      User.findOrCreate({
+        where: {googleId: profile.id},
+        defaults: info
+      })
+        .spread(function (user) {
+          done(null, user);
+        })
+        .catch(done);
     })
-    .spread(function (user) {
-      done(null, user);
-    })
-    .catch(done);
-  })
 );
 
 app.get('/google', passport.authenticate('google', { scope: 'email' }));
@@ -78,13 +78,15 @@ app.get('/google/callback',
 app.post('/login', (req, res, next) => {
   User.findOne({
     where: {
-      email: req.body.email
+      email: req.body.email,
     }
   })
     .then(user => {
+      console.log('/login', user);
       if (!user) res.status(401).send('User not found');
       if (user.password !== user.Model.encryptPassword(req.body.password, user.salt)) res.status(401).send('Incorrect password');
       else {
+
         req.login(user, err => {
           if (err) next(err);
           else res.json(user);
@@ -95,8 +97,10 @@ app.post('/login', (req, res, next) => {
 });
 
 app.post('/signup', (req, res, next) => {
+  console.log('auth/signup');
   User.create(req.body)
     .then(user => {
+      console.log('create response', user);
       req.login(user, err => {
         if (err) next(err);
         else res.json(user);
@@ -112,6 +116,7 @@ app.post('/logout', (req, res, next) => {
 
 //this only works on the enter request
 app.get('/me', (req, res, next) => {
+  console.log('/me', req.user);
   res.json(req.user);
 });
 
