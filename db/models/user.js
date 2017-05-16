@@ -37,6 +37,9 @@ module.exports = db.define('user', {
   googleId: {
     type: Sequelize.STRING,
   },
+  location: {
+    type: Sequelize.STRING,
+  }
 }, {
   instanceMethods: {
     sanitize: function () {

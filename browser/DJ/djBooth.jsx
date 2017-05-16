@@ -8,6 +8,8 @@ import registerClickDrag from 'aframe-click-drag-component';
 
 import DeckContainer from './containers/DeckContainer'
 
+import canUseDOM from 'can-use-dom'
+
 import Camera from './components/Camera.jsx';
 import DaydreamController from './components/DaydreamController.jsx';
 import Background from './components/Background.jsx';
@@ -58,6 +60,26 @@ class djBooth extends React.Component {
   
     this.connection.open('fullstack-academy');
     this.getSong()
+
+    const geolocation = (
+      canUseDOM && navigator.geolocation ?
+        navigator.geolocation :
+        ({
+          getCurrentPosition(success, failure) {
+            failure(`Your browser doesn't support geolocation.`);
+          },
+        })
+    );
+
+    geolocation.getCurrentPosition((position) => {
+      this.props.djLocation({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      },this.props.auth.id);
+    })
+
+
+
   }
 
   startStream(e){
@@ -113,6 +135,7 @@ class djBooth extends React.Component {
     const deck1 = this.props.djBooth.deck1;
     const deck2 = this.props.djBooth.deck2;
     const auth = this.props.auth;
+    console.log('djProps',this.props)
 
     return (
       <div>
