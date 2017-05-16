@@ -1,10 +1,10 @@
 import React from 'react';
-import {connect} from 'react-redux'
-import '../../public/stylesheets/youtube.scss'
+import {connect} from 'react-redux';
 import {FlatButton, TextField, Divider} from 'material-ui';
 
+import '../../public/stylesheets/youtube.scss';
 
-class YoutubeSearch extends React.Component
+class YoutubeSearch extends React.Component {
 
   constructor(props) {
     super(props);
@@ -88,13 +88,11 @@ class YoutubeSearch extends React.Component
 
 const mapStateToProps = function(state){
   return {
-    
   }
 }
 
 const mapDispatchToProps = function(dispatch){
   return {
-    
   }
 }
 
