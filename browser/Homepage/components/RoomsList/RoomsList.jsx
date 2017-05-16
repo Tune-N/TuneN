@@ -13,12 +13,12 @@ const style = {
 };
 
 const DJsList = (props) => {
-  const { djs } = props;
+  const { liveDJs } = props;
   return (
   <div id="rooms_list" style={style}>
     <Paper zDepth={2} >
       <Subheader style={{ color: '#FFFFFF', fontSize: 20 }}>Top DJ Rooms</Subheader>
-        {djs.map(dj => (
+        {liveDJs.map(dj => (
           <RoomCard key={dj.username} name={dj.username} listeners={dj.listeners} />
           ))
         }

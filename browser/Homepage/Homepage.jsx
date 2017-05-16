@@ -16,8 +16,8 @@ class Homepage extends React.Component {
   }
 
   render() {
-    const { djs } = this.props;
-
+    const { liveDJs } = this.props;
+    console.log('Homepage', liveDJs);
     return (
       <div>
         <Navbar />
@@ -26,11 +26,11 @@ class Homepage extends React.Component {
         </span>
         <div id="homepage">
           <RoomsMap
-            djs={djs}
+            liveDJs={liveDJs}
             containerElement={<div id="rooms_map" />}
             mapElement={<div style={{ height: `100%` }} />}
           />
-          <RoomsList djs={djs} />
+          <RoomsList liveDJs={liveDJs} />
         </div>
       </div>
     );
