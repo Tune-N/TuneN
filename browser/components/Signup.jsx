@@ -23,12 +23,11 @@ class Signup extends React.Component {
           <form className='row' onSubmit={this.onSignup}>
             <fieldset style={{ paddingTop: 15 }}>
               <div className="google-btn-container">
-                <img style={{ height: '50%', width: '50%' }} src="images/logo_transparent.png" />
+                <img style={{ height: '25%', width: '25%' }} src="images/logo_transparent.png" />
               </div>
             </fieldset>
             <hr />
             <div className="form-group">
-              <label>username</label>
               <input
                 name="username"
                 type="username"
@@ -38,7 +37,6 @@ class Signup extends React.Component {
               />
             </div>
             <div className="form-group">
-              <label>email</label>
               <input
                 name="email"
                 type="email"
@@ -48,7 +46,6 @@ class Signup extends React.Component {
               />
             </div>
             <div className="form-group">
-              <label>password</label>
               <input
                 name="password"
                 type="password"
@@ -57,7 +54,7 @@ class Signup extends React.Component {
                 required
               />
             </div>
-            <button style={{ backgroundColor: '#3D69A2' }} type="submit" className="btn btn-block btn-primary">Sign Up</button>
+            <button style={{ backgroundColor: '#3D69A2', marginBottom: 10 }} type="submit" className="btn btn-block btn-primary">Signup</button>
           </form>
         </div>
       </div>

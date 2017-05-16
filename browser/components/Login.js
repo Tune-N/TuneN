@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { login } from '../reducers/auth/actions-creators';
+import { Link } from 'react-router-dom';
 
 import '../../public/stylesheets/login.scss';
 
@@ -16,7 +17,7 @@ class Login extends React.Component {
         }}>
           <fieldset style={{ paddingTop: 15 }}>
             <div className="google-btn-container">
-              <img style={{ height: '50%', width: '50%' }} src="images/logo_transparent.png" />
+              <img style={{ height: '25%', width: '25%' }} src="images/logo_transparent.png" />
             </div>
           </fieldset>
           <hr/>
@@ -29,9 +30,16 @@ class Login extends React.Component {
           <fieldset className="login-btn" style={{ paddingBottom: 10 }}>
             <button className="login btn btn-success" label="login" type="submit" value="Login" >Login</button>
           </fieldset>
-          <fieldset className="google-btn-container" style={{ paddingBottom: 10 }}>
+          <div className="google-btn-container">
             <a href='/api/auth/google'><img id="google-img" src="googlebtn.png" /></a>
-          </fieldset>
+          </div>
+          <hr/>
+          <div style={{ textAlign: 'center', paddingBottom: 5, marginTop: 0 }}>
+            <span style={{ color: '#FFFFFF' }}>OR</span>
+          </div>
+          <div style={{ paddingBottom: 10, color: '#3D69A2' }}>
+            <Link to="/signup"><button className="login btn btn-primary" label="Signup" type="Signup" value="Signup" >Signup Here</button></Link>
+          </div>
         </form>
       </div>
     );
