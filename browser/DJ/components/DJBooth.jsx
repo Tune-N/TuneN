@@ -38,6 +38,7 @@ class djBooth extends React.Component {
     this.crossFader = this.crossFader.bind(this);
     this.crossFaderUp = this.crossFaderUp.bind(this);
     this.crossFaderDown = this.crossFaderDown.bind(this);
+    this.onTrackPadMove = this.onTrackPadMove.bind(this);
 
   }
 
@@ -82,11 +83,19 @@ class djBooth extends React.Component {
     this.connection.open(`full-stack-academy-${this.props.username}`);
     console.log('DJBooth connection.open:', `full-stack-academy-${this.props.username}`)
     this.gainNode = []
+    this.gainNode[0] = this.audioContext.createGain();
+    this.gainNode[1] = this.audioContext.createGain();
     this.goLive();
   }
 
   componentWillUnmount() {
     socket.emit('stop dj');
+  }
+
+  onTrackPadMove(event) {
+    const { id, crossfader } = this.props;
+    let yaxis = 1 - ((event.detail.axis[1] + 1)/2);
+    this.crossFader(yaxis);
   }
 
   startStream(e) {
@@ -131,10 +140,11 @@ class djBooth extends React.Component {
     request.send();
   }
 
-  crossFader(e){
-
-    let volume1 = parseFloat(e.target.value)
-    let volume2 = 1 - volume1
+  crossFader(yaxis){
+    console.log('crossfader val', yaxis);
+    if (yaxis < 0.55 && yaxis > 0.45) return
+    let volume1 = yaxis;
+    let volume2 = 1 - volume1;
 
     this.gainNode[0].gain.value = volume1
     this.gainNode[1].gain.value = volume2
@@ -173,7 +183,11 @@ class djBooth extends React.Component {
           {/*<input id="volume" className="col-xs-2"  onChange={this.crossFader} type="range" min="0" max="1" step="0.01" value={this.state.volume} />
           <button onClick={this.crossFaderUp}>song 1</button>
           <button onClick={this.crossFaderDown}>song 2</button>*/}
-          <Scene>
+          <Scene
+            events={{
+              axismove: this.onTrackPadMove,
+            }}
+          >
             <Camera />
             <DaydreamController />
             <Background />
@@ -183,6 +197,7 @@ class djBooth extends React.Component {
               song={this.props.djBooth.deck1.song} 
               volume={deck1.volume} 
               playSong={this.getSong}
+              crossfader={this.crossFader}
             />
             <DeckContainer 
               id="deck2" 
