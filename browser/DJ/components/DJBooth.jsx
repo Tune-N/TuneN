@@ -24,7 +24,7 @@ class djBooth extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      volume:'1',
+      volume:1,
     };
 
     // #TODO: Chance to arrow binding
@@ -38,7 +38,7 @@ class djBooth extends React.Component {
     this.djName = window.location.pathname.split('/')[1]
     const connection = new RTCMultiConnection();
     // connection.channel = `full-stack-academy-${this.djName}`;
-    connection.channel = 'full-stack-academy';
+    connection.channel = `full-stack-academy-${this.props.username}`;
     connection.dontCaptureUserMedia = true;
     connection.session = {
       video: false,
@@ -64,16 +64,15 @@ class djBooth extends React.Component {
 
     this.connection = this.createConnection();
     this.connection.connect();
-
     // Create AudioContext and MediaStream
     this.audioContext = new AudioContext();
     this.broadcastingStream = this.audioContext.createMediaStreamDestination();
     this.connection.attachStreams.push(this.broadcastingStream.stream);
-    this.connection.open('fullstack-academy');
-
+    this.connection.open(`full-stack-academy-${this.props.username}`);
+    this.gainNode = []
     this.goLive();
-    // this.getSong(0,'or3U2rXxvQw',1);
-    // this.getSong(1,'UqyT8IEBkvY',0);
+    this.getSong(0,'or3U2rXxvQw');
+    this.getSong(1,'UqyT8IEBkvY');
   }
 
   componentWillUnmount() {
@@ -83,18 +82,18 @@ class djBooth extends React.Component {
   startStream(e) {
     e.preventDefault();
     // this.connection.open('fullstack-academy');
-    console.log(this.connection);
+    
 
   }
 
-  getSong(gainIndex, videoId, initialVolume=1){
+  getSong(gainIndex, videoId, initialVolume = 1){
     let request = new XMLHttpRequest();
 
     // request.open('GET', `/mp3/${videoId}`, true);
     //
     request.open('GET', `/music/youtube/mp3/${videoId}`, true);
     request.responseType = 'arraybuffer';
-    console.log('this inside getSong', this)
+    
 
     request.onload = () => {
       this.audioContext.decodeAudioData(request.response,(buffer)=>{
@@ -105,13 +104,16 @@ class djBooth extends React.Component {
         // soundSource.connect(this.broadcastingStream);
 
         // Play SoundSource on DJ's Computer
+        if(this.gainNode[gainIndex]){
+          this.gainNode[gainIndex].disconnect();
+        }
         this.gainNode[gainIndex] = this.audioContext.createGain();
 
         soundSource.connect(this.gainNode[gainIndex]);
 
         this.gainNode[gainIndex].connect(this.audioContext.destination); //Needed for Dj audio
         this.gainNode[gainIndex].connect(this.broadcastingStream);
-        this.gainNode[gainIndex].gain.value = initialVolume
+        this.gainNode[gainIndex].gain.value = (gainIndex==0)? this.state.volume : 1 - this.state.volume
 
         soundSource.start(0)
 
@@ -137,7 +139,7 @@ class djBooth extends React.Component {
     return (
       <div>
         <div className="DJBooth">
-          <input id="volume" className="col-xs-2"  onChange={this.crossFader} type="range" min="0" max="1" step="0.01" value={this.state.volume} />
+          {/*<input id="volume" className="col-xs-2"  onChange={this.crossFader} type="range" min="0" max="1" step="0.01" value={this.state.volume} />*/}
           <Scene>
             <Camera />
             <DaydreamController />

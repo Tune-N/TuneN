@@ -6,11 +6,14 @@ import '../../public/stylesheets/rtcaudio.scss';
 class Room extends React.Component {
   constructor(props) {
     super(props) 
+    this.state = {
+      djUsername: window.location.pathname.split('/')[1]
+    }
   }
 
   createConnetion(){
     const connection = new RTCMultiConnection();
-    connection.channel = 'full-stack-academy';
+    connection.channel = `full-stack-academy-${this.state.djUsername}`;
     connection.dontCaptureUserMedia = true;
     connection.session = {
       audio: true,
@@ -34,14 +37,13 @@ class Room extends React.Component {
 
     // connect to signaling gateway
     this.connection.connect();
-    this.connection.join('fullstack-academy')
+    this.connection.join(`full-stack-academy-${this.state.djUsername}`)
      
   }
 
   render(){
     return (
 	    <div>
-	      <h1>Room</h1>
 	      <Youtube />
 	      <div id="streams-container"></div>
 	    </div>
