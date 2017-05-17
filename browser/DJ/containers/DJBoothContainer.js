@@ -5,7 +5,7 @@ import { goLive, endSession } from '../../reducers/djBooth/action-creators';
 import djBooth from '../components/DJBooth.jsx';
 
 const mapStateToProps = state => ({
-  username: state.auth,
+  username: state.auth.username,
   djBooth: state.djBooth,
 });
 
