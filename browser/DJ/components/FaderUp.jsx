@@ -11,7 +11,8 @@ class FaderUp extends React.Component {
   }
 
   onClick() {
-    console.log("fader up clicked on");
+    console.log("Fader Up Clicked on");
+    this.props.faderUp()
   }
 
   render() {

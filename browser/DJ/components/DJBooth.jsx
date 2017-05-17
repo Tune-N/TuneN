@@ -82,8 +82,6 @@ class djBooth extends React.Component {
     this.connection.open(`full-stack-academy-${this.props.username}`);
     this.gainNode = []
     this.goLive();
-    this.getSong(0,'or3U2rXxvQw');
-    this.getSong(1,'UqyT8IEBkvY');
   }
 
   componentWillUnmount() {
@@ -96,6 +94,7 @@ class djBooth extends React.Component {
   }
 
   getSong(gainIndex, videoId){
+    console.log(`getSong on gainIndex: ${gainIndex}, songId: ${videoId}`)
     let request = new XMLHttpRequest();
 
     // request.open('GET', `/mp3/${videoId}`, true);
@@ -143,7 +142,6 @@ class djBooth extends React.Component {
   }
 
   crossFaderUp(e){
-    e.preventDefault()
     let addLogic = this.state.volume += 0.05
     let volume1 = (addLogic > 1) ? 1 : addLogic
     let volume2 = 1 - volume1
@@ -155,7 +153,6 @@ class djBooth extends React.Component {
   }
 
   crossFaderDown(e){
-    e.preventDefault()
     let addLogic = this.state.volume -= 0.05
     let volume1 = (addLogic < 0) ? 0 : addLogic
     let volume2 = 1 - volume1
@@ -180,11 +177,22 @@ class djBooth extends React.Component {
             <DaydreamController />
             <Background />
             <DeckContainer
-              id="deck1" position="0 2 -2" song={this.props.djBooth.deck1.song} volume={deck1.volume} />
-            <DeckContainer id="deck2" position="0 1 -2" song={this.props.djBooth.deck2.song} volume={deck2.volume} />
+              id="deck1" 
+              position="0 2 -2" 
+              song={this.props.djBooth.deck1.song} 
+              volume={deck1.volume} 
+              playSong={this.getSong}
+            />
+            <DeckContainer 
+              id="deck2" 
+              position="0 1 -2" 
+              song={this.props.djBooth.deck2.song} 
+              volume={deck2.volume} 
+              playSong={this.getSong}
+            />
             <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} />
-            <FaderUp id="faderUp" position="-1.3 2 -2" />
-            <FaderDown id="faderDown" position="-1.3 1 -2" />
+            <FaderUp id="faderUp" position="-1.3 2 -2" faderUp={this.crossFaderUp} />
+            <FaderDown id="faderDown" position="-1.3 1 -2" faderUp={this.crossFaderDown}/>
 
             <Entity
               primitive="a-image"

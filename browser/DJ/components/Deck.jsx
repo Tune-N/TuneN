@@ -11,14 +11,17 @@ class Deck extends React.Component {
   }
 
   onClick() {
-    console.log('props inside of djbooth', this.props);
-    const { id, selectedSong, setDeckSong, removeRequestedSong } = this.props;
+    const { id, selectedSong, setDeckSong, removeRequestedSong, playSong } = this.props;
+    console.log('onClick selectedSong', selectedSong)
     setDeckSong(id, selectedSong);
-    console.log('selected song here', selectedSong.id);
-    removeRequestedSong(id, selectedSong.id);
+    removeRequestedSong(selectedSong.id);
+    const gainIndex = id === 'deck1' ? 0 : 1;
+    console.log('gainIndex', gainIndex)
+    playSong(gainIndex, selectedSong.id);
   }
 
   render() {
+    console.log('Deck props', this.props);
     const { id, position, song } = this.props;
 
     return (
