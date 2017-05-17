@@ -51,7 +51,7 @@ export const getLiveDJs = () => (dispatch) => {
 
 // Listeners
 firebase.database().ref(`liveDJs`).on('value', (snapshot) =>{
-  const djs = snapshot.val()
+  const djs = snapshot.val();
   const djsArray = [];
   for (const dj in djs) {
     djsArray.push(djs[dj]);
