@@ -17,24 +17,10 @@ export default function reducer(state = initialState, action) {
       newState.list = action.liveDJs;
       break;
 
-    case ADD_DJ:
-      newState.list = action.room;
-      break;
-
-    case REMOVE_DJ:
-      newState.list = action.room;
-      break;
-
     case SET_CURRENT_DJ:
       newState.list = action.room;
       break;
 
-    case SET_LOCATION:
-      newState.list = newState.list.map(dj => {
-        if (dj.id === action.djId) dj.location = action.location;
-        return dj;
-      });
-      break;
 
     default:
       return state;

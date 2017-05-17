@@ -16,11 +16,11 @@ const RoomsMap = withGoogleMap((props) => {
       defaultOptions={{ styles: mapStyles }}
     >
       {liveDJs.map(dj => (
-        dj.location &&
+        dj.latitude &&
         <Marker
           position={{
-            lat: Number(dj.location.split(' ')[0]),
-            lng: Number(dj.location.split(' ')[1])
+            lat: Number(dj.latitude),
+            lng: Number(dj.longitude),
           }}
           key={dj.username}
         />

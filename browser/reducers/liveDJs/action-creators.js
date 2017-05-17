@@ -1,4 +1,6 @@
 import axios from 'axios';
+import store from '../../store';
+
 
 /* globals firebase */
 
@@ -48,7 +50,12 @@ export const getLiveDJs = () => (dispatch) => {
 };
 
 // Listeners
-firebase.database().ref(`liveDJs`).on('value', (liveDJs) =>{
-  console.log('liveDJs event', liveDJs)
+firebase.database().ref(`liveDJs`).on('value', (snapshot) =>{
+  const djs = snapshot.val()
+  const djsArray = [];
+  for (const dj in djs) {
+    djsArray.push(djs[dj]);
+  }
+  store.dispatch(setDJs(djsArray));
 });
 

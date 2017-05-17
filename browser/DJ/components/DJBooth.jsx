@@ -1,14 +1,13 @@
 import React from 'react';
 import aframe from 'aframe';
 import { Scene } from 'aframe-react';
+import canUseDOM from 'can-use-dom';
 
 import 'aframe-mouse-cursor-component';
 import 'aframe-daydream-controller-component';
 import registerClickDrag from 'aframe-click-drag-component';
 
 import DeckContainer from '../containers/DeckContainer';
-
-import canUseDOM from 'can-use-dom';
 
 import Camera from './Camera.jsx';
 import DaydreamController from './DaydreamController.jsx';
@@ -43,13 +42,11 @@ class djBooth extends React.Component {
   }
 
   goLive() {
-    console.log('goLive Booth Method');
     const { goLive, username } = this.props;
     const geoLocation = canUseDOM && navigator.geolocation;
-    console.log('geoLocation', geoLocation.getCurrentPosition);
     geoLocation.getCurrentPosition((position) => {
-      const { latitute, longitude } = position;
-      goLive(username, latitute, longitude);
+      const { latitude, longitude } = position.coords;
+      goLive(username, latitude, longitude);
     });
   }
 

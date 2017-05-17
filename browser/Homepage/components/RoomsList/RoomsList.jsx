@@ -12,8 +12,10 @@ const style = {
   height: 600
 };
 
+
 const DJsList = (props) => {
   const { liveDJs } = props;
+  console.log('DJsList props', liveDJs);
   return (
   <div id="rooms_list" style={style}>
     <Paper zDepth={2} >
