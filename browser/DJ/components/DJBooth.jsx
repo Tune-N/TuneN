@@ -14,7 +14,7 @@ import DaydreamController from './DaydreamController.jsx';
 import Background from './Background.jsx';
 import RequestedSongs from './RequestedSongs.jsx';
 
-import '../../public/stylesheets/rtcaudio.scss';
+import '../../../public/stylesheets/rtcaudio.scss';
 
 registerClickDrag(aframe);
 
@@ -23,12 +23,12 @@ registerClickDrag(aframe);
 class djBooth extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       volume:'1',
     };
 
     // #TODO: Chance to arrow binding
-    this.createConnetion = this.createConnetion.bind(this);
+    this.createConnection = this.createConnection.bind(this);
     this.startStream = this.startStream.bind(this);
     this.getSong = this.getSong.bind(this);
     this.crossFader = this.crossFader.bind(this);
@@ -72,8 +72,8 @@ class djBooth extends React.Component {
     this.connection.open('fullstack-academy');
 
     this.goLive();
-    this.getSong(0,'or3U2rXxvQw',1)
-    this.getSong(1,'UqyT8IEBkvY',0)
+    // this.getSong(0,'or3U2rXxvQw',1);
+    // this.getSong(1,'UqyT8IEBkvY',0);
   }
 
   componentWillUnmount() {
