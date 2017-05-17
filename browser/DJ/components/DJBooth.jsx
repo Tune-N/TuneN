@@ -183,11 +183,7 @@ class djBooth extends React.Component {
           {/*<input id="volume" className="col-xs-2"  onChange={this.crossFader} type="range" min="0" max="1" step="0.01" value={this.state.volume} />
           <button onClick={this.crossFaderUp}>song 1</button>
           <button onClick={this.crossFaderDown}>song 2</button>*/}
-          <Scene
-            events={{
-              axismove: this.onTrackPadMove,
-            }}
-          >
+          <Scene>
             <Camera />
             <DaydreamController />
             <Background />
@@ -197,7 +193,7 @@ class djBooth extends React.Component {
               song={this.props.djBooth.deck1.song} 
               volume={deck1.volume} 
               playSong={this.getSong}
-              crossfader={this.crossFader}
+              crossFader={this.crossFader}
             />
             <DeckContainer 
               id="deck2" 
@@ -205,6 +201,7 @@ class djBooth extends React.Component {
               song={this.props.djBooth.deck2.song} 
               volume={deck2.volume} 
               playSong={this.getSong}
+              crossFader={this.crossFader}
             />
             <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} />
             <FaderUp id="faderUp" position="-1.3 2 -2" faderUp={this.crossFaderUp} />

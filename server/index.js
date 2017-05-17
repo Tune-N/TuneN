@@ -144,7 +144,7 @@ function updateAllRoomsListenerCount(){
         liveDJs = liveDJs.map((dj) =>{
           if (dj.username === djToUpdate.username){
             djToUpdate.listeners = listeners.length - 1;
-            if(dj.username === 'DJ Khaleb') dj.listeners += 22;
+            if(dj.username === 'DJ Khaled') dj.listeners += 22;
             return djToUpdate
           }
           return dj;
@@ -164,7 +164,7 @@ function updateRoomListenerCount(roomName){
     liveDjs = liveDJs.map(dj => {
       if (dj.username === roomName) {
         dj.listeners = listeners.length -1;
-        if(dj.username === 'DJ Khaleb') dj.listeners += 22;
+        if(dj.username === 'DJ Khaled') dj.listeners += 22;
         return dj;
       }
       return dj;
