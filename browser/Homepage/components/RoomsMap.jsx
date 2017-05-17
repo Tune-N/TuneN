@@ -7,8 +7,12 @@ import mapStyles from '../../../public/stylesheets/mapStyles.json';
 // #TODO: remove duplicate rooms_map ids
 
 const RoomsMap = withGoogleMap((props) => {
-  console.log('thisDjs',props.djs)
+  console.log('thisDjs',props)
   return (
+    <div>
+      <span style={{color: props.muiTheme.palette.textColor, fontSize:30}}>
+          Live DJs
+        </span>
     <GoogleMap
       id="rooms_map"
       defaultZoom={8}
@@ -22,7 +26,7 @@ console.log('djHere',dj)
         return (<Marker position={{lat: Number(dj.location.split(' ')[0]), lng: Number(dj.location.split(' ')[1])}}
                                                            key={dj.location}/>)})
 }
-    </GoogleMap>
+    </GoogleMap></div>
   )
 });
 
