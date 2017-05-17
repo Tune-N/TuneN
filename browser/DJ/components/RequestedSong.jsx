@@ -25,7 +25,7 @@ class RequestedSong extends React.Component {
 
   render(){
     const { id, position, name, selectSong, selectedSong, image } = this.props;
-    let color = this.state.focus ? "blue" : "white";
+    let color = this.state.focus ? "#999595" : "white";
     if (selectedSong && selectedSong.id === id) color = "yellow";
 
     console.log('should be image URL', image);
