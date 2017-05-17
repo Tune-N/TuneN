@@ -41,21 +41,4 @@ export const updateDJLocation = (djId, location) => {
 };
 
 
-// Dispatchers
-export const getLiveDJs = () => (dispatch) => {
-  return axios.get('/api/users/live')
-    .then((response) => {
-      dispatch(setDJs(response.data));
-    });
-};
-
-// Listeners
-firebase.database().ref(`liveDJs`).on('value', (snapshot) =>{
-  const djs = snapshot.val();
-  const djsArray = [];
-  for (const dj in djs) {
-    djsArray.push(djs[dj]);
-  }
-  store.dispatch(setDJs(djsArray));
-});
 

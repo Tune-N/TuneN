@@ -7,6 +7,8 @@ import 'aframe-mouse-cursor-component';
 import 'aframe-daydream-controller-component';
 import registerClickDrag from 'aframe-click-drag-component';
 
+import socket from '../../socket';
+
 import DeckContainer from '../containers/DeckContainer';
 
 import Camera from './Camera.jsx';
@@ -18,7 +20,7 @@ import '../../../public/stylesheets/rtcaudio.scss';
 
 registerClickDrag(aframe);
 
-/* globals window, navigator, AudioContext, RTCMultiConnection, XMLHttpRequest */
+/* globals window, navigator, AudioContext, RTCMultiConnection, XMLHttpRequest, io */
 
 class djBooth extends React.Component {
   constructor(props) {
@@ -53,16 +55,22 @@ class djBooth extends React.Component {
   }
 
   goLive() {
+    console.log('goLive()');
     const { goLive, username } = this.props;
     const geoLocation = canUseDOM && navigator.geolocation;
+
     geoLocation.getCurrentPosition((position) => {
+      console.log('geoLocation');
       const { latitude, longitude } = position.coords;
-      goLive(username, latitude, longitude);
+      console.log('Emitting location', socket.id);
+      socket.emit('dj location', { latitude, longitude });
     });
+    socket.emit('goLive', { username });
   }
 
 
   componentDidMount() {
+
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
     this.connection = this.createConnection();
@@ -74,8 +82,8 @@ class djBooth extends React.Component {
     this.connection.open(`full-stack-academy-${this.props.username}`);
     this.gainNode = []
     this.goLive();
-    this.getSong(0,'or3U2rXxvQw');
-    this.getSong(1,'UqyT8IEBkvY');
+    // this.getSong(0,'or3U2rXxvQw',1);
+    // this.getSong(1,'UqyT8IEBkvY',0);
   }
 
   componentWillUnmount() {
@@ -94,7 +102,7 @@ class djBooth extends React.Component {
     //
     request.open('GET', `/music/youtube/mp3/${videoId}`, true);
     request.responseType = 'arraybuffer';
-    
+
 
     request.onload = () => {
       this.audioContext.decodeAudioData(request.response,(buffer)=>{
@@ -136,7 +144,7 @@ class djBooth extends React.Component {
 
   crossFaderUp(e){
     e.preventDefault()
-    let addLogic = this.state.volume += 0.05 
+    let addLogic = this.state.volume += 0.05
     let volume1 = (addLogic > 1) ? 1 : addLogic
     let volume2 = 1 - volume1
 
@@ -148,7 +156,7 @@ class djBooth extends React.Component {
 
   crossFaderDown(e){
     e.preventDefault()
-    let addLogic = this.state.volume -= 0.05 
+    let addLogic = this.state.volume -= 0.05
     let volume1 = (addLogic < 0) ? 0 : addLogic
     let volume2 = 1 - volume1
 
