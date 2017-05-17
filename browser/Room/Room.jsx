@@ -25,6 +25,7 @@ class Room extends React.Component {
       logger:false
     };
 
+
     //Audio Element
     let streamsContainer = document.getElementById('streams-container');
     connection.onstream = function(e) {
