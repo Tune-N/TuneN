@@ -21,6 +21,9 @@ module.exports = db.define('user', {
   password: {
     type: Sequelize.STRING,
   },
+  image: {
+    type: Sequelize.STRING,
+  },
   salt: {
     type: Sequelize.STRING,
   },

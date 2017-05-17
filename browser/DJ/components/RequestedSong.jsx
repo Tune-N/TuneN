@@ -24,10 +24,11 @@ class RequestedSong extends React.Component {
   }
 
   render(){
-    const { id, position, name, album, artist, selectSong, selectedSong } = this.props;
+    const { id, position, name, selectSong, selectedSong, image } = this.props;
     let color = this.state.focus ? "blue" : "white";
     if (selectedSong && selectedSong.id === id) color = "yellow";
 
+    console.log('should be image URL', image);
     return (
       <Entity
         click-drag
@@ -39,7 +40,7 @@ class RequestedSong extends React.Component {
         color={color}
         position={position}
         events={{
-          'click': () => selectSong({id, name, album, artist}),
+          'click': () => selectSong({id, name}),
           'mouseenter': this.setFocus,
           'raycaster-intersected': this.setFocus,
           'mouseleave':this.removeFocus,
@@ -51,7 +52,7 @@ class RequestedSong extends React.Component {
           value={name}
           color="black"
           position="-0.42 0.04 0"
-          width="0.80"
+          width="1.2"
         />
       </Entity>
     )

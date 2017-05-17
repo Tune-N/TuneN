@@ -21,20 +21,18 @@ const RequestedSongs = (props) => {
         value="Top Requested Songs"
         color="black"
         height="0.90"
-        width="0.75"
+        width="0.90"
         position="0 0.90 0.02"
         align="center"
       />
       {
         songs.map((song, index) => (
           <RequestedSongContainer
-            id={song.id}
+            id={song.id.videoId}
             position={`0 ${0.80-0.17 * index} 0.02`}
-            key={song.id}
-            name={song.name}
-            album={song.album}
-            artist={song.artist}
-            image={song.image}
+            key={song.id.videoId}
+            name={song.snippet.title}
+            image={song.snippet.thumbnails.default.url}
           />
         ))
       }
