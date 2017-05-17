@@ -50,7 +50,7 @@ const server = app.listen(app.get('port'), function () {
 const io = socketio.listen(server);
 
 let liveDJs = [
-  { id:0, username: 'DJ Khaleb', latitude: 40.7156176, longitude: -74.046018,  listeners: 22 },
+  { id:0, username: 'DJ Khaled', latitude: 40.7156176, longitude: -74.046018,  listeners: 22 },
 ];
 
 
