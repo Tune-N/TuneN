@@ -70,10 +70,10 @@ class djBooth extends React.Component {
     this.broadcastingStream = this.audioContext.createMediaStreamDestination();
     this.connection.attachStreams.push(this.broadcastingStream.stream);
     this.connection.open('fullstack-academy');
-
+    this.gainNode = []
     this.goLive();
-    // this.getSong(0,'or3U2rXxvQw',1);
-    // this.getSong(1,'UqyT8IEBkvY',0);
+    this.getSong(0,'or3U2rXxvQw',1);
+    this.getSong(1,'UqyT8IEBkvY',0);
   }
 
   componentWillUnmount() {
