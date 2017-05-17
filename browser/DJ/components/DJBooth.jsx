@@ -32,6 +32,9 @@ class djBooth extends React.Component {
     this.startStream = this.startStream.bind(this);
     this.getSong = this.getSong.bind(this);
     this.crossFader = this.crossFader.bind(this);
+    this.crossFaderUp = this.crossFaderUp.bind(this);
+    this.crossFaderDown = this.crossFaderDown.bind(this);
+
   }
 
   createConnection() {
@@ -82,8 +85,6 @@ class djBooth extends React.Component {
   startStream(e) {
     e.preventDefault();
     // this.connection.open('fullstack-academy');
-    
-
   }
 
   getSong(gainIndex, videoId, initialVolume = 1){
@@ -133,13 +134,39 @@ class djBooth extends React.Component {
     this.setState({volume: volume1});
   }
 
+  crossFaderUp(e){
+    e.preventDefault()
+    let addLogic = this.state.volume += 0.05 
+    let volume1 = (addLogic > 1) ? 1 : addLogic
+    let volume2 = 1 - volume1
+
+    this.gainNode[0].gain.value = volume1
+    this.gainNode[1].gain.value = volume2
+
+    this.setState({volume: volume1});
+  }
+
+  crossFaderDown(e){
+    e.preventDefault()
+    let addLogic = this.state.volume -= 0.05 
+    let volume1 = (addLogic < 0) ? 0 : addLogic
+    let volume2 = 1 - volume1
+
+    this.gainNode[0].gain.value = volume1
+    this.gainNode[1].gain.value = volume2
+
+    this.setState({volume: volume1});
+  }
+
   render() {
     const { deck1, deck2, requestedSongs } = this.props.djBooth;
 
     return (
       <div>
         <div className="DJBooth">
-          {/*<input id="volume" className="col-xs-2"  onChange={this.crossFader} type="range" min="0" max="1" step="0.01" value={this.state.volume} />*/}
+          {/*<input id="volume" className="col-xs-2"  onChange={this.crossFader} type="range" min="0" max="1" step="0.01" value={this.state.volume} />
+          <button onClick={this.crossFaderUp}>song 1</button>
+          <button onClick={this.crossFaderDown}>song 2</button>*/}
           <Scene>
             <Camera />
             <DaydreamController />
