@@ -27,7 +27,7 @@ export const removeDJ = dj => ({
   dj,
 });
 
-export const setCurentDJ = dj => ({
+export const setCurrentDJ = dj => ({
   type: SET_CURRENT_DJ,
   dj,
 });

@@ -2,7 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {FlatButton, TextField, Divider} from 'material-ui';
 
-import '../../public/stylesheets/youtube.scss';
+import socket from '../../socket';
+
+import '../../../public/stylesheets/youtube.scss';
 
 class YoutubeSearch extends React.Component {
 
@@ -45,7 +47,9 @@ class YoutubeSearch extends React.Component {
     song.id = item.id;
     song.kind = item.kind;
     song.snippet = item.snippet;
-    console.log('requested song', song);
+    console.log(`${this.props.room} Requesting song: ${song}`);
+    socket.emit('song request', this.props.room, song);
+
   }
 
 
@@ -88,6 +92,7 @@ class YoutubeSearch extends React.Component {
 
 const mapStateToProps = function(state){
   return {
+    room: state.liveDJs.selected,
   }
 }
 

@@ -85,7 +85,7 @@ class djBooth extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.endSession(this.props.username);
+    socket.emit('stop dj');
   }
 
   startStream(e) {
