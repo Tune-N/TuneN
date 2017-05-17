@@ -7,16 +7,12 @@ import Navbar from '../components/Navbar.jsx';
 import RoomsList from './components/RoomsList/RoomsList.jsx';
 import RoomsMap from './components/RoomsMap.jsx';
 
-import { getLiveDJs } from '../reducers/liveDJs/action-creators';
 
 class Homepage extends React.Component {
 
-  componentDidMount() {
-    this.props.getLiveDJs();
-  }
-
   render() {
     const { liveDJs } = this.props;
+    console.log('Homepage liveDJs', liveDJs);
     return (
       <div>
         <Navbar />
@@ -41,7 +37,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getLiveDJs,
+
 };
 
 const StyledHome = muiThemeable()(Homepage);

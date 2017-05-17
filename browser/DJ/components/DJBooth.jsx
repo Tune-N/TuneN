@@ -7,6 +7,8 @@ import 'aframe-mouse-cursor-component';
 import 'aframe-daydream-controller-component';
 import registerClickDrag from 'aframe-click-drag-component';
 
+import socket from '../../socket';
+
 import DeckContainer from '../containers/DeckContainer';
 
 import Camera from './Camera.jsx';
@@ -18,7 +20,7 @@ import '../../../public/stylesheets/rtcaudio.scss';
 
 registerClickDrag(aframe);
 
-/* globals window, navigator, AudioContext, RTCMultiConnection, XMLHttpRequest */
+/* globals window, navigator, AudioContext, RTCMultiConnection, XMLHttpRequest, io */
 
 class djBooth extends React.Component {
   constructor(props) {
@@ -50,16 +52,22 @@ class djBooth extends React.Component {
   }
 
   goLive() {
+    console.log('goLive()');
     const { goLive, username } = this.props;
     const geoLocation = canUseDOM && navigator.geolocation;
+
     geoLocation.getCurrentPosition((position) => {
+      console.log('geoLocation');
       const { latitude, longitude } = position.coords;
-      goLive(username, latitude, longitude);
+      console.log('Emitting location', socket.id);
+      socket.emit('dj location', { latitude, longitude });
     });
+    socket.emit('goLive', { username });
   }
 
 
   componentDidMount() {
+
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
     this.connection = this.createConnection();
@@ -94,7 +102,6 @@ class djBooth extends React.Component {
     //
     request.open('GET', `/music/youtube/mp3/${videoId}`, true);
     request.responseType = 'arraybuffer';
-    console.log('this inside getSong', this)
 
     request.onload = () => {
       this.audioContext.decodeAudioData(request.response,(buffer)=>{
