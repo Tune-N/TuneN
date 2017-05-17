@@ -51,7 +51,7 @@ class YoutubeSearch extends React.Component {
 
   render() {
     return (
-        <div className="youtube-section col-xs-3 no-pad" style={{textAlign:'center',color:'#fff',backgroundColor:'#303030'}}>
+        <div className="youtube-section col-xs-6 no-pad" style={{textAlign:'center',color:'#fff',backgroundColor:'#303030' }}>
            <h2 className="header youtube-header">
                 YouTube Music
           </h2>
