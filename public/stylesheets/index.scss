@@ -4,18 +4,22 @@
 
 #main {
 	background-color: #303030;
-	margin:0 auto;
 }
+
 
 #homepage{
 	display:flex;
 	flex-direction: row;
+	padding-left: 1cm;
+}
+
+#mapTitle{
+	padding-left: 1cm;
 }
 
 #rooms_map {
 	flex-grow: 4;
 	height: 600px;
-	padding-left: 1cm;
 }
 
 #rooms_list{
@@ -26,4 +30,8 @@
 	position: absolute;
 	height: 100%;
 	width: 100%;
+}
+
+body {
+	background-color: #303030
 }

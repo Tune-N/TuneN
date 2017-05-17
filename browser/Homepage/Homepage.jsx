@@ -21,12 +21,14 @@ class Homepage extends React.Component {
     return (
       <div>
         <Navbar />
+        <span id='mapTitle' style={{color: '#FFFFFF', fontSize:30}}>Live DJs</span>
         <div id="homepage">
+
           <RoomsMap
             djs={djs}
             containerElement={<div id="rooms_map"/>}
             mapElement={<div style={{ height: `100%` }}
-            muiTheme={this.props.muiTheme}/>}
+            />}
           />
           <RoomsList djs={djs}/>
         </div>

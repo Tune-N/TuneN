@@ -10,9 +10,6 @@ const RoomsMap = withGoogleMap((props) => {
   console.log('thisDjs',props)
   return (
     <div>
-      <span style={{color: props.muiTheme.palette.textColor, fontSize:30}}>
-          Live DJs
-        </span>
     <GoogleMap
       id="rooms_map"
       defaultZoom={8}
