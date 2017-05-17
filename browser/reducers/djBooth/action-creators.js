@@ -44,6 +44,8 @@ export const goLive = (username, latitude = '', longitude = '') => () => {
 };
 
 export const endSession = username => () => {
+
+
   return firebase.database().ref(`liveDJs/${username}`).remove()
     .catch(err => console.log(err));
 };

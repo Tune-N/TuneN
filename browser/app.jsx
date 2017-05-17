@@ -3,7 +3,6 @@ import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -41,7 +40,7 @@ const muiTheme = getMuiTheme({
     pickerHeaderColor: fade(fullWhite, 0.12),
     clockCircleColor: fade(fullWhite, 0.12),
   },
-})
+});
 
 
 class App extends React.Component {
