@@ -61,34 +61,117 @@ io.on('connection', (socket) => {
 
   socket.on('goLive', (dj) => {
     dj = Object.assign({}, dj, {id: socket.id});
-    console.log('Someone went live', dj);
-    console.log('socket id', socket.id);
+    console.log(`${dj.username} went Live. (SocketId: ${socket.id})`);
+    socket.join(dj.username);
+
     liveDJs.push(dj);
+
+    console.log(`Emitting LiveDJs: ${liveDJs.length}`);
     socket.broadcast.emit('liveDJs', liveDJs);
-    console.log('LiveDJs: ', liveDJs.length);
+
+
   });
 
   socket.on('dj location', (location) => {
-    console.log('dj location', dj);
+    console.log('DJ Location Received', dj);
     liveDjs = liveDJs.map((dj)=> {
       if (dj.id === socket.id) return Object.assign({}, dj, location);
       return dj;
-    })
+    });
     socket.broadcast.emit('liveDJs', liveDJs);
-    console.log('LiveDJs: ', liveDJs.length);
+  });
+
+  socket.on('joined room', (roomName) => {
+    console.log(`Socket: ${socket.id} joined ${roomName}`);
+    socket.join(roomName);
+    updateRoomListenerCount(roomName);
+  });
+
+  socket.on('leave room', (roomName)=> {
+    console.log(`Socket: ${socket.id} left ${roomName}`);
+    socket.leave(roomName);
+    updateRoomListenerCount(roomName);
+
+  });
+
+  socket.on('stop dj', () => {
+    console.log(`Stop DJ: ${socket.id}`);
+    removeDJ(socket);
+  });
+
+  socket.on('song request', (room, song) => {
+    console.log(`${socket.id} requested song: ${song}`);
+    liveDJs.map(dj =>{
+      if( dj.username === room ){
+        if (!dj.requestedSongs) dj.requestedSongs = [];
+        dj.requestedSongs.push(song);
+        return dj;
+      }
+      return dj;
+    });
+    console.log(`Emitting: 'song requested' to room: ${room}`);
+
+    io.to(room).emit('song requested', song);
   });
 
   socket.on('disconnect', () => {
-    console.log('DJ Disconnected:', socket.id);
-    liveDJs = liveDJs.filter((dj)=>{
-      return dj.id !== socket.id;
-    })
-    console.log('LiveDJs: ', liveDJs.length);
-    socket.broadcast.emit('liveDJs', liveDJs);
-  })
+    console.log(`Socket ${socket.id} disconnected.`);
+
+    // Remove DJ if socket is a DJ
+    removeDJ(socket);
+
+    // Update Listeners in DJ if socket is a listener
+    updateAllRoomsListenerCount();
+
+  });
 
 });
 
+function removeDJ(socket){
+  console.log('Removing DJ with Socket Id: ', socket.id);
+  liveDJs = liveDJs.filter((dj)=>{
+    return dj.id !== socket.id;
+  });
+  io.emit('liveDJs', liveDJs);
+}
+
+function updateAllRoomsListenerCount(){
+  console.log('updateAllRoomListenerCount')
+  liveDJs.forEach((djToUpdate) => {
+    if (io.in(djToUpdate.username).clients) {
+      io.in(djToUpdate.username).clients((err, listeners) => {
+        if (err) console.log(err);
+        liveDJs = liveDJs.map((dj) =>{
+          if (dj.username === djToUpdate.username){
+            djToUpdate.listeners = listeners.length - 1;
+            if(dj.username === 'DJ Khaleb') dj.listeners += 22;
+            return djToUpdate
+          }
+          return dj;
+        });
+        io.emit('liveDJs', liveDJs);
+      });
+    }
+  });
+
+}
+
+
+function updateRoomListenerCount(roomName){
+  io.in(roomName).clients((err, listeners) => {
+    if (err) console.log(err);
+    console.log(`${roomName} listeners: ${listeners.length}`);
+    liveDjs = liveDJs.map(dj => {
+      if (dj.username === roomName) {
+        dj.listeners = listeners.length -1;
+        if(dj.username === 'DJ Khaleb') dj.listeners += 22;
+        return dj;
+      }
+      return dj;
+    });
+    io.emit('liveDJs', liveDJs);
+  });
+}
+
 
 module.export = server;
-

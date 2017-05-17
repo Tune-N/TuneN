@@ -28,7 +28,6 @@ class RequestedSong extends React.Component {
     let color = this.state.focus ? "blue" : "white";
     if (selectedSong && selectedSong.id === id) color = "yellow";
 
-    console.log('should be image URL', image);
     return (
       <Entity
         click-drag

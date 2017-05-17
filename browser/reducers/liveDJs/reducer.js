@@ -18,7 +18,7 @@ export default function reducer(state = initialState, action) {
       break;
 
     case SET_CURRENT_DJ:
-      newState.list = action.room;
+      newState.selected = action.dj;
       break;
 
 
