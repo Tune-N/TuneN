@@ -10,24 +10,29 @@ class Deck extends React.Component {
     this.onClick = this.onClick.bind(this);
   }
 
-  onClick(){
-    const { id, selectedSong, setDeckSong, removeRequestedSong } = this.props;
+  onClick() {
+    const { id, selectedSong, setDeckSong, removeRequestedSong, playSong } = this.props;
+    console.log('onClick selectedSong', selectedSong)
     setDeckSong(id, selectedSong);
-    removeRequestedSong(id, selectedSong.id);
+    removeRequestedSong(selectedSong.id);
+    const gainIndex = id === 'deck1' ? 0 : 1;
+    console.log('gainIndex', gainIndex)
+    playSong(gainIndex, selectedSong.id);
   }
 
   render() {
+    console.log('Deck props', this.props);
     const { id, position, song } = this.props;
 
     return (
       <Entity
         className="selectable"
         id={id}
+        src={'soundWaves.png'}
         primitive="a-plane"
         material={{
-          color: 'white',
           opacity: 0.70,
-          wireframe: true
+          wireframe: false,
         }}
         position={position}
         width="1.50"

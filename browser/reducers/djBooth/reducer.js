@@ -7,17 +7,10 @@ import {
 } from './action-creators';
 
 const song1 ={
-  etag: "something",
   id: {
-    kind: "youtube#video",
-    videoId: "YQHsXMglC9A",
+    videoId: "zix4aMOKwrM",
   },
   snippet: {
-    channelId: "UComP_epzeKzvBX156r6pm1Q",
-    channelTitle: "AdeleVEVO",
-    description: "'Hello' is taken from the new album, 25, out November 20. http://adele.com Available now from iTunes http://smarturl.it/itunes25 Available now from Amazon ...",
-    liveBroadcastContent: "none",
-    publishedAt: "2015-10-23T06:54:18.000Z",
     thumbnails: {
       default: {
         height: 90,
@@ -25,21 +18,14 @@ const song1 ={
         width: 120,
       },
     },
-    title: "Adele - Hello",
+    title: "50 Cent - In Da Club",
   },
 }
 const song2 = {
-  etag: "something",
   id: {
-    kind: "youtube#video",
-    videoId: "xvZqHgFz51I",
+    videoId: "FHkMT1Vxi5I",
   },
   snippet: {
-    channelId: "UCFNosi99Sp0_eLilBiXmmXA",
-    channelTitle: "FutureVEVO",
-    description: "FUTURE available at: iTunes: http://smarturl.it/FUTURE.iTunes Apple Music: http://smarturl.it/FUTURE.AM Spotify: http://smarturl.it/FUTURE.Sptfy Google Play: ...",
-    liveBroadcastContent: "none",
-    publishedAt: "2017-05-05T14:00:06.000Z",
     thumbnails: {
       default: {
         height: 90,
@@ -48,6 +34,21 @@ const song2 = {
       },
     },
     title: "Future - Mask Off",
+  },
+}
+const song3 = {
+  id: {
+    videoId: "y6y_4_b6RS8",
+  },
+  snippet: {
+    thumbnails: {
+      default: {
+        height: 90,
+        url: "https://i.ytimg.com/vi/xvZqHgFz51I/default.jpg",
+        width: 120,
+      },
+    },
+    title: "R Kelly - Ignition",
   },
 }
 
@@ -64,7 +65,7 @@ const initialState = {
     volume: 0,
     progress: 0,
   },
-  requestedSongs: [song1, song2],
+  requestedSongs: [song1, song2, song3],
 
   selectedSong: null,
 
@@ -96,6 +97,7 @@ export default function reducer(state = initialState, action) {
       break;
 
     case REMOVE_REQUESTED_SONG:
+      console.log('Reducer REMOVE_REQUESTED_SONG', action)
       newState.requestedSongs = state.requestedSongs.filter(
         song => song.id.videoId !== action.songId);
       break;

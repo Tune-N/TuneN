@@ -15,6 +15,8 @@ import Camera from './Camera.jsx';
 import DaydreamController from './DaydreamController.jsx';
 import Background from './Background.jsx';
 import RequestedSongs from './RequestedSongs.jsx';
+import FaderUp from './FaderUp.jsx';
+import FaderDown from './FaderDown.jsx';
 
 import '../../../public/stylesheets/rtcaudio.scss';
 
@@ -26,7 +28,7 @@ class djBooth extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      volume:'1',
+      volume:1,
     };
 
     // #TODO: Chance to arrow binding
@@ -34,13 +36,16 @@ class djBooth extends React.Component {
     this.startStream = this.startStream.bind(this);
     this.getSong = this.getSong.bind(this);
     this.crossFader = this.crossFader.bind(this);
+    this.crossFaderUp = this.crossFaderUp.bind(this);
+    this.crossFaderDown = this.crossFaderDown.bind(this);
+
   }
 
   createConnection() {
     this.djName = window.location.pathname.split('/')[1]
     const connection = new RTCMultiConnection();
     // connection.channel = `full-stack-academy-${this.djName}`;
-    connection.channel = 'full-stack-academy';
+    connection.channel = `full-stack-academy-${this.props.username}`;
     connection.dontCaptureUserMedia = true;
     connection.session = {
       video: false,
@@ -65,21 +70,19 @@ class djBooth extends React.Component {
 
 
   componentDidMount() {
-
+    console.log('DJBoothdidMount')
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
     this.connection = this.createConnection();
     this.connection.connect();
-
     // Create AudioContext and MediaStream
     this.audioContext = new AudioContext();
     this.broadcastingStream = this.audioContext.createMediaStreamDestination();
     this.connection.attachStreams.push(this.broadcastingStream.stream);
-    this.connection.open('fullstack-academy');
-
+    this.connection.open(`full-stack-academy-${this.props.username}`);
+    console.log('DJBooth connection.open:', `full-stack-academy-${this.props.username}`)
+    this.gainNode = []
     this.goLive();
-    // this.getSong(0,'or3U2rXxvQw',1);
-    // this.getSong(1,'UqyT8IEBkvY',0);
   }
 
   componentWillUnmount() {
@@ -89,17 +92,17 @@ class djBooth extends React.Component {
   startStream(e) {
     e.preventDefault();
     // this.connection.open('fullstack-academy');
-    console.log(this.connection);
-
   }
 
-  getSong(gainIndex, videoId, initialVolume=1){
+  getSong(gainIndex, videoId){
+    console.log(`getSong on gainIndex: ${gainIndex}, songId: ${videoId}`)
     let request = new XMLHttpRequest();
 
     // request.open('GET', `/mp3/${videoId}`, true);
     //
     request.open('GET', `/music/youtube/mp3/${videoId}`, true);
     request.responseType = 'arraybuffer';
+
 
     request.onload = () => {
       this.audioContext.decodeAudioData(request.response,(buffer)=>{
@@ -110,13 +113,16 @@ class djBooth extends React.Component {
         // soundSource.connect(this.broadcastingStream);
 
         // Play SoundSource on DJ's Computer
+        if(this.gainNode[gainIndex]){
+          this.gainNode[gainIndex].disconnect();
+        }
         this.gainNode[gainIndex] = this.audioContext.createGain();
 
         soundSource.connect(this.gainNode[gainIndex]);
 
         this.gainNode[gainIndex].connect(this.audioContext.destination); //Needed for Dj audio
         this.gainNode[gainIndex].connect(this.broadcastingStream);
-        this.gainNode[gainIndex].gain.value = initialVolume
+        this.gainNode[gainIndex].gain.value = (gainIndex==0)? this.state.volume : 1 - this.state.volume
 
         soundSource.start(0)
 
@@ -136,21 +142,58 @@ class djBooth extends React.Component {
     this.setState({volume: volume1});
   }
 
+  crossFaderUp(e){
+    let addLogic = this.state.volume += 0.05
+    let volume1 = (addLogic > 1) ? 1 : addLogic
+    let volume2 = 1 - volume1
+
+    this.gainNode[0].gain.value = volume1
+    this.gainNode[1].gain.value = volume2
+
+    this.setState({volume: volume1});
+  }
+
+  crossFaderDown(e){
+    let addLogic = this.state.volume -= 0.05
+    let volume1 = (addLogic < 0) ? 0 : addLogic
+    let volume2 = 1 - volume1
+
+    this.gainNode[0].gain.value = volume1
+    this.gainNode[1].gain.value = volume2
+
+    this.setState({volume: volume1});
+  }
+
   render() {
     const { deck1, deck2, requestedSongs } = this.props.djBooth;
 
     return (
       <div>
         <div className="DJBooth">
-          <input id="volume" className="col-xs-2"  onChange={this.crossFader} type="range" min="0" max="1" step="0.01" value={this.state.volume} />
+          {/*<input id="volume" className="col-xs-2"  onChange={this.crossFader} type="range" min="0" max="1" step="0.01" value={this.state.volume} />
+          <button onClick={this.crossFaderUp}>song 1</button>
+          <button onClick={this.crossFaderDown}>song 2</button>*/}
           <Scene>
             <Camera />
             <DaydreamController />
             <Background />
             <DeckContainer
-              id="deck1" position="0 2 -2" song={this.props.djBooth.deck1.song} volume={deck1.volume} />
-            <DeckContainer id="deck2" position="0 1 -2" song={this.props.djBooth.deck2.song} volume={deck2.volume} />
+              id="deck1" 
+              position="0 2 -2" 
+              song={this.props.djBooth.deck1.song} 
+              volume={deck1.volume} 
+              playSong={this.getSong}
+            />
+            <DeckContainer 
+              id="deck2" 
+              position="0 1 -2" 
+              song={this.props.djBooth.deck2.song} 
+              volume={deck2.volume} 
+              playSong={this.getSong}
+            />
             <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} />
+            <FaderUp id="faderUp" position="-1.3 2 -2" faderUp={this.crossFaderUp} />
+            <FaderDown id="faderDown" position="-1.3 1 -2" faderUp={this.crossFaderDown}/>
 
             <Entity
               primitive="a-image"

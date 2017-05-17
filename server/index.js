@@ -73,7 +73,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('dj location', (location) => {
-    console.log('DJ Location Received', dj);
+    console.log('dj location', location);
     liveDjs = liveDJs.map((dj)=> {
       if (dj.id === socket.id) return Object.assign({}, dj, location);
       return dj;

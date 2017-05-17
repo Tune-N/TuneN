@@ -34,9 +34,9 @@ export const addRequestedSong = (song) => ({
   song,
 });
 
-export const removeRequestedSong = (song) => ({
+export const removeRequestedSong = (songId) => ({
   type: REMOVE_REQUESTED_SONG,
-  song,
+  songId,
 });
 
 /* ------------       DISPATCHERS     ------------------ */

@@ -11,15 +11,18 @@ const RequestedSongs = (props) => {
     <Entity
       id="requestedSongs"
       primitive="a-plane"
-      color="white"
+      color="#CC181E"
       width="1"
       height="2"
+      material={{
+        opacity: 0.90,
+      }}
       position={position}
       rotation={rotation}>
       <Entity
         primitive="a-text"
         value="Top Requested Songs"
-        color="black"
+        color="white"
         height="0.90"
         width="0.90"
         position="0 0.90 0.02"
