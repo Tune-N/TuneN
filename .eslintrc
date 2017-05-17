@@ -9,6 +9,7 @@
     "quotes": "off",
     "no-trailing-spaces": "off",
     "react/sort-comp":"off",
-    "padded-blocks": "off"
+    "padded-blocks": "off",
+    "no-use-before-define": "off"
   }
 }

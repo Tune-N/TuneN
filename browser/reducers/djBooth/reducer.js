@@ -1,5 +1,10 @@
 
-import { SET_SELECTED_SONG, SET_DECK_SONG, REMOVE_REQUESTED_SONG } from './action-creators';
+import {
+  SET_SELECTED_SONG,
+  SET_DECK_SONG,
+  ADD_REQUESTED_SONG,
+  REMOVE_REQUESTED_SONG,
+} from './action-creators';
 
 const song1 ={
   etag: "something",
@@ -84,11 +89,16 @@ export default function reducer(state = initialState, action) {
       newState[action.deck] = newDeck;
       break;
 
+    case ADD_REQUESTED_SONG:
+      const newRequestedSongsList = JSON.parse(JSON.stringify(state.requestedSongs));
+      newRequestedSongsList.push(action.song);
+      newState.requestedSongs = newRequestedSongsList;
+      break;
+
     case REMOVE_REQUESTED_SONG:
       newState.requestedSongs = state.requestedSongs.filter(
         song => song.id.videoId !== action.songId);
       break;
-
 
     default:
       return state;

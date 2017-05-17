@@ -60,9 +60,7 @@ class djBooth extends React.Component {
     const geoLocation = canUseDOM && navigator.geolocation;
 
     geoLocation.getCurrentPosition((position) => {
-      console.log('geoLocation');
       const { latitude, longitude } = position.coords;
-      console.log('Emitting location', socket.id);
       socket.emit('dj location', { latitude, longitude });
     });
     socket.emit('goLive', { username });
@@ -87,7 +85,7 @@ class djBooth extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.endSession(this.props.username);
+    socket.emit('stop dj');
   }
 
   startStream(e) {

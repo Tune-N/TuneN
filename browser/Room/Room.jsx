@@ -1,25 +1,27 @@
 import React from 'react';
-import Youtube from '../components/Youtube'
+import { connect } from 'react-redux';
+
+import Youtube from './components/Youtube';
+import RequestedSongsList from './components/RequestedSongsList';
+
+import socket from '../socket';
 
 import '../../public/stylesheets/rtcaudio.scss';
 
 class Room extends React.Component {
   constructor(props) {
-    super(props) 
-    this.state = {
-      djUsername: window.location.pathname.split('/')[1]
-    }
+    super(props)
   }
 
   createConnetion(){
     const connection = new RTCMultiConnection();
-    connection.channel = `full-stack-academy-${this.state.djUsername}`;
+    connection.channel = `full-stack-academy-${this.dj}`;
     connection.dontCaptureUserMedia = true;
     connection.session = {
       audio: true,
       oneway: true,
       logger:false
-    }; 
+    };
 
     //Audio Element
     let streamsContainer = document.getElementById('streams-container');
@@ -31,25 +33,45 @@ class Room extends React.Component {
   }
 
   componentDidMount(){
-     
+    const { dj } = this.props;
+    socket.emit('joined room', dj);
 
-    this.connection = this.createConnetion()
+    this.connection = this.createConnetion();
 
     // connect to signaling gateway
     this.connection.connect();
-    this.connection.join(`full-stack-academy-${this.state.djUsername}`)
-     
+    this.connection.join(`full-stack-academy-${dj}`)
   }
 
-  render(){
+  componentWillUnmount() {
+    console.log('Emitting leave room');
+    const { dj } = this.props;
+    socket.emit('leave room', dj);
+  }
+
+  render() {
     return (
 	    <div>
 	      <Youtube />
 	      <div id="streams-container"></div>
+        <div style={{ width: '50%', float: 'right' }}>
+          <RequestedSongsList
+            requestedSongs={this.props.requestedSongs}
+          />
+        </div>
 	    </div>
-  	)	
+  	)
   }
-  
 };
 
-export default Room;
+const mapStateToProps = state => ({
+  dj: state.liveDJs.selected,
+  requestedSongs: state.djBooth.requestedSongs,
+});
+
+const mapDispatchToProps = {
+
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Room);
