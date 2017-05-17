@@ -141,6 +141,8 @@ class djBooth extends React.Component {
   }
 
   crossFader(yaxis){
+    console.log('crossfader val', yaxis);
+    if (yaxis < 0.55 && yaxis > 0.45) return
     let volume1 = yaxis;
     let volume2 = 1 - volume1;
 
