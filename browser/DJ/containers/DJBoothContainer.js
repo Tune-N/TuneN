@@ -5,13 +5,13 @@ import { goLive, endSession } from '../../reducers/djBooth/action-creators';
 import djBooth from '../components/DJBooth.jsx';
 
 const mapStateToProps = state => ({
-  user: state.auth,
+  username: state.auth,
   djBooth: state.djBooth,
 });
 
 const mapDispatchToProps = {
   goLive,
-  endSession
+  endSession,
 };
 
 const djBoothContainer = connect(mapStateToProps, mapDispatchToProps)(djBooth);
