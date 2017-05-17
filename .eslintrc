@@ -8,6 +8,7 @@
     "arrow-body-style": "off",
     "quotes": "off",
     "no-trailing-spaces": "off",
-    "react/sort-comp":"off"
+    "react/sort-comp":"off",
+    "padded-blocks": "off"
   }
 }

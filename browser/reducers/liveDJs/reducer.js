@@ -1,5 +1,5 @@
 
-import { SET_DJS, ADD_DJ, REMOVE_DJ, SET_CURRENT_DJ, SET_LOCATION} from './action-creators'
+import { SET_DJS, ADD_DJ, REMOVE_DJ, SET_CURRENT_DJ, SET_LOCATION } from './action-creators';
 
 
 const initialState = {
@@ -41,6 +41,4 @@ export default function reducer(state = initialState, action) {
   }
 
   return newState;
-
 }
-
