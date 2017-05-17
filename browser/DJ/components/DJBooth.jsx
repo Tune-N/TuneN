@@ -82,8 +82,8 @@ class djBooth extends React.Component {
     this.connection.open(`full-stack-academy-${this.props.username}`);
     this.gainNode = []
     this.goLive();
-    // this.getSong(0,'or3U2rXxvQw',1);
-    // this.getSong(1,'UqyT8IEBkvY',0);
+    this.getSong(0,'or3U2rXxvQw');
+    this.getSong(1,'UqyT8IEBkvY');
   }
 
   componentWillUnmount() {
@@ -95,7 +95,7 @@ class djBooth extends React.Component {
     // this.connection.open('fullstack-academy');
   }
 
-  getSong(gainIndex, videoId, initialVolume = 1){
+  getSong(gainIndex, videoId){
     let request = new XMLHttpRequest();
 
     // request.open('GET', `/mp3/${videoId}`, true);
