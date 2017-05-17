@@ -1,5 +1,5 @@
-import { connect } from 'react-redux'
-import { setDeckSong, removeRequestedSong } from '../../reducers/djBooth/reducer'
+import { connect } from 'react-redux';
+import { setDeckSong, removeRequestedSong } from '../../reducers/djBooth/action-creators';
 
 import Deck from '../components/Deck.jsx'
 

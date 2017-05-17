@@ -15,6 +15,8 @@ import Camera from './Camera.jsx';
 import DaydreamController from './DaydreamController.jsx';
 import Background from './Background.jsx';
 import RequestedSongs from './RequestedSongs.jsx';
+import FaderUp from './FaderUp.jsx';
+import FaderDown from './FaderDown.jsx';
 
 import '../../../public/stylesheets/rtcaudio.scss';
 
@@ -181,6 +183,8 @@ class djBooth extends React.Component {
               id="deck1" position="0 2 -2" song={this.props.djBooth.deck1.song} volume={deck1.volume} />
             <DeckContainer id="deck2" position="0 1 -2" song={this.props.djBooth.deck2.song} volume={deck2.volume} />
             <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} />
+            <FaderUp id="faderUp" position="-1.3 2 -2" />
+            <FaderDown id="faderDown" position="-1.3 1 -2" />
 
             <Entity
               primitive="a-image"

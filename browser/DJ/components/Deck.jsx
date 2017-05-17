@@ -10,9 +10,11 @@ class Deck extends React.Component {
     this.onClick = this.onClick.bind(this);
   }
 
-  onClick(){
+  onClick() {
+    console.log('props inside of djbooth', this.props);
     const { id, selectedSong, setDeckSong, removeRequestedSong } = this.props;
     setDeckSong(id, selectedSong);
+    console.log('selected song here', selectedSong.id);
     removeRequestedSong(id, selectedSong.id);
   }
 
@@ -23,11 +25,11 @@ class Deck extends React.Component {
       <Entity
         className="selectable"
         id={id}
+        src={'soundWaves.png'}
         primitive="a-plane"
         material={{
-          color: 'white',
           opacity: 0.70,
-          wireframe: true
+          wireframe: false,
         }}
         position={position}
         width="1.50"
