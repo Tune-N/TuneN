@@ -8,6 +8,7 @@ import mapStyles from '../../../public/stylesheets/mapStyles.json';
 
 const RoomsMap = withGoogleMap((props) => {
   const { liveDJs } = props;
+  console.log('RoomsMap', props)
   return (
     <GoogleMap
       id="rooms_map"
