@@ -9,7 +9,6 @@ import store from './store';
 import '../public/stylesheets/index.scss';
 import '../public/stylesheets/nav.scss';
 
-
 /* global document */
 ReactDOM.render(
   <Provider store={store}>

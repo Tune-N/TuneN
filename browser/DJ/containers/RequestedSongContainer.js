@@ -1,7 +1,7 @@
-import { connect } from 'react-redux'
-import { selectSong } from '../../reducers/djBooth/reducer'
+import { connect } from 'react-redux';
+import { selectSong } from '../../reducers/djBooth/action-creators';
 
-import RequestedSong from '../components/RequestedSong.jsx'
+import RequestedSong from '../components/RequestedSong.jsx';
 
 
 const mapStateToProps = (state) => ({

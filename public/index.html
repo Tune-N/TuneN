@@ -12,15 +12,28 @@
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfQxgWt-LSZcEmTEN8581Uq9SzZHnpuys"></script>
   <script src="https://apis.google.com/js/client.js"></script>
-  <script  src="https://cdn.webrtc-experiment.com/RTCMultiConnection.js"></script>
+  <script src="https://cdn.webrtc-experiment.com/RTCMultiConnection.js"></script>
   <script src="https://cdn.webrtc-experiment.com/firebase.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyD5Y4H52jHBjysqmliladg-6_xmiGUxflQ",
+      authDomain: "tunen-87da9.firebaseapp.com",
+      databaseURL: "https://tunen-87da9.firebaseio.com",
+      projectId: "tunen-87da9",
+      storageBucket: "tunen-87da9.appspot.com",
+      messagingSenderId: "28139658269"
+    };
+    firebase.initializeApp(config);
+  </script>
 
 </head>
 
 <body>
-  <!-- We will render our React app into a div with an id of 'app' -->
-  <!-- We can grab it off the DOM by saing `document.getElementById('app');` -->
   <div id="app"></div>
+
   <script async defer src="/bundle.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>

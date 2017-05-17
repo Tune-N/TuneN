@@ -6,20 +6,20 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
 
 import { getUserInfo } from './reducers/auth/actions-creators';
 
 import Homepage from './Homepage/Homepage.jsx';
-import SignUp from './components/Signup.jsx';
+import Signup from './components/Signup.jsx';
 import Login from './components/Login';
 import Room from './Room/Room.jsx';
-import DJBooth from './DJ/containers/djBoothContainer';
+import DJBooth from './DJ/containers/DJBoothContainer';
 
 import {cyan700, red500, grey600, fullWhite} from 'material-ui/styles/colors';
 import {fade} from 'material-ui/utils/colorManipulator'
 import {spacing} from 'material-ui/styles/spacing'
 
+injectTapEventPlugin();
 
 const muiTheme = getMuiTheme({
   spacing: spacing,
@@ -50,12 +50,12 @@ class App extends React.Component {
     this.props.getUserInfo();
   }
 
-  render(){
+  render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
-        <div id="main" className="container-fluid">
+        <div id="main">
           <Route exact path="/" component={Homepage} />
-          <Route path="/signup" component={SignUp} />
+          <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/dj" component={DJBooth} />
           <Route path="/:djName/live" component={Room} />
@@ -67,7 +67,7 @@ class App extends React.Component {
 }
 
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   user: state.auth,
 });
 

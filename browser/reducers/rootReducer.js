@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
   auth: require('./auth/reducer').default,
-  djs: require('./djs/reducer').default,
+  liveDJs: require('./liveDJs/reducer').default,
   djBooth: require('./djBooth/reducer').default,
 });
 

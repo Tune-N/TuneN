@@ -5,6 +5,10 @@
     "no-console": "off",
     "react/prop-types": "off",
     "import/extensions":"off",
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    "quotes": "off",
+    "no-trailing-spaces": "off",
+    "react/sort-comp":"off",
+    "padded-blocks": "off"
   }
 }

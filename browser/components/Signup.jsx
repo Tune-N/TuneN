@@ -7,7 +7,7 @@ import '../../public/stylesheets/login.scss';
 
 class Signup extends React.Component {
 
-  onSignup = (event) => {
+  onSignup=(event) => {
     event.preventDefault();
     const username = event.target.username.value;
     const email = event.target.email.value;
@@ -54,22 +54,21 @@ class Signup extends React.Component {
                 required
               />
             </div>
-            <button style={{ backgroundColor: '#3D69A2', marginBottom: 10 }} type="submit" className="btn btn-block btn-primary">Signup</button>
+            <button
+              style={{ backgroundColor: '#3D69A2', marginBottom: 10 }}
+              type="submit"
+              className="btn btn-block btn-primary">
+              Signup
+            </button>
           </form>
         </div>
       </div>
     );
   }
-};
+}
 
 const mapDispatch = {
   signUp,
 };
 
-
 export default connect(null, mapDispatch)(Signup);
-
-
-
-
-

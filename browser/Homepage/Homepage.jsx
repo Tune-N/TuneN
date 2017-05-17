@@ -7,7 +7,7 @@ import Navbar from '../components/Navbar.jsx';
 import RoomsList from './components/RoomsList/RoomsList.jsx';
 import RoomsMap from './components/RoomsMap.jsx';
 
-import { getLiveDJs } from '../reducers/djs/action-creators';
+import { getLiveDJs } from '../reducers/liveDJs/action-creators';
 
 class Homepage extends React.Component {
 
@@ -16,30 +16,28 @@ class Homepage extends React.Component {
   }
 
   render() {
-    const { djs } = this.props;
-
+    const { liveDJs } = this.props;
     return (
       <div>
         <Navbar />
-        <span style={{color: this.props.muiTheme.palette.textColor, fontSize:30}}>
-          Live DJs
-        </span>
+        <span id='mapTitle' style={{color: '#FFFFFF', fontSize:30}}>Live DJs</span>
         <div id="homepage">
+
           <RoomsMap
-            djs={djs}
-            containerElement={<div id="rooms_map"/>}
+            liveDJs={liveDJs}
+            containerElement={<div id="rooms_map" />}
             mapElement={<div style={{ height: `100%` }} />}
           />
-          <RoomsList djs={djs}/>
+          <RoomsList liveDJs={liveDJs} />
         </div>
       </div>
-    )
+    );
   }
 }
 
 
-const mapStateToProps = (state) => ({
-  djs: state.djs.list
+const mapStateToProps = state => ({
+  liveDJs: state.liveDJs.list,
 });
 
 const mapDispatchToProps = {

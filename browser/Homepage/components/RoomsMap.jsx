@@ -7,23 +7,27 @@ import mapStyles from '../../../public/stylesheets/mapStyles.json';
 // #TODO: remove duplicate rooms_map ids
 
 const RoomsMap = withGoogleMap((props) => {
-  console.log('thisDjs',props.djs)
+  const { liveDJs } = props;
+  console.log('RoomsMap', props)
   return (
     <GoogleMap
       id="rooms_map"
       defaultZoom={8}
-      defaultCenter={{lat: 40.690218, lng: -74.0962687}}
-      defaultOptions={{styles: mapStyles}}>
-
-
-
-      {props.djs.filter(dj => dj.isLive).map(dj =>{
-console.log('djHere',dj)
-        return (<Marker position={{lat: Number(dj.location.split(' ')[0]), lng: Number(dj.location.split(' ')[1])}}
-                                                           key={dj.location}/>)})
-}
+      defaultCenter={{ lat: 40.690218, lng: -74.0962687 }}
+      defaultOptions={{ styles: mapStyles }}
+    >
+      {liveDJs.map(dj => (
+        dj.latitude &&
+        <Marker
+          position={{
+            lat: Number(dj.latitude),
+            lng: Number(dj.longitude),
+          }}
+          key={dj.username}
+        />
+      ))}
     </GoogleMap>
-  )
+  );
 });
 
 export default RoomsMap;
