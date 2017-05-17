@@ -42,43 +42,35 @@ class djBooth extends React.Component {
     return connection;
   }
 
-  getGeoLocation() {
-    const { setLocation, user } = this.props;
-    const geolocation = canUseDOM && navigator.geolocation;
-
-    geolocation.getCurrentPosition((position) => {
-      setLocation(user.id, {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      });
+  goLive() {
+    console.log('goLive Booth Method');
+    const { goLive, username } = this.props;
+    const geoLocation = canUseDOM && navigator.geolocation;
+    console.log('geoLocation', geoLocation.getCurrentPosition);
+    geoLocation.getCurrentPosition((position) => {
+      const { latitute, longitude } = position;
+      goLive(username, latitute, longitude);
     });
   }
 
-  componentDidMount() {
-    console.log('djBooth', this.props);
-    const { user, goLive } = this.props;
-    this.getGeoLocation();
-    goLive('test2'); // Change to user.username but ComponentDidMount fires before thunk
 
+  componentDidMount() {
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
     this.connection = this.createConnection();
     this.connection.connect();
-    console.log('connection', this.connection);
-    
+
     // Create AudioContext and MediaStream
     this.audioContext = new AudioContext();
     this.broadcastingStream = this.audioContext.createMediaStreamDestination();
     this.connection.attachStreams.push(this.broadcastingStream.stream);
-
-  
     this.connection.open('fullstack-academy');
 
-
+    this.goLive();
   }
 
   componentWillUnmount() {
-    this.props.endSession('test2');
+    this.props.endSession(this.props.username);
   }
 
   startStream(e) {

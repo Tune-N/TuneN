@@ -1,6 +1,7 @@
 import axios from 'axios';
-import * as firebase from 'firebase';
 import { updateDJLocation } from '../liveDJs/action-creators';
+
+/* globals firebase */
 
 /* -----------------    ACTIONS     ------------------ */
 
@@ -33,20 +34,22 @@ export const removeRequestedSong = (songId) => ({
 
 /* ------------       DISPATCHERS     ------------------ */
 
-export const goLive = name => () => {
-  return firebase.database().ref(`liveDjs/${name}`).set({ name })
+export const goLive = (username, latitude = '', longitude = '') => () => {
+  return firebase.database().ref(`liveDJs/${username}`).set({
+    username,
+    latitude,
+    longitude,
+  })
     .catch(err => console.log(err));
 };
 
-export const endSession = name => () => {
-  console.log('endSession Firebase', name);
-  return firebase.database().ref(`liveDjs/${name}`).remove()
+export const endSession = username => () => {
+  return firebase.database().ref(`liveDJs/${username}`).remove()
     .catch(err => console.log(err));
 };
 
 export const setLocation = (id, location) => (dispatch) => {
   const { lat, lng } = location;
-  console.log('putting location',location, 'id', id);
   axios.put(`/api/users/${id}`, {location:`${lat} ${lng}`})
     .then((res) => {
       const user = res.data[0];

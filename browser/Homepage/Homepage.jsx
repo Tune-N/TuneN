@@ -17,7 +17,6 @@ class Homepage extends React.Component {
 
   render() {
     const { liveDJs } = this.props;
-    console.log('Homepage', liveDJs);
     return (
       <div>
         <Navbar />

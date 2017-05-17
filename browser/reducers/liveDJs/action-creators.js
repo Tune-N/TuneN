@@ -1,14 +1,13 @@
 import axios from 'axios';
 
+/* globals firebase */
 
 // Actions
 export const SET_DJS = 'SET_DJS';
 export const ADD_DJ = 'ADD_DJ';
 export const REMOVE_DJ = 'REMOVE_DJ';
-export const SET_LOCATION = 'SET_LOCATION'
-
+export const SET_LOCATION = 'SET_LOCATION';
 export const SET_CURRENT_DJ = 'SET_CURRENT_DJ'; // This refers to the DJ you are listening to.
-
 
 // Action Creators
 export const setDJs = liveDJs => ({
@@ -47,4 +46,9 @@ export const getLiveDJs = () => (dispatch) => {
       dispatch(setDJs(response.data));
     });
 };
+
+// Listeners
+firebase.database().ref(`liveDJs`).on('value', (liveDJs) =>{
+  console.log('liveDJs event', liveDJs)
+});
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as firebase from 'firebase';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
@@ -21,17 +20,6 @@ import {fade} from 'material-ui/utils/colorManipulator'
 import {spacing} from 'material-ui/styles/spacing'
 
 injectTapEventPlugin();
-
-const firebaseConfig = {
-  apiKey: "AIzaSyD5Y4H52jHBjysqmliladg-6_xmiGUxflQ",
-  authDomain: "tunen-87da9.firebaseapp.com",
-  databaseURL: "https://tunen-87da9.firebaseio.com",
-  projectId: "tunen-87da9",
-  storageBucket: "tunen-87da9.appspot.com",
-  messagingSenderId: "28139658269",
-};
-
-firebase.initializeApp(firebaseConfig);
 
 const muiTheme = getMuiTheme({
   spacing: spacing,

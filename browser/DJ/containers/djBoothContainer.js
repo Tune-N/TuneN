@@ -5,7 +5,7 @@ import { goLive, endSession, setLocation } from '../../reducers/djBooth/action-c
 import djBooth from '../components/DJBooth.jsx';
 
 const mapStateToProps = state => ({
-  user: state.auth,
+  username: state.auth.username,
   djBooth: state.djBooth,
 });
 
