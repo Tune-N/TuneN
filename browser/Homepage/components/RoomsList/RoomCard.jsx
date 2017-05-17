@@ -14,7 +14,6 @@ const RoomCard = (props) => {
     <Link
       to={`/${name}/live`}
       onClick={(e) =>{
-        console.log('RoomCard Clicked', name);
         store.dispatch(setCurrentDJ(name));
       }}
     >

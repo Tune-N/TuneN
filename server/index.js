@@ -109,7 +109,9 @@ io.on('connection', (socket) => {
       }
       return dj;
     });
-    io.to(room).emit(liveDJs);
+    console.log(`Emitting: 'song requested' to room: ${room}`);
+
+    io.to(room).emit('song requested', song);
   });
 
   socket.on('disconnect', () => {

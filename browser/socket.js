@@ -15,8 +15,10 @@ socket.on('liveDJs', (liveDJs) => {
 
 socket.on('song requested', (song) => {
   console.log("Received 'song requested'");
-  addRequestedSong(song);
+  store.dispatch(addRequestedSong(song));
 });
+
+
 
 export default socket;
 

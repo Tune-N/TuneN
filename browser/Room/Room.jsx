@@ -34,7 +34,6 @@ class Room extends React.Component {
 
   componentDidMount(){
     const { dj } = this.props;
-    console.log('Room props', this.props);
     socket.emit('joined room', dj);
 
     this.connection = this.createConnetion();
@@ -58,7 +57,9 @@ class Room extends React.Component {
         </div>
 	      <div id="streams-container"></div>
         <div style={{ width: '50%', float: 'right' }}>
-          <RequestedSongsList />
+          <RequestedSongsList
+            requestedSongs={this.props.requestedSongs}
+          />
         </div>
 	    </div>
   	)
@@ -67,6 +68,7 @@ class Room extends React.Component {
 
 const mapStateToProps = state => ({
   dj: state.liveDJs.selected,
+  requestedSongs: state.djBooth.requestedSongs,
 });
 
 const mapDispatchToProps = {
