@@ -65,7 +65,7 @@ const initialState = {
     volume: 0,
     progress: 0,
   },
-  requestedSongs: [song1, song2],
+  requestedSongs: [song1, song2, song3],
 
   selectedSong: null,
 

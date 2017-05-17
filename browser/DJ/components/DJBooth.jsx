@@ -70,7 +70,7 @@ class djBooth extends React.Component {
 
 
   componentDidMount() {
-
+    console.log('DJBoothdidMount')
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
     this.connection = this.createConnection();
@@ -80,6 +80,7 @@ class djBooth extends React.Component {
     this.broadcastingStream = this.audioContext.createMediaStreamDestination();
     this.connection.attachStreams.push(this.broadcastingStream.stream);
     this.connection.open(`full-stack-academy-${this.props.username}`);
+    console.log('DJBooth connection.open:', `full-stack-academy-${this.props.username}`)
     this.gainNode = []
     this.goLive();
   }
