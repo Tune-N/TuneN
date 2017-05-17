@@ -14,6 +14,7 @@ class Deck extends React.Component {
     console.log('props inside of djbooth', this.props);
     const { id, selectedSong, setDeckSong, removeRequestedSong } = this.props;
     setDeckSong(id, selectedSong);
+    console.log('selected song here', selectedSong.id);
     removeRequestedSong(id, selectedSong.id);
   }
 
