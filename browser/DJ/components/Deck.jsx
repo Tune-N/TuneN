@@ -6,7 +6,6 @@ import { Entity } from 'aframe-react';
 class Deck extends React.Component {
   constructor(props) {
     super(props);
-
     this.onClick = this.onClick.bind(this);
   }
 
@@ -19,6 +18,7 @@ class Deck extends React.Component {
     console.log('gainIndex', gainIndex)
     playSong(gainIndex, selectedSong.id);
   }
+
 
   render() {
     console.log('Deck props', this.props);
@@ -38,7 +38,7 @@ class Deck extends React.Component {
         width="1.50"
         height="0.50"
         events={{
-          click: this.onClick
+          click: this.onClick,
         }}
       >
         {song &&
