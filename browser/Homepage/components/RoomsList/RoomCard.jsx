@@ -13,7 +13,7 @@ const RoomCard = (props) => {
         leftAvatar={<Avatar src={avatarSrc} />}
         primaryText={`${name}`}
         secondaryText={`${listeners} Listeners`}
-        rightIcon={<PlayCircle/>}>
+        rightIcon={<PlayCircle color="#CC181E"/>}>
       </ListItem>
     </Link>
   )

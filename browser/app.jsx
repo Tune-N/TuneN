@@ -53,7 +53,7 @@ class App extends React.Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
-        <div id="main" className="container-fluid">
+        <div id="main">
           <Route exact path="/" component={Homepage} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
