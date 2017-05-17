@@ -1,4 +1,6 @@
+import axios from 'axios';
 import * as firebase from 'firebase';
+import { updateDJLocation } from '../liveDJs/action-creators';
 
 /* -----------------    ACTIONS     ------------------ */
 
@@ -40,4 +42,14 @@ export const endSession = name => () => {
   console.log('endSession Firebase', name);
   return firebase.database().ref(`liveDjs/${name}`).remove()
     .catch(err => console.log(err));
+};
+
+export const setLocation = (id, location) => (dispatch) => {
+  const { lat, lng } = location;
+  console.log('putting location',location, 'id', id);
+  axios.put(`/api/users/${id}`, {location:`${lat} ${lng}`})
+    .then((res) => {
+      const user = res.data[0];
+      dispatch(updateDJLocation(user.id, user.location));
+    });
 };

@@ -8,6 +8,8 @@ import registerClickDrag from 'aframe-click-drag-component';
 
 import DeckContainer from '../containers/DeckContainer';
 
+import canUseDOM from 'can-use-dom';
+
 import Camera from './Camera.jsx';
 import DaydreamController from './DaydreamController.jsx';
 import Background from './Background.jsx';
@@ -16,7 +18,7 @@ import RequestedSongs from './RequestedSongs.jsx';
 
 registerClickDrag(aframe);
 
-/* globals window, AudioContext, RTCMultiConnection, XMLHttpRequest */
+/* globals window, navigator, AudioContext, RTCMultiConnection, XMLHttpRequest */
 
 class djBooth extends React.Component {
   constructor(props) {
@@ -40,9 +42,22 @@ class djBooth extends React.Component {
     return connection;
   }
 
+  getGeoLocation() {
+    const { setLocation, user } = this.props;
+    const geolocation = canUseDOM && navigator.geolocation;
+
+    geolocation.getCurrentPosition((position) => {
+      setLocation(user.id, {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    });
+  }
+
   componentDidMount() {
-    console.log('djBooth', this.props)
+    console.log('djBooth', this.props);
     const { user, goLive } = this.props;
+    this.getGeoLocation();
     goLive('test2'); // Change to user.username but ComponentDidMount fires before thunk
 
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -58,6 +73,7 @@ class djBooth extends React.Component {
 
   
     this.connection.open('fullstack-academy');
+
 
   }
 
