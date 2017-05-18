@@ -7,7 +7,7 @@ const chalk = require('chalk');
 require('./models');
 
 // Syncing all the models at once. This promise is used by main.js.
-const syncedDbPromise = db.sync({ force: true });
+const syncedDbPromise = db.sync({ force: false });
 
 syncedDbPromise
 .then(() => console.log(chalk.green('Sequelize models synced to PostgreSQL')))
