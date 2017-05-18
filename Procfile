@@ -1,1 +1,1 @@
-web: node server/rootReducer.js
+web: node server/index.js
