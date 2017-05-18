@@ -50,30 +50,26 @@ const server = app.listen(app.get('port'), function () {
 const io = socketio.listen(server);
 
 let liveDJs = [
-  { id:0, username: 'DJ Khaleb', latitude: 40.7156176, longitude: -74.046018,  listeners: 22 },
+  { id:0, username: 'DJ Khaled', latitude: 40.7156176, longitude: -74.046018,  listeners: 22 },
 ];
 
 
 io.on('connection', (socket) => {
-  console.log('New Listener connected', socket.id);
 
   socket.emit('liveDJs', liveDJs);
 
   socket.on('goLive', (dj) => {
     dj = Object.assign({}, dj, {id: socket.id});
-    console.log(`${dj.username} went Live. (SocketId: ${socket.id})`);
     socket.join(dj.username);
 
     liveDJs.push(dj);
 
-    console.log(`Emitting LiveDJs: ${liveDJs.length}`);
     socket.broadcast.emit('liveDJs', liveDJs);
 
 
   });
 
   socket.on('dj location', (location) => {
-    console.log('dj location', location);
     liveDjs = liveDJs.map((dj)=> {
       if (dj.id === socket.id) return Object.assign({}, dj, location);
       return dj;
@@ -82,25 +78,21 @@ io.on('connection', (socket) => {
   });
 
   socket.on('joined room', (roomName) => {
-    console.log(`Socket: ${socket.id} joined ${roomName}`);
     socket.join(roomName);
     updateRoomListenerCount(roomName);
   });
 
   socket.on('leave room', (roomName)=> {
-    console.log(`Socket: ${socket.id} left ${roomName}`);
     socket.leave(roomName);
     updateRoomListenerCount(roomName);
 
   });
 
   socket.on('stop dj', () => {
-    console.log(`Stop DJ: ${socket.id}`);
     removeDJ(socket);
   });
 
   socket.on('song request', (room, song) => {
-    console.log(`${socket.id} requested song: ${song}`);
     liveDJs.map(dj =>{
       if( dj.username === room ){
         if (!dj.requestedSongs) dj.requestedSongs = [];
@@ -109,13 +101,11 @@ io.on('connection', (socket) => {
       }
       return dj;
     });
-    console.log(`Emitting: 'song requested' to room: ${room}`);
 
     io.to(room).emit('song requested', song);
   });
 
   socket.on('disconnect', () => {
-    console.log(`Socket ${socket.id} disconnected.`);
 
     // Remove DJ if socket is a DJ
     removeDJ(socket);
@@ -128,7 +118,6 @@ io.on('connection', (socket) => {
 });
 
 function removeDJ(socket){
-  console.log('Removing DJ with Socket Id: ', socket.id);
   liveDJs = liveDJs.filter((dj)=>{
     return dj.id !== socket.id;
   });
@@ -136,7 +125,6 @@ function removeDJ(socket){
 }
 
 function updateAllRoomsListenerCount(){
-  console.log('updateAllRoomListenerCount')
   liveDJs.forEach((djToUpdate) => {
     if (io.in(djToUpdate.username).clients) {
       io.in(djToUpdate.username).clients((err, listeners) => {
@@ -144,7 +132,7 @@ function updateAllRoomsListenerCount(){
         liveDJs = liveDJs.map((dj) =>{
           if (dj.username === djToUpdate.username){
             djToUpdate.listeners = listeners.length - 1;
-            if(dj.username === 'DJ Khaleb') dj.listeners += 22;
+            if(dj.username === 'DJ Khaled') dj.listeners += 22;
             return djToUpdate
           }
           return dj;
@@ -160,11 +148,10 @@ function updateAllRoomsListenerCount(){
 function updateRoomListenerCount(roomName){
   io.in(roomName).clients((err, listeners) => {
     if (err) console.log(err);
-    console.log(`${roomName} listeners: ${listeners.length}`);
     liveDjs = liveDJs.map(dj => {
       if (dj.username === roomName) {
         dj.listeners = listeners.length -1;
-        if(dj.username === 'DJ Khaleb') dj.listeners += 22;
+        if(dj.username === 'DJ Khaled') dj.listeners += 22;
         return dj;
       }
       return dj;
