@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="460" src="/public/images/logo_transparent.png">
+</p>
+
 ## TuneN
 TuneN lets anyone listed to live DJs playing all over the world, request song and watch the DJ live in a 3D Virtual Reality Environment.
 
