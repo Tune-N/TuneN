@@ -58,7 +58,6 @@ class djBooth extends React.Component {
   }
 
   goLive() {
-    console.log('goLive()');
     const { goLive, username } = this.props;
     const geoLocation = canUseDOM && navigator.geolocation;
 
@@ -71,7 +70,6 @@ class djBooth extends React.Component {
 
 
   componentDidMount() {
-    console.log('DJBoothdidMount')
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
     this.connection = this.createConnection();
@@ -81,7 +79,6 @@ class djBooth extends React.Component {
     this.broadcastingStream = this.audioContext.createMediaStreamDestination();
     this.connection.attachStreams.push(this.broadcastingStream.stream);
     this.connection.open(`full-stack-academy-${this.props.username}`);
-    console.log('DJBooth connection.open:', `full-stack-academy-${this.props.username}`)
     this.gainNode = []
     this.gainNode[0] = this.audioContext.createGain();
     this.gainNode[1] = this.audioContext.createGain();
@@ -104,7 +101,6 @@ class djBooth extends React.Component {
   }
 
   getSong(gainIndex, videoId){
-    console.log(`getSong on gainIndex: ${gainIndex}, songId: ${videoId}`)
     let request = new XMLHttpRequest();
 
     // request.open('GET', `/mp3/${videoId}`, true);
@@ -141,7 +137,6 @@ class djBooth extends React.Component {
   }
 
   crossFader(yaxis){
-    console.log('crossfader val', yaxis);
     if (yaxis < 0.55 && yaxis > 0.45) return
     let volume1 = yaxis;
     let volume2 = 1 - volume1;

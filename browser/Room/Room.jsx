@@ -14,10 +14,8 @@ class Room extends React.Component {
   }
 
   createConnetion(){
-    console.log('Room createConnection')
     const connection = new RTCMultiConnection();
     connection.channel = `full-stack-academy-${this.props.dj}`;
-    console.log('connection.channel', connection.channel)
     connection.dontCaptureUserMedia = true;
     connection.session = {
       audio: true,
@@ -36,7 +34,6 @@ class Room extends React.Component {
   }
 
   componentDidMount(){
-    console.log('RoomdidMount')
     const { dj } = this.props;
     socket.emit('joined room', dj);
 
@@ -44,12 +41,10 @@ class Room extends React.Component {
 
     // connect to signaling gateway
     this.connection.connect();
-    console.log('.join', `full-stack-academy-${dj}`)
     this.connection.join(`full-stack-academy-${dj}`)
   }
 
   componentWillUnmount() {
-    console.log('Emitting leave room');
     const { dj } = this.props;
     socket.emit('leave room', dj);
   }

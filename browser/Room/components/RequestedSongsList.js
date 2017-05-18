@@ -14,7 +14,7 @@ const style = {
 
 
 const RequestedSongs = (props) => {
-  console.log('RequestedSongList', props);
+  
   const { requestedSongs } = props;
   return (
   <div id="rooms_list" style={style}>

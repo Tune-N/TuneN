@@ -13,23 +13,21 @@ class Deck extends React.Component {
   onClick() {
     const { id, selectedSong, setDeckSong, removeRequestedSong, playSong } = this.props;
     if(!selectedSong) return
-    console.log('onClick selectedSong', selectedSong)
+    
     setDeckSong(id, selectedSong);
     removeRequestedSong(selectedSong.id);
     const gainIndex = id === 'deck1' ? 0 : 1;
-    console.log('gainIndex', gainIndex)
     playSong(gainIndex, selectedSong.id);
   }
 
   onTrackPadMove(event) {
-    console.log('trackpad move')
+    
     const { id, crossfader } = this.props;
     let yaxis = 1 - ((event.detail.axis[1] + 1)/2);
     this.props.crossFader(yaxis);
   }
 
   render() {
-    console.log('Deck props', this.props);
     const { id, position, song } = this.props;
 
     return (

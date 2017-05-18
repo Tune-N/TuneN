@@ -97,7 +97,6 @@ export default function reducer(state = initialState, action) {
       break;
 
     case REMOVE_REQUESTED_SONG:
-      console.log('Reducer REMOVE_REQUESTED_SONG', action)
       newState.requestedSongs = state.requestedSongs.filter(
         song => song.id.videoId !== action.songId);
       break;

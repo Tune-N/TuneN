@@ -9,12 +9,10 @@ import { setDJs } from './reducers/liveDJs/action-creators';
 const socket = io();
 
 socket.on('liveDJs', (liveDJs) => {
-  console.log("Received liveDJs", liveDJs);
   store.dispatch(setDJs(liveDJs));
 });
 
 socket.on('song requested', (song) => {
-  console.log("Received 'song requested'");
   store.dispatch(addRequestedSong(song));
 });
 
