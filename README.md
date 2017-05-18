@@ -13,6 +13,6 @@ The project was developed as part of Full Stack Academy of Code Software Enginee
 
 #### Tech Stack
 
-![Tech Stack](/docs/images/Data%20Flow%20Diagram.png?raw=true "Tech Stack")
+![Tech Stack](/docs/images/TuneN%20Tech%20Stack.png "Tech Stack")
 
 
