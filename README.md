@@ -5,16 +5,14 @@ The project was developed as part of Full Stack Academy of Code Software Enginee
 
 #### Authors
 
- 1. Ben McCain (Mr. Redux Middleware)
- 2. Marcos Reynoso (WebRTC Guru)
- 3. Isaac Ibiapina (Romeo the Blockchain expert) 
- 4. Samir Awuapara (Ups... I just submitted a pull request to this guy's library )
+ 1. Ben McCain
+ 2. Isaac Ibiapina
+ 3. Marcos Reynoso 
+ 4. Samir Awuapara
     
 
-#### Technologies Used
+#### Tech Stack
 
-1. [React](https://facebook.github.io/react/)
-2. [A-Frame](https://aframe.io/)
-3. [A-Frame React](https://github.com/aframevr/aframe-react)
-4. [Google's Daydream](https://vr.google.com/daydream/)
+![Tech Stack](/docs/images/Data%20Flow%20Diagram.png?raw=true "Tech Stack")
+
 
