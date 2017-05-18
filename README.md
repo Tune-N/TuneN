@@ -3,7 +3,7 @@ TuneN lets anyone listed to live DJs playing all over the world, request song an
 
 The project was developed as part of Full Stack Academy of Code Software Engineer Immersive Program.
 
-#### Authors
+### Authors
 
  1. Ben McCain
  2. Isaac Ibiapina
@@ -11,7 +11,7 @@ The project was developed as part of Full Stack Academy of Code Software Enginee
  4. Samir Awuapara
     
 
-#### Tech Stack
+### Tech Stack
 
 ![Tech Stack](/docs/images/TuneN%20Tech%20Stack.png "Tech Stack")
 
