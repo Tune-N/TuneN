@@ -18,8 +18,8 @@ The project was developed as part of Full Stack Academy of Code Software Enginee
 ### Tech Stack
 
 <p align="center">
-  <img width="450" src="/docs/images/TuneN%20Tech%20Stack.png">
+  <img width="900" src="/docs/images/TuneN%20Tech%20Stack.png">
 </p>
-![Tech Stack](/docs/images/TuneN%20Tech%20Stack.png "Tech Stack")
+
 
 
