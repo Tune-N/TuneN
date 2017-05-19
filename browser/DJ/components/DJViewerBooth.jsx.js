@@ -15,6 +15,10 @@ import FaderDown from './FaderDown.jsx';
 
 class DJViewerBooth extends React.Component {
 
+  // componentDidMount(){
+  //   document.querySelector('a-camera').removeAttribute('wasd-controls');
+  // }
+
 
   render() {
     // const { deck1, deck2, requestedSongs } = this.props.djBooth;
@@ -26,7 +30,7 @@ class DJViewerBooth extends React.Component {
            <button onClick={this.crossFaderUp}>song 1</button>
            <button onClick={this.crossFaderDown}>song 2</button>*/}
           <Scene embedded id="viewer">
-            <Camera />
+            <Camera viewer='true' />
             <Background />
             <DeckContainer
               id="deck1"

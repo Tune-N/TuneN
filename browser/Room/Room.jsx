@@ -53,8 +53,8 @@ class Room extends React.Component {
   render() {
     return (
 	    <div>
-	      <Youtube />
         <DJViewerBooth/>
+	      <Youtube />
 	      <div id="streams-container"></div>
         <div style={{ width: '50%', float: 'right' }}>
           <RequestedSongsList
