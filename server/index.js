@@ -79,6 +79,7 @@ io.on('connection', (socket) => {
 
 
   socket.on('joined room', (roomName) => {
+    socket.to(roomName).emit('newViewer','')
     console.log(`somebody joined ${roomName}`)
     socket.join(roomName);
     updateRoomListenerCount(roomName);
@@ -121,9 +122,14 @@ io.on('connection', (socket) => {
     socket.to(dj).emit('songChange',{position,rotation,color,name})
   })
 
+  socket.on('loadInitialState', (state) => {
+    const {requestedSongs, deck1, deck2, djsName} = state
+    console.log('username',djsName)
+    socket.to(djsName).emit('loadInitialState',{requestedSongs, deck1, deck2})
+  })
+
   socket.on('cameraChange', (camera) => {
     const {position, rotation, djsName} = camera
-    console.log('broadcast camera',position,rotation,djsName)
     socket.to(djsName).emit('cameraChange',{position,rotation})
   })
 

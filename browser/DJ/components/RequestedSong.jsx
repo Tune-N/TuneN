@@ -45,7 +45,6 @@ class RequestedSong extends React.Component {
           'mouseleave':this.removeFocus,
           'raycaster-intersected-cleared': this.removeFocus,
           'componentchanged':function() {
-            console.log('songColor here',this.components.material.data.color )
             songChange(
               this.components.position.data,
               this.components.rotation.data,

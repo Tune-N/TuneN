@@ -25,8 +25,9 @@ export default function (state = initialState, action) {
 
   switch (action.type) {
 
-    case 'LOAD_SONGS':
-      return Object.assign(newState, {songList:action.songList})
+    case 'LOAD_STATE':
+      console.log('decks',action.loadedState)
+      return Object.assign(newState, {songList:action.loadedState.requestedSongs},{deck1:action.loadedState.deck1},{deck2:action.loadedState.deck2})
 
     // case 'SONG_CHANGE':
     //   return Object.assign(newState, {songList: newState.songList.map(song => {
@@ -40,12 +41,10 @@ export default function (state = initialState, action) {
       return newState
 
     case 'SET_DECKS_SONG':
-
       newState[action.songDeck.deck] = action.songDeck.song
       return newState
 
     case 'CAMERA_CHANGE':
-      console.log('camera reducer',action)
       newState.camera.position = Object.values(action.camera.position).join(' ')
       newState.camera.rotation  = Object.values(action.camera.rotation).join(' ')
         return newState

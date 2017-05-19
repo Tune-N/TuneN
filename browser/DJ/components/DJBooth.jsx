@@ -85,16 +85,25 @@ class djBooth extends React.Component {
     this.gainNode[1] = this.audioContext.createGain();
     this.goLive();
 
-    console.log('DJBooth Props',this.props)
     var secondCameraEl = document.querySelector('a-camera');
     secondCameraEl.addEventListener('componentchanged', function () {
       const position = this.components.position.data
       const rotation = this.components.rotation.data
 
       socket.emit('cameraChange',{position,rotation,djsName})
-      console.log('camerass changinggg')
     });
+
+    let {requestedSongs, deck1, deck2} = this.props.djBooth
+    console.log('whatprops wehave', this.props)
+    socket.on('newViewer', function() {
+      console.log('emitting decks', deck1, deck2)
+      deck1 = deck1.song.name
+      deck2 = deck2.song.name
+      socket.emit('loadInitialState', {requestedSongs, deck1, deck2, djsName} )
+    })
+
   }
+
 
   componentWillUnmount() {
     socket.emit('stop dj');
@@ -181,6 +190,7 @@ class djBooth extends React.Component {
   }
 
   render() {
+    console.log('DJ booth props', this.props.djBooth)
     const { deck1, deck2, requestedSongs } = this.props.djBooth;
 
     return (

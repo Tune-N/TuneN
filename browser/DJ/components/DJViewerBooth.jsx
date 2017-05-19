@@ -14,49 +14,64 @@ import FaderUp from './FaderUp.jsx';
 import FaderDown from './FaderDown.jsx';
 
 
-socket.on('songChange',function(song){
-  console.log('gettingSongChangefire',song)
-  store.dispatch({
-    type: 'SONG_CHANGE',
-    song
-  })
-})
 
-socket.on('loadAllSongs', function (songList) {
-  store.dispatch({
-    type:'LOAD_SONGS',
-    songList
-  })
-})
-
-socket.on('removeSong', function (songName) {
-  store.dispatch({
-    type:'REMOVE_SONG',
-    songName
-  })
-})
-
-
-socket.on('setDeckSong', function (songDeck) {
-  store.dispatch({
-    type:'SET_DECKS_SONG',
-    songDeck
-  })
-})
-
-socket.on('cameraChange', function (camera) {
-  console.log('dispathing camera',camera)
-  store.dispatch({
-    type:'CAMERA_CHANGE',
-    camera
-  })
-})
 
 class DJViewerBooth extends React.Component {
 
-  // componentDidMount(){
-  //   document.querySelector('a-camera').removeAttribute('wasd-controls');
-  // }
+
+  componentDidMount(){
+    socket.on('songChange',function(song){
+      console.log('gettingSongChangefire',song)
+      store.dispatch({
+        type: 'SONG_CHANGE',
+        song
+      })
+    })
+
+    // socket.on('loadAllSongs', function (songList) {
+    //   store.dispatch({
+    //     type:'LOAD_SONGS',
+    //     songList
+    //   })
+    // })
+
+    socket.on('removeSong', function (songName) {
+      store.dispatch({
+        type:'REMOVE_SONG',
+        songName
+      })
+    })
+
+    socket.on('setDeckSong', function (songDeck) {
+      store.dispatch({
+        type:'SET_DECKS_SONG',
+        songDeck
+      })
+    })
+
+    socket.on('cameraChange', function (camera) {
+      store.dispatch({
+        type:'CAMERA_CHANGE',
+        camera
+      })
+    })
+
+    socket.on('loadInitialState', function (loadedState) {
+      console.log('loading up initial state on viewer')
+      store.dispatch({
+        type:'LOAD_STATE',
+        loadedState
+      })
+    })
+
+
+
+  }
+
+
+  componentWillUnmount(){
+    //leave code here
+  }
 
 
   render() {
@@ -66,7 +81,7 @@ class DJViewerBooth extends React.Component {
     return (
       <div>
         <div className="DJBooth">
-          {/*<input id="volume" className="col-xs-2"  onChange={this.crossFader} type="range" min="0" max="1" step="0.01" value={this.state.volume} />
+          {/*<input id="volume" className="col-xs-2" type="range" min="0" max="1" step="0.01" />
            <button onClick={this.crossFaderUp}>song 1</button>
            <button onClick={this.crossFaderDown}>song 2</button>*/}
           <Scene embedded id="viewer">
