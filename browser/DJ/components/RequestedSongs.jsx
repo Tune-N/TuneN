@@ -36,6 +36,7 @@ const RequestedSongs = (props) => {
             key={song.id.videoId}
             name={song.snippet.title}
             image={song.snippet.thumbnails.default.url}
+            songChange={props.songChange}
           />
         ))
       }

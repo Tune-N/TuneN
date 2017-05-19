@@ -4,6 +4,7 @@ import {
   SET_DECK_SONG,
   ADD_REQUESTED_SONG,
   REMOVE_REQUESTED_SONG,
+  SONG_CHANGE
 } from './action-creators';
 
 const song1 ={
@@ -100,6 +101,13 @@ export default function reducer(state = initialState, action) {
       newState.requestedSongs = state.requestedSongs.filter(
         song => song.id.videoId !== action.songId);
       break;
+
+    case SONG_CHANGE:
+      console.log('SONGCHANGE firing',action)
+      newState.requestedSongs = newState.requestedSongs.map(song =>{
+        if (song.name == action.attributes.name) song = Object.assign(song,action.attributes)
+        return song})
+      break
 
     default:
       return state;
