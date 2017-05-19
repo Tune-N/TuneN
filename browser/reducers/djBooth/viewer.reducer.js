@@ -13,8 +13,8 @@ const initialState = {
   songList:[
   ],
   camera:{
-    position:'',
-    rotation:''
+    position:{x:0,y:0,z:0},
+    rotation:{x:0,y:0,z:0}
   }
 }
 
@@ -28,11 +28,11 @@ export default function (state = initialState, action) {
     case 'LOAD_SONGS':
       return Object.assign(newState, {songList:action.songList})
 
-    case 'SONG_CHANGE':
-      return Object.assign(newState, {songList: newState.songList.map(song => {
-        if (song.name == action.name) song = Object.assign(song,action)
-        return song
-      })})
+    // case 'SONG_CHANGE':
+    //   return Object.assign(newState, {songList: newState.songList.map(song => {
+    //     if (song.name == action.name) song = Object.assign(song,action)
+    //     return song
+    //   })})
 
     case 'REMOVE_SONG':
       newState.songList =  newState.songList.filter(
@@ -46,7 +46,9 @@ export default function (state = initialState, action) {
 
     case 'CAMERA_CHANGE':
       console.log('camera reducer',action)
-      return Object.assign(newState.camera,action)
+      newState.camera.position = Object.values(action.camera.position).join(' ')
+      newState.camera.rotation  = Object.values(action.camera.rotation).join(' ')
+        return newState
 
     default:
       return state;

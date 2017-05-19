@@ -70,7 +70,7 @@ class DJViewerBooth extends React.Component {
            <button onClick={this.crossFaderUp}>song 1</button>
            <button onClick={this.crossFaderDown}>song 2</button>*/}
           <Scene embedded id="viewer">
-            <Camera viewer='true' />
+            <Camera viewer='true' position={this.props.djViewer.camera.position} rotation={this.props.djViewer.camera.rotation}/>
             <Background />
             <DeckContainer
               id="deck1"

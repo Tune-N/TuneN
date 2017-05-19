@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Youtube from './components/Youtube';
 import RequestedSongsList from './components/RequestedSongsList';
-import DJViewerBooth from '../DJ/components/DJViewerBooth.jsx'
+import DJViewerBoothContainer from '../DJ/containers/DJBoothViewerContainer'
 
 import socket from '../socket';
 
@@ -53,7 +53,7 @@ class Room extends React.Component {
   render() {
     return (
 	    <div>
-        <DJViewerBooth/>
+        <DJViewerBoothContainer/>
 	      <Youtube />
 	      <div id="streams-container"></div>
         <div style={{ width: '50%', float: 'right' }}>
