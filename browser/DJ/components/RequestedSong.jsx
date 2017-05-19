@@ -39,6 +39,11 @@ class RequestedSong extends React.Component {
         color={color}
         position={position}
         events={{
+          'click': () => selectSong({id, name}),
+          'mouseenter': this.setFocus,
+          'raycaster-intersected': this.setFocus,
+          'mouseleave':this.removeFocus,
+          'raycaster-intersected-cleared': this.removeFocus,
           'componentchanged':function() {
             songChange(
               this.components.position.data,
