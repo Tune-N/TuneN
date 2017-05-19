@@ -37,7 +37,7 @@ const song2 = {
     },
     title: "Future - Mask Off",
   },
-  votes: 31,
+  votes: 29,
 }
 const song3 = {
   id: {
