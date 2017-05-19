@@ -20,12 +20,12 @@ export const SONG_CHANGE = 'SONG_CHANGE'
 
 /* ------------   ACTION CREATORS     ------------------ */
 
-export const songChange = song =>{
-  socket.emit('songChange', song)
+export const songChange = (position,rotation,color,name,dj) =>{
+  socket.emit('songChange', position,rotation,color,name,dj)
 
   return {
     type:'SONG_CHANGE',
-    song
+    position,rotation,color,name,dj
   }
 }
 

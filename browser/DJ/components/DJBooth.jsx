@@ -198,7 +198,7 @@ class djBooth extends React.Component {
               playSong={this.getSong}
               crossFader={this.crossFader}
             />
-            <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} songChange={this.props.songChange}/>
+            <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} songChange={this.props.songChange} djName={this.props.username}/>
             <FaderUp id="faderUp" position="-1.3 2 -2" faderUp={this.crossFaderUp} />
             <FaderDown id="faderDown" position="-1.3 1 -2" faderUp={this.crossFaderDown}/>
 

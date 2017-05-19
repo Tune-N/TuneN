@@ -77,6 +77,7 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('liveDJs', liveDJs);
   });
 
+
   socket.on('joined room', (roomName) => {
     socket.join(roomName);
     updateRoomListenerCount(roomName);
@@ -114,6 +115,10 @@ io.on('connection', (socket) => {
     updateAllRoomsListenerCount();
 
   });
+
+  socket.on('songChange', song => {
+    socket.to(song.djName).emit('songChange',song)
+  })
 
 });
 

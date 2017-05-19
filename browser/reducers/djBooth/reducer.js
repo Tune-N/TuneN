@@ -105,7 +105,7 @@ export default function reducer(state = initialState, action) {
     case SONG_CHANGE:
       console.log('SONGCHANGE firing',action)
       newState.requestedSongs = newState.requestedSongs.map(song =>{
-        if (song.name == action.attributes.name) song = Object.assign(song,action.attributes)
+        if (song.snippet.title == action.name) song = Object.assign(song,action)
         return song})
       break
 

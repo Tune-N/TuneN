@@ -24,7 +24,7 @@ class RequestedSong extends React.Component {
   }
 
   render(){
-    const { id, position, name, selectSong, selectedSong, image, songChange } = this.props;
+    const { id, position, name, selectSong, selectedSong, image, songChange, djName } = this.props;
     let color = this.state.focus ? "#999595" : "white";
     if (selectedSong && selectedSong.id === id) color = "yellow";
 
@@ -45,11 +45,13 @@ class RequestedSong extends React.Component {
           'mouseleave':this.removeFocus,
           'raycaster-intersected-cleared': this.removeFocus,
           'componentchanged':function() {
+            console.log('songColor here',this.components.material.data.color )
             songChange(
               this.components.position.data,
               this.components.rotation.data,
               this.components.material.data.color,
-              name,window.location.pathname.split('/')[1].replace('%20',' '))},
+              name,
+            djName)},
         }}
       >
         <Entity
