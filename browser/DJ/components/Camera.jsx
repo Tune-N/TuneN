@@ -7,7 +7,7 @@ const Viewer = () =>(
 )
 
 const DJ = () =>(
- <Entity position="0 0 0"><Entity primitive="a-camera" mouse-cursor /></Entity>
+ <Entity primitive="a-camera" mouse-cursor />
 )
 
 const Camera = (props) =>(

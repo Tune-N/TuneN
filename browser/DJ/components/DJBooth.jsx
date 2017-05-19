@@ -70,6 +70,7 @@ class djBooth extends React.Component {
 
 
   componentDidMount() {
+    const djName = this.props.username
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
     this.connection = this.createConnection();
@@ -83,6 +84,16 @@ class djBooth extends React.Component {
     this.gainNode[0] = this.audioContext.createGain();
     this.gainNode[1] = this.audioContext.createGain();
     this.goLive();
+
+    console.log('DJBooth Props',this.props)
+    var secondCameraEl = document.querySelector('a-camera');
+    secondCameraEl.addEventListener('componentchanged', function () {
+      const position = this.components.position.data
+      const rotation = this.components.rotation.data
+
+      socket.emit('cameraChange',{position,rotation,djName})
+      console.log('camerass changinggg')
+    });
   }
 
   componentWillUnmount() {
@@ -179,7 +190,9 @@ class djBooth extends React.Component {
           <button onClick={this.crossFaderUp}>song 1</button>
           <button onClick={this.crossFaderDown}>song 2</button>*/}
           <Scene>
-            <Camera />
+            <a-camera events={{'componentchanged': function () {
+              console.log('cameras changing')
+            }}}  />
             <DaydreamController />
             <Background />
             <DeckContainer

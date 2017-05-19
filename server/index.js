@@ -79,6 +79,7 @@ io.on('connection', (socket) => {
 
 
   socket.on('joined room', (roomName) => {
+    console.log(`somebody joined ${roomName}`)
     socket.join(roomName);
     updateRoomListenerCount(roomName);
   });
@@ -116,8 +117,14 @@ io.on('connection', (socket) => {
 
   });
 
-  socket.on('songChange', song => {
-    socket.to(song.djName).emit('songChange',song)
+  socket.on('songChange', (position,rotation,color,name,dj) => {
+    console.log('trying to broadcast')
+    socket.to(dj).emit('songChange',{position,rotation,color,name})
+  })
+
+  socket.on('cameraChange', (position,rotation,dj) => {
+    console.log('broadcast camera')
+    socket.to(dj).emit('cameraChange',{position,rotation})
   })
 
 });

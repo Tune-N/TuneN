@@ -12,6 +12,10 @@ const initialState = {
   },
   songList:[
   ],
+  camera:{
+    position:'',
+    rotation:''
+  }
 }
 
 /* ------------   REDUCER    ------------------ */
@@ -25,9 +29,8 @@ export default function (state = initialState, action) {
       return Object.assign(newState, {songList:action.songList})
 
     case 'SONG_CHANGE':
-      console.log('receiving on viewerrr')
       return Object.assign(newState, {songList: newState.songList.map(song => {
-        if (song.name == action.attributes.name) song = Object.assign(song,action.attributes)
+        if (song.name == action.name) song = Object.assign(song,action)
         return song
       })})
 
@@ -41,6 +44,9 @@ export default function (state = initialState, action) {
       newState[action.songDeck.deck] = action.songDeck.song
       return newState
 
+    case 'CAMERA_CHANGE':
+      Object.assign(newState.camera,action)
+      return newState
 
     default:
       return state;

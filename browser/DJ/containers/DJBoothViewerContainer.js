@@ -1,4 +1,6 @@
 import { connect } from 'react-redux';
+import socket from '../../socket'
+import store from '../../store'
 
 import DJViewerBooth from '../components/DJViewerBooth.jsx';
 
@@ -8,7 +10,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
 };
-
 
 
 const djBoothContainer = connect(mapStateToProps, mapDispatchToProps)(DJViewerBooth);
