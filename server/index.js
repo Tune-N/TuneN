@@ -118,13 +118,13 @@ io.on('connection', (socket) => {
   });
 
   socket.on('songChange', (position,rotation,color,name,dj) => {
-    console.log('trying to broadcast')
     socket.to(dj).emit('songChange',{position,rotation,color,name})
   })
 
-  socket.on('cameraChange', (position,rotation,dj) => {
-    console.log('broadcast camera')
-    socket.to(dj).emit('cameraChange',{position,rotation})
+  socket.on('cameraChange', (camera) => {
+    const {position, rotation, djsName} = camera
+    console.log('broadcast camera',position,rotation,djsName)
+    socket.to(djsName).emit('cameraChange',{position,rotation})
   })
 
 });

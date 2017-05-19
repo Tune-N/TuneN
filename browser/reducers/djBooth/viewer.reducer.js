@@ -45,8 +45,8 @@ export default function (state = initialState, action) {
       return newState
 
     case 'CAMERA_CHANGE':
-      Object.assign(newState.camera,action)
-      return newState
+      console.log('camera reducer',action)
+      return Object.assign(newState.camera,action)
 
     default:
       return state;

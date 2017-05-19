@@ -12,6 +12,8 @@ const mapDispatchToProps = {
 };
 
 
+
+
 const djBoothContainer = connect(mapStateToProps, mapDispatchToProps)(DJViewerBooth);
 
 export default djBoothContainer;

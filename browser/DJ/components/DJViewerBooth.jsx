@@ -1,6 +1,7 @@
 import React from 'react';
 import aframe from 'aframe';
 import { Scene, Entity } from 'aframe-react';
+import store from '../../store'
 
 import socket from '../../socket';
 
@@ -13,6 +14,44 @@ import FaderUp from './FaderUp.jsx';
 import FaderDown from './FaderDown.jsx';
 
 
+socket.on('songChange',function(song){
+  console.log('gettingSongChangefire',song)
+  store.dispatch({
+    type: 'SONG_CHANGE',
+    song
+  })
+})
+
+socket.on('loadAllSongs', function (songList) {
+  store.dispatch({
+    type:'LOAD_SONGS',
+    songList
+  })
+})
+
+socket.on('removeSong', function (songName) {
+  store.dispatch({
+    type:'REMOVE_SONG',
+    songName
+  })
+})
+
+
+socket.on('setDeckSong', function (songDeck) {
+  store.dispatch({
+    type:'SET_DECKS_SONG',
+    songDeck
+  })
+})
+
+socket.on('cameraChange', function (camera) {
+  console.log('dispathing camera',camera)
+  store.dispatch({
+    type:'CAMERA_CHANGE',
+    camera
+  })
+})
+
 class DJViewerBooth extends React.Component {
 
   // componentDidMount(){
@@ -21,6 +60,7 @@ class DJViewerBooth extends React.Component {
 
 
   render() {
+    console.log('DJviewerprops',this.props)
     // const { deck1, deck2, requestedSongs } = this.props.djBooth;
 
     return (
