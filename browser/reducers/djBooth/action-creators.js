@@ -15,6 +15,7 @@ export const START_PLAYING = 'START_PLAYING';
 export const STOP_PLAYING = 'STOP_PLAYING';
 export const SET_DECK_PROGRESS = 'SET_DECK_PROGRESS';
 export const SET_LIVE_DJS = 'SET_LIVE_DJS';
+export const VOTE_SONG_UP = 'VOTE_SONG_UP';
 
 
 /* ------------   ACTION CREATORS     ------------------ */
@@ -36,6 +37,11 @@ export const addRequestedSong = (song) => ({
 
 export const removeRequestedSong = (songId) => ({
   type: REMOVE_REQUESTED_SONG,
+  songId,
+});
+
+export const voteSongUp = (songId) => ({
+  type: VOTE_SONG_UP,
   songId,
 });
 

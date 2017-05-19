@@ -18,7 +18,7 @@ const RoomCard = (props) => {
       }}
     >
       <ListItem
-        leftAvatar={<Avatar src={image || 'http://www.material-ui.com/images/ok-128.jpg'} />}
+        leftAvatar={<Avatar src={image || 'http://www.rap-up.com/app/uploads/2016/04/dj-khaled.jpg'} />}
         primaryText={`${name}`}
         secondaryText={`${listeners} Listeners`}
         rightIcon={ <PlayCircle color="#CC181E"/>}

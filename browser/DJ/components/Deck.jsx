@@ -13,7 +13,7 @@ class Deck extends React.Component {
   onClick() {
     const { id, selectedSong, setDeckSong, removeRequestedSong, playSong } = this.props;
     if(!selectedSong) return
-    
+
     setDeckSong(id, selectedSong);
     removeRequestedSong(selectedSong.id);
     const gainIndex = id === 'deck1' ? 0 : 1;
@@ -21,7 +21,7 @@ class Deck extends React.Component {
   }
 
   onTrackPadMove(event) {
-    
+
     const { id, crossfader } = this.props;
     let yaxis = 1 - ((event.detail.axis[1] + 1)/2);
     this.props.crossFader(yaxis);

@@ -4,6 +4,7 @@ import {
   SET_DECK_SONG,
   ADD_REQUESTED_SONG,
   REMOVE_REQUESTED_SONG,
+  VOTE_SONG_UP,
 } from './action-creators';
 
 const song1 ={
@@ -14,12 +15,13 @@ const song1 ={
     thumbnails: {
       default: {
         height: 90,
-        url: "https://i.ytimg.com/vi/YQHsXMglC9A/default.jpg",
+        url: "https://i.ytimg.com/vi/5qm8PH4xAss/default.jpg",
         width: 120,
       },
     },
     title: "50 Cent - In Da Club",
   },
+  votes: 46,
 }
 const song2 = {
   id: {
@@ -35,6 +37,7 @@ const song2 = {
     },
     title: "Future - Mask Off",
   },
+  votes: 31,
 }
 const song3 = {
   id: {
@@ -44,12 +47,13 @@ const song3 = {
     thumbnails: {
       default: {
         height: 90,
-        url: "https://i.ytimg.com/vi/xvZqHgFz51I/default.jpg",
+        url: "https://i.ytimg.com/vi/rPr4F8dplFg/default.jpg",
         width: 120,
       },
     },
     title: "R Kelly - Ignition",
   },
+  votes: 29,
 }
 
 // Initial State
@@ -99,6 +103,17 @@ export default function reducer(state = initialState, action) {
     case REMOVE_REQUESTED_SONG:
       newState.requestedSongs = state.requestedSongs.filter(
         song => song.id.videoId !== action.songId);
+      break;
+
+     case VOTE_SONG_UP:
+      newState.requestedSongs = state.requestedSongs.map(song => {
+        if (song.id.videoId === action.songId) {
+          console.log('song votes before', song.votes);
+          song.votes += 1;
+          console.log('song votes after', song.votes);
+        }
+        return song;
+      });
       break;
 
     default:

@@ -14,20 +14,22 @@ const style = {
 
 
 const RequestedSongs = (props) => {
-  
-  const { requestedSongs } = props;
+
+  let { requestedSongs } = props;
+  requestedSongs = requestedSongs.sort((a, b) => {
+    return a.votes < b.votes;
+  });
   return (
   <div id="rooms_list" style={style}>
     <Paper zDepth={2} >
       <Subheader style={{ color: '#FFFFFF', fontSize: 20 }}>Top Requested Songs</Subheader>
         {requestedSongs.map(song => (
-          <RequestedSongCard key={song.id.videoId} name={song.snippet.title} votes={10} />
+          <RequestedSongCard key={song.id.videoId} id={song.id.videoId} name={song.snippet.title} votes={song.votes} url={song.snippet.thumbnails.default.url} />
           ))
         }
     </Paper>
   </div>
-  )
-
+  );
 };
 
 export default RequestedSongs;
