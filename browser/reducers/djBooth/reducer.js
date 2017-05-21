@@ -57,12 +57,12 @@ const song3 = {
 const initialState = {
   djName: '',
   deck1: {
-    song: null,
+    song: {name:''},
     volume: 0,
     progress: 0,
   },
   deck2: {
-    song: null,
+    song: {name: ''},
     volume: 0,
     progress: 0,
   },

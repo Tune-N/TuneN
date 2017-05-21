@@ -124,7 +124,6 @@ io.on('connection', (socket) => {
 
   socket.on('loadInitialState', (state) => {
     const {requestedSongs, deck1, deck2, djsName} = state
-    console.log('username',djsName)
     socket.to(djsName).emit('loadInitialState',{requestedSongs, deck1, deck2})
   })
 

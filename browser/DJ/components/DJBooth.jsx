@@ -93,14 +93,15 @@ class djBooth extends React.Component {
       socket.emit('cameraChange',{position,rotation,djsName})
     });
 
-    let {requestedSongs, deck1, deck2} = this.props.djBooth
-    console.log('whatprops wehave', this.props)
+
+    let thisBooth = this
     socket.on('newViewer', function() {
+      let {requestedSongs, deck1, deck2} = thisBooth.props.djBooth
       console.log('emitting decks', deck1, deck2)
-      deck1 = deck1.song.name
-      deck2 = deck2.song.name
+
       socket.emit('loadInitialState', {requestedSongs, deck1, deck2, djsName} )
     })
+
 
   }
 

@@ -26,14 +26,14 @@ export default function (state = initialState, action) {
   switch (action.type) {
 
     case 'LOAD_STATE':
-      console.log('decks',action.loadedState)
-      return Object.assign(newState, {songList:action.loadedState.requestedSongs},{deck1:action.loadedState.deck1},{deck2:action.loadedState.deck2})
+      return Object.assign(newState, {songList:action.requestedSongs},{deck1:action.deck1.song.name},{deck2:action.deck2.song.name})
 
-    // case 'SONG_CHANGE':
-    //   return Object.assign(newState, {songList: newState.songList.map(song => {
-    //     if (song.name == action.name) song = Object.assign(song,action)
-    //     return song
-    //   })})
+    case 'SONG_CHANGE':
+      console.log('songchange action', action)
+      return Object.assign(newState, {songList: newState.songList.map(song => {
+        if (song.name == action.song.name) song = action.song
+        return song
+      })})
 
     case 'REMOVE_SONG':
       newState.songList =  newState.songList.filter(

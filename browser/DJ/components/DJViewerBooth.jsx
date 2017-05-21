@@ -35,34 +35,7 @@ class DJViewerBooth extends React.Component {
     //   })
     // })
 
-    socket.on('removeSong', function (songName) {
-      store.dispatch({
-        type:'REMOVE_SONG',
-        songName
-      })
-    })
 
-    socket.on('setDeckSong', function (songDeck) {
-      store.dispatch({
-        type:'SET_DECKS_SONG',
-        songDeck
-      })
-    })
-
-    socket.on('cameraChange', function (camera) {
-      store.dispatch({
-        type:'CAMERA_CHANGE',
-        camera
-      })
-    })
-
-    socket.on('loadInitialState', function (loadedState) {
-      console.log('loading up initial state on viewer')
-      store.dispatch({
-        type:'LOAD_STATE',
-        loadedState
-      })
-    })
 
 
 
@@ -76,7 +49,7 @@ class DJViewerBooth extends React.Component {
 
   render() {
     console.log('DJviewerprops',this.props)
-    // const { deck1, deck2, requestedSongs } = this.props.djBooth;
+    const { deck1, deck2, songList } = this.props.djViewer;
 
     return (
       <div>
@@ -92,15 +65,15 @@ class DJViewerBooth extends React.Component {
               position="0 2 -2"
 
             />
-            {/*song={this.props.djBooth.deck1.song}*/}
-            {/*song={this.props.djBooth.deck2.song}*/}
+            song={deck1.song}
+            song={deck2.song}
             <DeckContainer
               id="deck2"
               position="0 1 -2"
 
             />
             {/*<RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} />*/}
-            {/*<RequestedSongsViewer position="2 1.5 -2" rotation="0 -20 0" />*/}
+            <RequestedSongsViewer position="2 1.5 -2" rotation="0 -20 0" songs={songList} />
             <FaderUp id="faderUp" position="-1.3 2 -2" />
             <FaderDown id="faderDown" position="-1.3 1 -2" image="http://3.bp.blogspot.com/-gI-Nh4Ex8Pc/UG35_g5H7oI/AAAAAAAAAIQ/TLgWQM4HUXU/s1600/plus-sign.png"/>
 

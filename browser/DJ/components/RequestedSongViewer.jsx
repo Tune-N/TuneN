@@ -9,7 +9,7 @@ class RequestedSongViewer extends React.Component {
   }
 
   render(){
-    const { id, position, name} = this.props;
+    const { id, color, position, name} = this.props;
 
     return (
       <Entity
@@ -21,9 +21,7 @@ class RequestedSongViewer extends React.Component {
         height="0.15"
         color={color}
         position={position}
-        events={{
 
-        }}
       >
         <Entity
           primitive="a-text"

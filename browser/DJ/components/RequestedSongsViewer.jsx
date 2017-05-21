@@ -3,6 +3,7 @@ import 'aframe';
 import { Entity } from 'aframe-react';
 
 import RequestedSongContainer from '../containers/RequestedSongContainer'
+import RequestedSongViewer from './RequestedSongViewer'
 
 const RequestedSongs = (props) => {
 
