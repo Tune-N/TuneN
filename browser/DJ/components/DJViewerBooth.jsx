@@ -21,30 +21,15 @@ class DJViewerBooth extends React.Component {
 
   componentDidMount(){
     socket.on('songChange',function(song){
-      console.log('gettingSongChangefire',song)
       store.dispatch({
         type: 'SONG_CHANGE',
         song
       })
     })
 
-    // socket.on('loadAllSongs', function (songList) {
-    //   store.dispatch({
-    //     type:'LOAD_SONGS',
-    //     songList
-    //   })
-    // })
-
-
-
-
 
   }
 
-
-  componentWillUnmount(){
-    //leave code here
-  }
 
 
   render() {
@@ -63,19 +48,19 @@ class DJViewerBooth extends React.Component {
             <DeckContainer
               id="deck1"
               position="0 2 -2"
-
+              image="http://i.imgur.com/KnoBYrW.png"
             />
             song={deck1.song}
             song={deck2.song}
             <DeckContainer
               id="deck2"
               position="0 1 -2"
-
+              image="http://i.imgur.com/KnoBYrW.png"
             />
             {/*<RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} />*/}
             <RequestedSongsViewer position="2 1.5 -2" rotation="0 -20 0" songs={songList} />
-            <FaderUp id="faderUp" position="-1.3 2 -2" />
-            <FaderDown id="faderDown" position="-1.3 1 -2" image="http://3.bp.blogspot.com/-gI-Nh4Ex8Pc/UG35_g5H7oI/AAAAAAAAAIQ/TLgWQM4HUXU/s1600/plus-sign.png"/>
+            <FaderUp id="faderUp" position="-1.3 2 -2" image="http://i.imgur.com/EvBhSmL.png"/>
+            <FaderDown id="faderDown" position="-1.3 1 -2" image="http://i.imgur.com/EvBhSmL.png"/>
 
             <Entity
               primitive="a-image"

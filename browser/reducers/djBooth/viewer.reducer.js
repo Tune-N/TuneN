@@ -29,9 +29,9 @@ export default function (state = initialState, action) {
       return Object.assign(newState, {songList:action.requestedSongs},{deck1:action.deck1.song.name},{deck2:action.deck2.song.name})
 
     case 'SONG_CHANGE':
-      console.log('songchange action', action)
+
       return Object.assign(newState, {songList: newState.songList.map(song => {
-        if (song.name == action.song.name) song = action.song
+        if (song.name == action.name) song = action
         return song
       })})
 

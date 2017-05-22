@@ -40,10 +40,11 @@ export const setDeckSong = (deck, song) => ({
   song,
 });
 
-export const addRequestedSong = (song) => ({
+export const addRequestedSong = (song) => {
+  return {
   type: ADD_REQUESTED_SONG,
   song,
-});
+}};
 
 export const removeRequestedSong = (songId) => ({
   type: REMOVE_REQUESTED_SONG,

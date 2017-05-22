@@ -92,8 +92,14 @@ export default function reducer(state = initialState, action) {
       break;
 
     case ADD_REQUESTED_SONG:
+
       const newRequestedSongsList = JSON.parse(JSON.stringify(state.requestedSongs));
-      newRequestedSongsList.push(action.song);
+      let newSong = action.song
+      newSong.name = action.song.snippet.title
+      newSong.color = 'white'
+      let newPosition = 0.8-((state.requestedSongs.length) * 0.17)
+      newSong.position = {x:0,y: newPosition,z: 0.02}
+      newRequestedSongsList.push(newSong);
       newState.requestedSongs = newRequestedSongsList;
       break;
 

@@ -9,12 +9,11 @@ class RequestedSongViewer extends React.Component {
   }
 
   render(){
-    const { id, color, position, name} = this.props;
+
+    const {color, position, name} = this.props;
 
     return (
       <Entity
-        click-drag
-        id={id}
         primitive="a-plane"
         className="Song selectable "
         width="0.90"

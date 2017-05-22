@@ -5,6 +5,7 @@ import { Entity } from 'aframe-react';
 import RequestedSongContainer from '../containers/RequestedSongContainer'
 
 const RequestedSongs = (props) => {
+  console.log('requestedsongprops',props)
 
   const {position, rotation, songs} = props;
   return (
@@ -18,7 +19,8 @@ const RequestedSongs = (props) => {
         opacity: 0.90,
       }}
       position={position}
-      rotation={rotation}>
+      rotation={rotation}
+    >
       <Entity
         primitive="a-text"
         value="Top Requested Songs"

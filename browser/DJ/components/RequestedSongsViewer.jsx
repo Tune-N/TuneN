@@ -31,12 +31,11 @@ const RequestedSongs = (props) => {
       />
       {
         songs.map((song, index) => (
-          <RequestedSongContainer
-            id={song.id.videoId}
+          <RequestedSongViewer
             position={`0 ${0.80-0.17 * index} 0.02`}
-            key={song.id.videoId}
-            name={song.snippet.title}
-            image={song.snippet.thumbnails.default.url}
+            name={song.name}
+            key = {song.name}
+            color = {song.color}
           />
         ))
       }

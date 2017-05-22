@@ -28,13 +28,13 @@ class Deck extends React.Component {
   }
 
   render() {
-    const { id, position, song } = this.props;
+    const { id, position, song,image } = this.props;
 
     return (
       <Entity
         className="selectable"
         id={id}
-        src={'soundWaves.png'}
+        src={image|| 'soundWaves.png'}
         primitive="a-plane"
         material={{
           opacity: 0.70,
