@@ -1,15 +1,7 @@
 const initialState = {
   djName: '',
-  deck1: {
-    song: null,
-    name: '',
-    progress: 0
-  },
-  deck2: {
-    song: null,
-    name: '',
-    progress: 0
-  },
+  deck1: '',
+  deck2: '',
   songList:[
   ],
   camera:{

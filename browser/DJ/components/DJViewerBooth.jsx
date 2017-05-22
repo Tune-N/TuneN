@@ -34,7 +34,7 @@ class DJViewerBooth extends React.Component {
 
   render() {
     console.log('DJviewerprops',this.props)
-    const { deck1, deck2, songList } = this.props.djViewer;
+    let { deck1 , deck2 , songList } = this.props.djViewer;
 
     return (
       <div>
@@ -49,13 +49,14 @@ class DJViewerBooth extends React.Component {
               id="deck1"
               position="0 2 -2"
               image="http://i.imgur.com/KnoBYrW.png"
+              songName={deck1}
             />
-            song={deck1.song}
-            song={deck2.song}
+
             <DeckContainer
               id="deck2"
               position="0 1 -2"
               image="http://i.imgur.com/KnoBYrW.png"
+              songName={deck2}
             />
             {/*<RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} />*/}
             <RequestedSongsViewer position="2 1.5 -2" rotation="0 -20 0" songs={songList} />

@@ -28,7 +28,8 @@ class Deck extends React.Component {
   }
 
   render() {
-    const { id, position, song,image } = this.props;
+    const { id, position, song = {name:''},image,songName} = this.props;
+    console.log('songNAMEE', songName)
 
     return (
       <Entity
@@ -48,15 +49,13 @@ class Deck extends React.Component {
           axismove: this.onTrackPadMove,
         }}
       >
-        {song &&
           <Entity
             primitive="a-text"
-            value={song.name}
+            value={songName || song.name}
             width="2.00"
             align="center"
             position=" 0 .3 0"
           />
-        }
       </Entity>
     )
   }
