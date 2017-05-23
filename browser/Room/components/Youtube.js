@@ -48,8 +48,9 @@ class YoutubeSearch extends React.Component {
     song.kind = item.kind;
     song.snippet = item.snippet;
     socket.emit('song request', this.props.room, song);
-
+    this.setState({result:''})
   }
+
 
 
   render() {
