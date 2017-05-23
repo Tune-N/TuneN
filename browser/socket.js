@@ -21,6 +21,13 @@ socket.on('song requested', (song) => {
 
 /*  Viewer socket listeners */
 
+socket.on('removeSongViewerSide', songId => {
+  store.dispatch({
+    type: 'REMOVE_REQUESTED_SONG',
+    songId
+  })
+})
+
 socket.on('removeSong', function (songName) {
   store.dispatch({
     type:'REMOVE_SONG',

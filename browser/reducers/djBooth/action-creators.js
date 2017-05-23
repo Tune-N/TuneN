@@ -46,10 +46,12 @@ export const addRequestedSong = (song) => {
   song,
 }};
 
-export const removeRequestedSong = (songId) => ({
+export const removeRequestedSong = (songId,username) => {
+  socket.emit('removeSongViewerSide', songId, username)
+  return {
   type: REMOVE_REQUESTED_SONG,
   songId,
-});
+}};
 
 /* ------------       DISPATCHERS     ------------------ */
 

@@ -15,7 +15,7 @@ class Deck extends React.Component {
     if(!selectedSong) return
     
     setDeckSong(id, selectedSong);
-    removeRequestedSong(selectedSong.id);
+    removeRequestedSong(selectedSong.id,this.props.username);
     const gainIndex = id === 'deck1' ? 0 : 1;
     playSong(gainIndex, selectedSong.id);
   }

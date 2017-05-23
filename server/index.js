@@ -77,6 +77,12 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('liveDJs', liveDJs);
   });
 
+  socket.on('removeSongViewerSide', (songId,username) => {
+    console.log('here is the', songId, username)
+    socket.to(username).emit('removeSongViewerSide', songId)
+  });
+
+
 
   socket.on('joined room', (roomName) => {
     socket.to(roomName).emit('newViewer','')
