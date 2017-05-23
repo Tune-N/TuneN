@@ -78,7 +78,6 @@ io.on('connection', (socket) => {
   });
 
   socket.on('removeSongViewerSide', (songId,username) => {
-    console.log('here is the', songId, username)
     socket.to(username).emit('removeSongViewerSide', songId)
   });
 
@@ -86,7 +85,6 @@ io.on('connection', (socket) => {
 
   socket.on('joined room', (roomName) => {
     socket.to(roomName).emit('newViewer','')
-    console.log(`somebody joined ${roomName}`)
     socket.join(roomName);
     updateRoomListenerCount(roomName);
   });

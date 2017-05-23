@@ -97,21 +97,18 @@ class djBooth extends React.Component {
     let thisBooth = this
     socket.on('newViewer', function() {
       let {requestedSongs, deck1, deck2} = thisBooth.props.djBooth
-      console.log('emitting decks', deck1, deck2)
 
       socket.emit('loadInitialState', {requestedSongs, deck1, deck2, djsName} )
     })
 
 
     setInterval(function () {
-      console.log('emitting interval')
       let {requestedSongs, deck1, deck2} = thisBooth.props.djBooth
       socket.emit('loadInitialState', {requestedSongs, deck1, deck2, djsName} )
     },500)
 
     socket.on('newViewer', function() {
       let {requestedSongs, deck1, deck2} = thisBooth.props.djBooth
-      console.log('emitting decks', deck1, deck2)
 
       socket.emit('loadInitialState', {requestedSongs, deck1, deck2, djsName} )
     })

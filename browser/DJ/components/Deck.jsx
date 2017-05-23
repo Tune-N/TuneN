@@ -29,7 +29,6 @@ class Deck extends React.Component {
 
   render() {
     const { id, position, song = {name:''},image,songName} = this.props;
-    console.log('songNAMEE', songName)
 
     return (
       <Entity

@@ -33,7 +33,6 @@ class DJViewerBooth extends React.Component {
 
 
   render() {
-    console.log('DJviewerprops',this.props)
     let { deck1 , deck2 , songList } = this.props.djViewer;
 
     return (

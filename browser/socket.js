@@ -50,7 +50,6 @@ socket.on('cameraChange', function (camera) {
 })
 
 socket.on('loadInitialState', function (loadedState) {
-  console.log('loading up initial state on viewer', loadedState)
   const {requestedSongs, deck1, deck2} = loadedState
   store.dispatch({
     type:'LOAD_STATE',
