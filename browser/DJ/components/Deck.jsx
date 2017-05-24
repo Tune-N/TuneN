@@ -15,7 +15,7 @@ class Deck extends React.Component {
     if(!selectedSong) return
     
     setDeckSong(id, selectedSong);
-    removeRequestedSong(selectedSong.id);
+    removeRequestedSong(selectedSong.id,this.props.username);
     const gainIndex = id === 'deck1' ? 0 : 1;
     playSong(gainIndex, selectedSong.id);
   }
@@ -28,13 +28,13 @@ class Deck extends React.Component {
   }
 
   render() {
-    const { id, position, song } = this.props;
+    const { id, position, song = {name:''},image,songName} = this.props;
 
     return (
       <Entity
         className="selectable"
         id={id}
-        src={'soundWaves.png'}
+        src={image|| 'soundWaves.png'}
         primitive="a-plane"
         material={{
           opacity: 0.70,
@@ -48,15 +48,13 @@ class Deck extends React.Component {
           axismove: this.onTrackPadMove,
         }}
       >
-        {song &&
           <Entity
             primitive="a-text"
-            value={song.name}
+            value={songName || song.name}
             width="2.00"
             align="center"
             position=" 0 .3 0"
           />
-        }
       </Entity>
     )
   }

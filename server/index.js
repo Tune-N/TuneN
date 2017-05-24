@@ -77,7 +77,14 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('liveDJs', liveDJs);
   });
 
+  socket.on('removeSongViewerSide', (songId,username) => {
+    socket.to(username).emit('removeSongViewerSide', songId)
+  });
+
+
+
   socket.on('joined room', (roomName) => {
+    socket.to(roomName).emit('newViewer','')
     socket.join(roomName);
     updateRoomListenerCount(roomName);
   });
@@ -114,6 +121,20 @@ io.on('connection', (socket) => {
     updateAllRoomsListenerCount();
 
   });
+
+  socket.on('songChange', (position,rotation,color,name,dj) => {
+    socket.to(dj).emit('songChange',{position,rotation,color,name})
+  })
+
+  socket.on('loadInitialState', (state) => {
+    const {requestedSongs, deck1, deck2, djsName} = state
+    socket.to(djsName).emit('loadInitialState',{requestedSongs, deck1, deck2})
+  })
+
+  socket.on('cameraChange', (camera) => {
+    const {position, rotation, djsName} = camera
+    socket.to(djsName).emit('cameraChange',{position,rotation})
+  })
 
 });
 

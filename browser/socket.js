@@ -18,5 +18,46 @@ socket.on('song requested', (song) => {
 
 
 
+
+/*  Viewer socket listeners */
+
+socket.on('removeSongViewerSide', songId => {
+  store.dispatch({
+    type: 'REMOVE_REQUESTED_SONG',
+    songId
+  })
+})
+
+socket.on('removeSong', function (songName) {
+  store.dispatch({
+    type:'REMOVE_SONG',
+    songName
+  })
+})
+
+socket.on('setDeckSong', function (songDeck) {
+  store.dispatch({
+    type:'SET_DECKS_SONG',
+    songDeck
+  })
+})
+
+socket.on('cameraChange', function (camera) {
+  store.dispatch({
+    type:'CAMERA_CHANGE',
+    camera
+  })
+})
+
+socket.on('loadInitialState', function (loadedState) {
+  const {requestedSongs, deck1, deck2} = loadedState
+  store.dispatch({
+    type:'LOAD_STATE',
+    requestedSongs,
+    deck1,
+    deck2
+  })
+})
+
 export default socket;
 

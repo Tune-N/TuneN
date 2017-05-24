@@ -4,6 +4,7 @@ import {
   SET_DECK_SONG,
   ADD_REQUESTED_SONG,
   REMOVE_REQUESTED_SONG,
+  SONG_CHANGE
 } from './action-creators';
 
 const song1 ={
@@ -56,12 +57,12 @@ const song3 = {
 const initialState = {
   djName: '',
   deck1: {
-    song: null,
+    song: {name:''},
     volume: 0,
     progress: 0,
   },
   deck2: {
-    song: null,
+    song: {name: ''},
     volume: 0,
     progress: 0,
   },
@@ -91,8 +92,14 @@ export default function reducer(state = initialState, action) {
       break;
 
     case ADD_REQUESTED_SONG:
+
       const newRequestedSongsList = JSON.parse(JSON.stringify(state.requestedSongs));
-      newRequestedSongsList.push(action.song);
+      let newSong = action.song
+      newSong.name = action.song.snippet.title
+      newSong.color = 'white'
+      let newPosition = 0.8-((state.requestedSongs.length) * 0.17)
+      newSong.position = {x:0,y: newPosition,z: 0.02}
+      newRequestedSongsList.push(newSong);
       newState.requestedSongs = newRequestedSongsList;
       break;
 
@@ -100,6 +107,12 @@ export default function reducer(state = initialState, action) {
       newState.requestedSongs = state.requestedSongs.filter(
         song => song.id.videoId !== action.songId);
       break;
+
+    case SONG_CHANGE:
+      newState.requestedSongs = newState.requestedSongs.map(song =>{
+        if (song.snippet.title == action.name) song = Object.assign(song,action)
+        return song})
+      break
 
     default:
       return state;

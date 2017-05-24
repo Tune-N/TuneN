@@ -3,6 +3,7 @@ import 'aframe';
 import { Entity } from 'aframe-react';
 
 import RequestedSongContainer from '../containers/RequestedSongContainer'
+import RequestedSongViewer from './RequestedSongViewer'
 
 const RequestedSongs = (props) => {
 
@@ -18,8 +19,7 @@ const RequestedSongs = (props) => {
         opacity: 0.90,
       }}
       position={position}
-      rotation={rotation}
-    >
+      rotation={rotation}>
       <Entity
         primitive="a-text"
         value="Top Requested Songs"
@@ -31,14 +31,11 @@ const RequestedSongs = (props) => {
       />
       {
         songs.map((song, index) => (
-          <RequestedSongContainer
-            id={song.id.videoId}
+          <RequestedSongViewer
             position={`0 ${0.80-0.17 * index} 0.02`}
-            key={song.id.videoId}
-            name={song.snippet.title}
-            image={song.snippet.thumbnails.default.url}
-            songChange={props.songChange}
-            djName={props.djName}
+            name={song.name}
+            key = {song.name}
+            color = {song.color}
           />
         ))
       }

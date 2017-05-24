@@ -15,12 +15,12 @@ class FaderUp extends React.Component {
   }
 
   render() {
-    const { id, position } = this.props;
+    const { id, position, image } = this.props;
     return (
       <Entity
         className="selectable"
         id={id}
-        src={'redPlusSign.png'}
+        src={image || 'redPlusSign.png'}
         primitive="a-plane"
         material={{
           opacity: 0.70,

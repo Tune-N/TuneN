@@ -70,6 +70,7 @@ class djBooth extends React.Component {
 
 
   componentDidMount() {
+    const djsName = this.props.username
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
     this.connection = this.createConnection();
@@ -83,7 +84,38 @@ class djBooth extends React.Component {
     this.gainNode[0] = this.audioContext.createGain();
     this.gainNode[1] = this.audioContext.createGain();
     this.goLive();
+
+    var secondCameraEl = document.querySelector('a-camera');
+    secondCameraEl.addEventListener('componentchanged', function () {
+      const position = this.components.position.data
+      const rotation = this.components.rotation.data
+
+      socket.emit('cameraChange',{position,rotation,djsName})
+    });
+
+
+    let thisBooth = this
+    socket.on('newViewer', function() {
+      let {requestedSongs, deck1, deck2} = thisBooth.props.djBooth
+
+      socket.emit('loadInitialState', {requestedSongs, deck1, deck2, djsName} )
+    })
+
+
+    setInterval(function () {
+      let {requestedSongs, deck1, deck2} = thisBooth.props.djBooth
+      socket.emit('loadInitialState', {requestedSongs, deck1, deck2, djsName} )
+    },500)
+
+    socket.on('newViewer', function() {
+      let {requestedSongs, deck1, deck2} = thisBooth.props.djBooth
+
+      socket.emit('loadInitialState', {requestedSongs, deck1, deck2, djsName} )
+    })
+
+
   }
+
 
   componentWillUnmount() {
     socket.emit('stop dj');
@@ -170,6 +202,7 @@ class djBooth extends React.Component {
   }
 
   render() {
+    console.log('DJ booth props', this.props.djBooth)
     const { deck1, deck2, requestedSongs } = this.props.djBooth;
 
     return (
@@ -198,7 +231,7 @@ class djBooth extends React.Component {
               playSong={this.getSong}
               crossFader={this.crossFader}
             />
-            <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} />
+            <RequestedSongs position="2 1.5 -2" rotation="0 -20 0" songs={requestedSongs} songChange={this.props.songChange} djName={this.props.username}/>
             <FaderUp id="faderUp" position="-1.3 2 -2" faderUp={this.crossFaderUp} />
             <FaderDown id="faderDown" position="-1.3 1 -2" faderUp={this.crossFaderDown}/>
 

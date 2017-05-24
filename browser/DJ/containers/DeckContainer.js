@@ -6,6 +6,7 @@ import Deck from '../components/Deck.jsx'
 
 const mapStateToProps = (state) => ({
   selectedSong: state.djBooth.selectedSong,
+  username: state.auth.username
 });
 
 const mapDispatchToProps = {
