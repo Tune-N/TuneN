@@ -5,8 +5,8 @@ const initialState = {
   songList:[
   ],
   camera:{
-    position:{x:0,y:0,z:0},
-    rotation:{x:0,y:0,z:0}
+    position:'0 0 0',
+    rotation:'0 0 0'
   }
 }
 
