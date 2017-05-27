@@ -4,8 +4,8 @@ import { Entity } from 'aframe-react';
 
 const Viewer = (coords) =>{
     return <a-entity camera="userHeight: 1.6" wasd-controls-enabled="false" look-controls-enabled="false"
-                     position={Object.values(coords.position).join(' ') || '0 0 0'}
-                     rotation={Object.values(coords.rotation).join(' ') || '0 0 0'}></a-entity>
+                     position={coords.position || '0 0 0'}
+                     rotation={coords.rotation || '0 0 0'}></a-entity>
 }
 
 const DJ = () =>(
